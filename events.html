@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — Olwen Dowling</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .events-grid {
+    max-width: 1400px; margin: 0 auto;
+    padding: 4rem 4rem 6rem;
+    display: grid; gap: 2rem;
+  }
+
+.event {
+display: grid; grid-template-columns: 12rem 1fr auto;
+gap: 3rem; align-items: center;
+padding: 2.5rem;
+background: var(–paper-warm);
+border: 1px solid rgba(22,17,12,0.08);
+transition: background 0.3s, transform 0.3s;
+}
+.event:hover {
+background: var(–paper-deep);
+}
+.event.featured {
+background: var(–ink); color: var(–paper);
+border-color: var(–rust);
+position: relative;
+}
+.event.featured::before {
+content: ‘Now Showing’;
+position: absolute; top: -1px; left: 2.5rem;
+background: var(–rust); color: var(–paper);
+font-size: 0.6rem; letter-spacing: 0.3em;
+text-transform: uppercase;
+padding: 0.4rem 1rem;
+transform: translateY(-50%);
+}
+
+.event-date {
+font-family: ‘Cormorant Garamond’, serif;
+text-align: center;
+border-right: 1px solid rgba(22,17,12,0.15);
+padding-right: 2rem;
+}
+.event.featured .event-date { border-right-color: rgba(241,235,221,0.2); }
+.event-date .month {
+font-size: 0.7rem; letter-spacing: 0.3em;
+text-transform: uppercase; color: var(–rust);
+margin-bottom: 0.5rem;
+}
+.event.featured .event-date .month { color: var(–ochre); }
+.event-date .day {
+font-size: 3.5rem; font-weight: 300;
+line-height: 1; font-style: italic;
+}
+.event-date .year {
+font-size: 0.85rem; font-style: italic;
+color: var(–slate); margin-top: 0.4rem;
+}
+.event.featured .event-date .year { color: var(–warm-mid); }
+
+.event-info h3 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.7rem; font-weight: 400;
+line-height: 1.2; margin-bottom: 0.6rem;
+}
+.event-info h3 em { font-style: italic; color: var(–rust); }
+.event.featured .event-info h3 em { color: var(–ochre); }
+
+.event-info .venue {
+font-size: 0.85rem; letter-spacing: 0.05em;
+color: var(–slate); margin-bottom: 1rem;
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic; font-size: 1rem;
+}
+.event.featured .event-info .venue { color: var(–warm-mid); }
+
+.event-info p {
+font-size: 0.9rem; line-height: 1.7;
+color: var(–ink-soft); max-width: 38rem;
+}
+.event.featured .event-info p { color: var(–warm-mid); }
+
+.event-meta {
+text-align: right;
+}
+.event-tag {
+display: inline-block;
+font-size: 0.6rem; letter-spacing: 0.25em;
+text-transform: uppercase;
+border: 1px solid var(–rust); color: var(–rust);
+padding: 0.4rem 0.9rem;
+border-radius: 100px;
+margin-bottom: 1rem;
+}
+.event.featured .event-tag {
+border-color: var(–ochre); color: var(–ochre);
+}
+.event-link {
+display: block;
+font-size: 0.7rem; letter-spacing: 0.25em;
+text-transform: uppercase;
+color: var(–ink); text-decoration: none;
+border-bottom: 1px solid var(–ink);
+padding-bottom: 0.3rem;
+transition: color 0.3s, border-color 0.3s;
+}
+.event.featured .event-link {
+color: var(–paper); border-color: rgba(241,235,221,0.4);
+}
+.event-link:hover { color: var(–rust); border-color: var(–rust); }
+.event.featured .event-link:hover { color: var(–ochre); border-color: var(–ochre); }
+
+.past-section {
+max-width: 1400px; margin: 0 auto;
+padding: 4rem 4rem 6rem;
+border-top: 1px solid rgba(22,17,12,0.1);
+}
+.past-section h2 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 2rem; font-weight: 300;
+margin-bottom: 2.5rem;
+}
+.past-section h2 em { font-style: italic; color: var(–rust); }
+.past-list {
+display: grid; gap: 1rem;
+}
+.past-item {
+display: grid; grid-template-columns: 6rem 1fr 1fr;
+gap: 2rem; padding: 1rem 0;
+border-bottom: 1px solid rgba(22,17,12,0.08);
+align-items: baseline;
+}
+.past-item .pyr {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic; color: var(–rust);
+}
+.past-item .pname { font-size: 0.92rem; }
+.past-item .pname em {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic; font-size: 1rem;
+}
+.past-item .pvenue {
+font-size: 0.82rem; color: var(–slate);
+font-style: italic; font-family: ‘Cormorant Garamond’, serif;
+}
+
+.subscribe {
+background: var(–ink); color: var(–paper);
+padding: 6rem 4rem; text-align: center;
+}
+.subscribe h2 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: clamp(2rem, 4vw, 3rem);
+font-weight: 300; font-style: italic;
+margin-bottom: 1rem;
+}
+.subscribe p {
+color: var(–warm-mid); margin-bottom: 2.5rem;
+max-width: 30rem; margin-left: auto; margin-right: auto;
+}
+.subscribe-form {
+display: flex; max-width: 30rem; margin: 0 auto;
+border-bottom: 1px solid var(–warm-mid);
+}
+.subscribe-form input {
+flex: 1; background: none; border: none;
+color: var(–paper); padding: 1rem 0;
+font-family: inherit; font-size: 0.95rem;
+outline: none;
+}
+.subscribe-form input::placeholder { color: var(–warm-mid); opacity: 0.6; }
+.subscribe-form button {
+background: none; border: none;
+color: var(–ochre); padding: 1rem 0 1rem 1.5rem;
+font-family: inherit; font-size: 0.7rem;
+letter-spacing: 0.25em; text-transform: uppercase;
+cursor: pointer; transition: color 0.3s;
+}
+.subscribe-form button:hover { color: var(–paper); }
+
+@media (max-width: 1024px) {
+.events-grid { padding: 2rem; }
+.event { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
+.event-date { border-right: none; border-bottom: 1px solid rgba(22,17,12,0.15); padding: 0 0 1rem; text-align: left; }
+.event.featured .event-date { border-bottom-color: rgba(241,235,221,0.2); }
+.event-date .day { font-size: 2.5rem; display: inline-block; margin-right: 1rem; }
+.event-date .month { display: inline-block; margin-right: 0.5rem; }
+.event-date .year { display: inline-block; }
+.event-meta { text-align: left; }
+.past-section { padding: 3rem 2rem; }
+.past-item { grid-template-columns: 4rem 1fr; gap: 1rem; }
+.past-item .pvenue { grid-column: 1 / -1; padding-left: 5rem; }
+.subscribe { padding: 4rem 2rem; }
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-mark">Olwen <span>Dowling</span></a>
+  <div class="nav-tagline">Painter · Printmaker · Est. 1995</div>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="biography.html">Biography</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <p class="eyebrow">Exhibitions &amp; Events</p>
+  <h1>What is <em>showing</em>,<br>and what is <em>coming</em>.</h1>
+  <p class="sub">Studio visits in North Chester are welcome by appointment. For inquiries about a specific exhibition, please write directly.</p>
+</header>
+
+<section class="events-grid">
+
+  <article class="event featured">
+    <div class="event-date">
+      <div class="month">Through Oct</div>
+      <div class="day">12</div>
+      <div class="year">2024</div>
+    </div>
+    <div class="event-info">
+      <h3><em>One Foot in Two Places</em></h3>
+      <div class="venue">Springfield Museums, Springfield MA</div>
+      <p>Solo exhibition of monotype prints and etchings exploring Irish-American identity and the experience of belonging to multiple places. The most extensive institutional showing of the work to date.</p>
+    </div>
+    <div class="event-meta">
+      <span class="event-tag">Solo · Museum</span>
+      <a href="#" class="event-link">Visit ↗</a>
+    </div>
+  </article>
+
+  <article class="event">
+    <div class="event-date">
+      <div class="month">June</div>
+      <div class="day">21</div>
+      <div class="year">2025</div>
+    </div>
+    <div class="event-info">
+      <h3>Open Studio &amp; Garden</h3>
+      <div class="venue">Hilltown Studio Tour, North Chester MA</div>
+      <p>Annual open studio weekend across the Hilltowns of western Massachusetts. New prints, recent paintings, demonstrations of the drypoint process.</p>
+    </div>
+    <div class="event-meta">
+      <span class="event-tag">Open Studio</span>
+      <a href="#" class="event-link">Details ↗</a>
+    </div>
+  </article>
+
+  <article class="event">
+    <div class="event-date">
+      <div class="month">Sept</div>
+      <div class="day">06</div>
+      <div class="year">2025</div>
+    </div>
+    <div class="event-info">
+      <h3>Group Exhibition — <em>The Print Now</em></h3>
+      <div class="venue">Zea Mays Printmaking, Florence MA</div>
+      <p>Members' exhibition of contemporary intaglio, monotype, and relief work from the Zea Mays cooperative.</p>
+    </div>
+    <div class="event-meta">
+      <span class="event-tag">Group</span>
+      <a href="#" class="event-link">Details ↗</a>
+    </div>
+  </article>
+
+  <article class="event">
+    <div class="event-date">
+      <div class="month">Oct</div>
+      <div class="day">—</div>
+      <div class="year">2025</div>
+    </div>
+    <div class="event-info">
+      <h3>Tyrone Guthrie Residency</h3>
+      <div class="venue">Annaghmakerrig, County Monaghan, Ireland</div>
+      <p>Returning fellowship at the Tyrone Guthrie Centre. New work focused on the Irish landscape — etching plates prepared in advance, plein-air watercolor in the field.</p>
+    </div>
+    <div class="event-meta">
+      <span class="event-tag">Residency</span>
+      <a href="#" class="event-link">About ↗</a>
+    </div>
+  </article>
+
+</section>
+
+<section class="past-section">
+  <h2><em>Recent</em> &amp; Past</h2>
+  <div class="past-list">
+    <div class="past-item">
+      <span class="pyr">2024</span>
+      <span class="pname"><em>Reaching</em> — Solo Exhibition</span>
+      <span class="pvenue">Becket Arts Center, Becket MA</span>
+    </div>
+    <div class="past-item">
+      <span class="pyr">2024</span>
+      <span class="pname">Group Exhibition</span>
+      <span class="pvenue">Hado-Mark Gallery, Lenox MA</span>
+    </div>
+    <div class="past-item">
+      <span class="pyr">2023</span>
+      <span class="pname">Tyrone Guthrie Residency</span>
+      <span class="pvenue">County Monaghan, Ireland</span>
+    </div>
+    <div class="past-item">
+      <span class="pyr">2022</span>
+      <span class="pname">Solo Exhibition</span>
+      <span class="pvenue">Chester Common Gallery, Chester MA</span>
+    </div>
+    <div class="past-item">
+      <span class="pyr">2021</span>
+      <span class="pname"><em>Canary in a Coal Mine</em></span>
+      <span class="pvenue">Hosmer Gallery, Northampton MA</span>
+    </div>
+    <div class="past-item">
+      <span class="pyr">2021</span>
+      <span class="pname">VCCA Fellowship</span>
+      <span class="pvenue">Virginia Center for the Creative Arts</span>
+    </div>
+  </div>
+  <p style="margin-top: 2.5rem;"><a href="cv.html" style="font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 0.3rem;">Full exhibition history →</a></p>
+</section>
+
+<section class="subscribe">
+  <h2>Stay informed.</h2>
+  <p>Occasional notes from the studio — new work, exhibition openings, residency dispatches from Ireland. No more than four times a year.</p>
+  <form class="subscribe-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓';">
+    <input type="email" placeholder="your.email@example.com" required>
+    <button type="submit">Subscribe →</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2024 Olwen Dowling Fine Art</p>
+  <p class="footer-mark">— OD —</p>
+  <p class="footer-end">Boston Printmakers · CSP · MGNE · Zea Mays</p>
+</footer>
+
+</body>
+</html>
