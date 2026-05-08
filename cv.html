@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum Vitae — Olwen O'Herlihy Dowling</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .cv-actions {
+    max-width: 1400px; margin: -2rem auto 0;
+    padding: 0 4rem 2rem;
+    display: flex; justify-content: flex-end; gap: 1rem;
+  }
+  .cv-action {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    border: 1px solid var(--ink);
+    padding: 0.6rem 1.2rem;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer; background: none;
+    font-family: inherit;
+  }
+  .cv-action:hover { background: var(--ink); color: var(--paper); }
+
+.cv-body {
+max-width: 1100px; margin: 0 auto;
+padding: 4rem 4rem 6rem;
+}
+
+.cv-section {
+border-top: 2px solid var(–ink);
+padding-top: 2rem; margin-bottom: 4rem;
+}
+
+.cv-section h2 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 2rem; font-weight: 300;
+color: var(–ink); margin-bottom: 2rem;
+letter-spacing: -0.01em;
+}
+.cv-section h2 em { font-style: italic; color: var(–rust); }
+
+.cv-row {
+display: grid; grid-template-columns: 5rem 1fr 1.5fr;
+gap: 2rem; padding: 0.9rem 0;
+border-bottom: 1px solid rgba(22,17,12,0.08);
+align-items: baseline;
+}
+.cv-row:last-child { border-bottom: none; }
+.cv-row .yr {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic; font-size: 1.1rem;
+color: var(–rust);
+}
+.cv-row .what {
+font-size: 0.95rem; color: var(–ink);
+}
+.cv-row .what em {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic; font-size: 1.05rem;
+}
+.cv-row .where {
+font-size: 0.85rem; color: var(–slate);
+font-style: italic; font-family: ‘Cormorant Garamond’, serif;
+}
+
+.cv-list {
+columns: 2; column-gap: 4rem; list-style: none;
+}
+.cv-list li {
+padding: 0.5rem 0;
+font-size: 0.92rem;
+color: var(–ink-soft);
+break-inside: avoid;
+border-bottom: 1px solid rgba(22,17,12,0.06);
+}
+.cv-list li::before {
+content: ’· ’; color: var(–rust); font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+.cv-actions { padding: 0 2rem 1rem; }
+.cv-body { padding: 2rem 2rem 4rem; }
+.cv-row { grid-template-columns: 4rem 1fr; gap: 1rem; }
+.cv-row .where { grid-column: 1 / -1; padding-left: 5rem; }
+.cv-list { columns: 1; }
+}
+
+@media print {
+body::before, nav, .cv-actions, footer { display: none !important; }
+body { background: white; }
+.page-header { padding: 1rem 0 1.5rem; border-bottom: 2px solid var(–ink); }
+.page-header h1 { font-size: 2.5rem; }
+.page-header .sub { font-size: 0.95rem; }
+.cv-body { padding: 1rem 0; max-width: 100%; }
+.cv-section { page-break-inside: avoid; }
+a { color: var(–ink); text-decoration: none; }
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-mark">Olwen <span>Dowling</span></a>
+  <div class="nav-tagline">Painter · Printmaker · Est. 1995</div>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="biography.html">Biography</a></li>
+    <li><a href="cv.html" class="active">CV</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <p class="eyebrow">Curriculum Vitae</p>
+  <h1><em>Olwen</em> O'Herlihy Dowling</h1>
+  <p class="sub">Studio: North Chester, Massachusetts &nbsp;·&nbsp; <a href="mailto:olwen@olwendowling.com" style="color:var(--rust); text-decoration:none;">olwen@olwendowling.com</a></p>
+</header>
+
+<div class="cv-actions">
+  <button class="cv-action" onclick="window.print()">Print / Save PDF</button>
+  <a href="mailto:olwen@olwendowling.com?subject=CV%20Inquiry" class="cv-action">Request CV</a>
+</div>
+
+<div class="cv-body">
+
+  <section class="cv-section">
+    <h2>Education &amp; <em>Training</em></h2>
+    <div class="cv-row">
+      <span class="yr">—</span>
+      <span class="what">BA, Studio Art &amp; Biology</span>
+      <span class="where">Smith College, Northampton MA</span>
+    </div>
+    <div class="cv-row">
+      <span class="yr">—</span>
+      <span class="what">Print &amp; Ceramic Studies</span>
+      <span class="where">L'Ecole d'Art, Vallauris, France</span>
+    </div>
+    <div class="cv-row">
+      <span class="yr">2007 →</span>
+      <span class="what">Member &amp; Practicing Printmaker</span>
+      <span class="where">Zea Mays Printmaking, Florence MA</span>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>Solo <em>Exhibitions</em></h2>
+    <div class="cv-row">
+      <span class="yr">2026</span>
+      <span class="what"><em>One Foot in Two Places</em> — monotype prints &amp; etchings</span>
+      <span class="where">D'Amour Museum of Fine Arts, Print Gallery, Springfield MA</span>
+    </div>
+    <div class="cv-row" style="opacity: 0.6;">
+      <span class="yr">—</span>
+      <span class="what" style="font-style: italic; color: var(--slate);">Earlier exhibitions to be added</span>
+      <span class="where"></span>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>Selected Group <em>Exhibitions</em></h2>
+    <div class="cv-row">
+      <span class="yr">Ongoing</span>
+      <span class="what">Flat File Project — Member Print Archive</span>
+      <span class="where">Zea Mays Printmaking, Florence MA</span>
+    </div>
+    <div class="cv-row" style="opacity: 0.6;">
+      <span class="yr">—</span>
+      <span class="what" style="font-style: italic; color: var(--slate);">Group exhibition history to be added</span>
+      <span class="where"></span>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>Residencies &amp; <em>Fellowships</em></h2>
+    <div class="cv-row">
+      <span class="yr">Recurring</span>
+      <span class="what">Artist in Residence — multiple fellowships</span>
+      <span class="where">Tyrone Guthrie Centre, Annaghmakerrig, Ireland</span>
+    </div>
+    <div class="cv-row">
+      <span class="yr">Past</span>
+      <span class="what">Fellowship</span>
+      <span class="where">Virginia Center for the Creative Arts (VCCA)</span>
+    </div>
+    <div class="cv-row" style="opacity: 0.6;">
+      <span class="yr">—</span>
+      <span class="what" style="font-style: italic; color: var(--slate);">Specific years to be added</span>
+      <span class="where"></span>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>Memberships &amp; <em>Affiliations</em></h2>
+    <ul class="cv-list">
+      <li>Zea Mays Printmaking, Florence MA</li>
+      <li>Boston Printmakers</li>
+      <li>California Society of Printmakers</li>
+      <li>Monotype Guild of New England</li>
+      <li>National Association of Women Artists</li>
+      <li>Hilltown Arts Alliance, Western MA</li>
+      <li>Anchor House Gallery, Northampton MA</li>
+      <li>Becket Arts Center</li>
+    </ul>
+  </section>
+
+  <section class="cv-section">
+    <h2>Selected <em>Press</em></h2>
+    <div class="cv-row" style="opacity: 0.7;">
+      <span class="yr">—</span>
+      <span class="what" style="font-style: italic; color: var(--slate);">Press citations to be added</span>
+      <span class="where"></span>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>Collections</h2>
+    <p style="font-size: 0.95rem; line-height: 1.85; color: var(--ink-soft); max-width: 50rem;">Private collections in the United States, Ireland, the United Kingdom, France, and the Netherlands. Work held in the Zea Mays Flat File Archive, Florence MA. Available through the Zea Mays Members' Gallery and by direct inquiry to the studio.</p>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2026 Olwen O'Herlihy Dowling</p>
+  <p class="footer-mark">— OD —</p>
+  <p class="footer-end">Boston Printmakers · CSP · MGNE · Zea Mays</p>
+</footer>
+
+</body>
+</html>
