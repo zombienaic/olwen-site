@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biography — Olwen O'Herlihy Dowling</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .bio-portrait {
+    background: var(--paper-deep);
+    padding: 6rem 4rem;
+    border-bottom: 1px solid rgba(22,17,12,0.1);
+  }
+  .bio-portrait-inner {
+    max-width: 1400px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 5rem; align-items: center;
+  }
+  .portrait-frame {
+    aspect-ratio: 3/4;
+    background-image: url('images/work-03.webp');
+    background-size: cover;
+    background-position: center;
+    background-color: #2a221a;
+    box-shadow: -2px 2px 0 rgba(20,15,10,0.1), -8px 12px 40px rgba(20,15,10,0.2);
+    position: relative;
+  }
+  .portrait-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(139,58,31,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .portrait-frame::after {
+    content: 'From One Foot in Two Places';
+    position: absolute;
+    bottom: -2rem;
+    left: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--slate);
+    letter-spacing: 0.05em;
+  }
+  .bio-portrait h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.15;
+    color: var(--ink); margin-bottom: 2rem;
+  }
+  .bio-portrait h2 em { font-style: italic; color: var(--rust); }
+  .bio-portrait p {
+    font-size: 1rem; line-height: 1.85;
+    color: var(--ink-soft); margin-bottom: 1.2rem;
+    max-width: 42rem;
+  }
+  .timeline {
+    background: var(--ink); color: var(--paper);
+    padding: 8rem 4rem;
+  }
+  .timeline-inner {
+    max-width: 1100px; margin: 0 auto;
+  }
+  .timeline-head {
+    text-align: center; margin-bottom: 5rem;
+  }
+  .timeline-head .label {
+    font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--ochre); margin-bottom: 1.5rem;
+  }
+  .timeline-head h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.1;
+  }
+  .timeline-head h2 em { font-style: italic; color: var(--ochre); }
+  .timeline-list {
+    border-left: 1px solid rgba(241,235,221,0.15);
+    padding-left: 0;
+    margin-left: 5rem;
+  }
+  .timeline-item {
+    position: relative;
+    padding: 1.5rem 0 1.5rem 3rem;
+    display: grid; grid-template-columns: 5rem 1fr;
+    gap: 2rem; align-items: baseline;
+  }
+  .timeline-item::before {
+    content: ''; position: absolute;
+    left: -4px; top: 2.2rem;
+    width: 7px; height: 7px;
+    border-radius: 50%; background: var(--ochre);
+  }
+  .timeline-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.4rem;
+    color: var(--ochre); position: absolute;
+    left: -7rem; top: 1.4rem;
+    width: 5rem; text-align: right;
+  }
+  .timeline-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 1.3rem;
+    color: var(--paper); margin-bottom: 0.4rem;
+  }
+  .timeline-content p {
+    font-size: 0.92rem; color: var(--warm-mid);
+    line-height: 1.7;
+  }
+  @media (max-width: 1024px) {
+    .bio-portrait { padding: 3rem 2rem; }
+    .bio-portrait-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .timeline { padding: 4rem 2rem; }
+    .timeline-list { margin-left: 0; padding-left: 2rem; }
+    .timeline-year { left: -2rem; top: 0; width: auto;
+      position: static; text-align: left; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; padding-left: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-mark">Olwen <span>Dowling</span></a>
+  <div class="nav-tagline">Painter · Printmaker · Est. 1995</div>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="biography.html" class="active">Biography</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <p class="eyebrow">Biography</p>
+  <h1>A life in <em>two landscapes</em>.</h1>
+  <p class="sub">Born in Dublin. Raised between Ireland and Malibu, California. Working from the Berkshire Hills of western Massachusetts since 1998 — with regular returns to Connemara and County Monaghan.</p>
+</header>
+
+<section class="bio-portrait">
+  <div class="bio-portrait-inner">
+    <div class="portrait-frame"></div>
+    <div>
+      <h2>From the <em>theatre</em><br>to the studio.</h2>
+      <p>Olwen O'Herlihy Dowling spent the first half of her working life in the professional theatre — over two decades as a producer, managing director, stage manager, and scenery designer. She produced new plays in Dublin, in regional American theatre, and on Cape Cod. The discipline of staging — the patience for craft, the readiness to be surprised by what materials want to do — became the foundation of everything that followed.</p>
+      <p>In her early forties she made the transition fully to the visual arts. She has described it not as a break but as a return: a coming back to what she had always meant to be doing. The work since has been continuous — printmaking at Zea Mays in Florence, Massachusetts; oil and watercolor painting from her studio in North Chester; residencies at the Tyrone Guthrie Centre in County Monaghan and the Virginia Center for the Creative Arts.</p>
+      <p>She holds a BA from Smith College in studio art and biology, and trained in printmaking at L'Ecole d'Art in Vallauris, France. The biology has resurfaced lately. Recent work attends to plant life, to birds in decline, to the specific ecological present of the two landscapes she has been looking at all her life.</p>
+    </div>
+  </div>
+</section>
+
+<section class="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-head">
+      <p class="label">A Working Chronology</p>
+      <h2>Selected <em>milestones</em>.</h2>
+    </div>
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="timeline-year">2026</div>
+        <div class="timeline-content">
+          <h4><em>One Foot in Two Places</em> — Solo Museum Exhibition</h4>
+          <p>D'Amour Museum of Fine Arts, Print Gallery, Springfield MA. The most extensive institutional showing of the work to date — monotype prints and etchings exploring Irish-American identity and the felt sense of belonging to multiple places. Through October 4, 2026.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Recent</div>
+        <div class="timeline-content">
+          <h4>Tyrone Guthrie Centre — Returning Fellow</h4>
+          <p>Multiple residencies at the Centre in County Monaghan, Ireland — a sustained engagement with the western Irish landscape over many years.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Practice</div>
+        <div class="timeline-content">
+          <h4>Member, Zea Mays Printmaking</h4>
+          <p>Florence, Massachusetts. Long-standing intaglio practice as part of the Zea Mays cooperative — the discipline at the center of the studio.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">VCCA</div>
+        <div class="timeline-content">
+          <h4>Virginia Center for the Creative Arts Fellowship</h4>
+          <p>Time and space to make new work — one of several fellowships supporting the practice.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Earlier</div>
+        <div class="timeline-content">
+          <h4>From Theatre to the Visual Arts</h4>
+          <p>A career-long transition: more than two decades in the professional theatre — as producer, managing director, stage manager, and scenery designer — before turning fully to the visual arts.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Training</div>
+        <div class="timeline-content">
+          <h4>Smith College &amp; L'Ecole d'Art, Vallauris</h4>
+          <p>BA in Studio Art and Biology from Smith. Print and ceramic studies in the south of France.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prose">
+  <aside class="prose-aside">§ On the work</aside>
+  <div class="prose-body">
+    <h3>The <em>subject matter</em> often dictates the medium.</h3>
+    <p>Most days the studio holds three simultaneous practices — a print on the press, a painting on the easel, a watercolor at the table. The choice between them is rarely strategic. Some subjects ask for the slow patience of intaglio; others for the speed and chance of monotype; others for the wet immediacy of oil. The job is to listen.</p>
+    <h3>Influences</h3>
+    <p>Turner, Cassatt, Homer, Diebenkorn, Sorolla — painters of light and water and edges, working in the long tradition Olwen identifies with. The contemporary printmakers of Zea Mays. The Irish landscape tradition. The biology shelf in the studio.</p>
+    <h3>Where the work goes</h3>
+    <p>Private collections in the United States, Ireland, the United Kingdom, and continental Europe. Galleries throughout western Massachusetts and in Dublin. The Zea Mays Flat File Project, ongoing.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Olwen O'Herlihy Dowling</p>
+  <p class="footer-mark">— OD —</p>
+  <p class="footer-end">Boston Printmakers · CSP · MGNE · Zea Mays</p>
+</footer>
+
+</body>
+</html>
