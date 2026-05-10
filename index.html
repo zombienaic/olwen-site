@@ -14,7 +14,7 @@
   --ink-soft: #2a221a;
   --paper: #e2d6bb;
   --paper-warm: #ebe2cf;
-  --paper-deep: #e2d6bb;
+  --paper-deep: #d4c5a5;
   --warm-mid: #b8a98d;
   --rust: #8b3a1f;
   --ochre: #c4873a;
@@ -47,25 +47,22 @@ nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: grid; grid-template-columns: auto 1fr auto;
   align-items: center; padding: 1.6rem 3rem; gap: 3rem;
-  background: rgba(241, 235, 221, 0.92);
+  background: rgba(226, 214, 187, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(22,17,12,0.08);
   transition: padding 0.3s;
 }
 nav.scrolled { padding: 1rem 3rem; }
-
 .nav-mark {
   font-family: "Cormorant Garamond", serif;
   font-size: 1.4rem; font-weight: 400;
   color: var(--ink); text-decoration: none;
 }
 .nav-mark span { font-style: italic; color: var(--rust); }
-
 .nav-tagline {
   font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--slate); opacity: 0.7; justify-self: center;
 }
-
 .nav-links { display: flex; gap: 2.2rem; list-style: none; }
 .nav-links a {
   font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
@@ -75,73 +72,47 @@ nav.scrolled { padding: 1rem 3rem; }
 .nav-links a:hover { opacity: 1; color: var(--rust); }
 .nav-links a.active { opacity: 1; }
 
-/* HERO — single column, no black box */
+/* HERO */
 .hero {
   min-height: 80vh;
   padding: 9rem 4rem 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
 }
-
 .hero-bg {
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 60%;
-  background-image: url("work-01.webp");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.55;
-  pointer-events: none;
+  position: absolute; top: 0; right: 0; bottom: 0; width: 55%;
+  background-image: url("images/g01-atlantic-seascape.jpg");
+  background-size: cover; background-position: center;
+  opacity: 0.55; pointer-events: none;
   mask-image: linear-gradient(to left, black 50%, transparent 95%);
   -webkit-mask-image: linear-gradient(to left, black 50%, transparent 95%);
 }
-
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  max-width: 1100px;
-}
-
+.hero-inner { position: relative; z-index: 2; max-width: 1100px; }
 .hero-meta {
   display: flex; align-items: center; gap: 1rem;
   font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase;
   color: var(--rust); margin-bottom: 2.5rem;
 }
-.hero-meta::before {
-  content: ""; width: 2.5rem; height: 1px; background: var(--rust);
-}
-
+.hero-meta::before { content: ""; width: 2.5rem; height: 1px; background: var(--rust); }
 .hero-name {
   font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  font-size: clamp(3.5rem, 9vw, 8rem);
-  line-height: 0.95;
-  letter-spacing: -0.025em;
-  color: var(--ink);
+  font-weight: 300; font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 0.95; letter-spacing: -0.025em; color: var(--ink);
 }
 .hero-name .surname {
   font-style: italic; font-weight: 400;
-  color: var(--rust); display: block;
-  padding-left: 0.3em;
+  color: var(--rust); display: block; padding-left: 0.3em;
 }
-
 .hero-statement {
   font-family: "Cormorant Garamond", serif;
-  font-style: italic; font-weight: 400;
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-style: italic; font-size: clamp(1.1rem, 1.6vw, 1.4rem);
   line-height: 1.55; color: var(--ink-soft);
   max-width: 32rem; margin-top: 2.5rem;
 }
 .hero-statement::before {
-  content: ""; display: block;
-  width: 2rem; height: 1px;
-  background: var(--ink-soft);
-  margin-bottom: 1.2rem; opacity: 0.4;
+  content: ""; display: block; width: 2rem; height: 1px;
+  background: var(--ink-soft); margin-bottom: 1.2rem; opacity: 0.4;
 }
-
 .hero-cta {
   display: inline-flex; align-items: center; gap: 1rem;
   font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
@@ -153,39 +124,21 @@ nav.scrolled { padding: 1rem 3rem; }
 .hero-cta:hover { color: var(--rust); border-color: var(--rust); }
 
 /* MARQUEE */
-.marquee-wrap {
-  overflow: hidden;
-  background: var(--ink);
-  padding: 1rem 0;
-}
-.marquee-track {
-  display: flex; white-space: nowrap;
-  animation: marquee 35s linear infinite;
-}
+.marquee-wrap { overflow: hidden; background: var(--ink); padding: 1rem 0; }
+.marquee-track { display: flex; white-space: nowrap; animation: marquee 40s linear infinite; }
 .marquee-item {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--paper);
-  padding: 0 2.5rem;
-  opacity: 0.8;
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 0.95rem; color: var(--paper); padding: 0 2.5rem; opacity: 0.8;
 }
 .marquee-sep { color: var(--rust); padding: 0 0.5rem; font-style: normal; }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* PROLOGUE */
 .prologue {
-  padding: 8rem 4rem;
-  max-width: 1400px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1.5fr;
-  gap: 6rem; align-items: start;
+  padding: 8rem 4rem; max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: start;
 }
-.prologue-side {
-  position: sticky; top: 8rem;
-}
+.prologue-side { position: sticky; top: 8rem; }
 .prologue-label {
   font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
   color: var(--rust); margin-bottom: 1.5rem;
@@ -196,70 +149,59 @@ nav.scrolled { padding: 1rem 3rem; }
   line-height: 1.3; color: var(--ink);
 }
 .prologue-body h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1.15; color: var(--ink);
-  margin-bottom: 2.5rem; letter-spacing: -0.01em;
+  font-family: "Cormorant Garamond", serif; font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.15;
+  color: var(--ink); margin-bottom: 2.5rem; letter-spacing: -0.01em;
 }
 .prologue-body h2 em { font-style: italic; color: var(--rust); }
 .prologue-body p {
   font-size: 1.02rem; line-height: 1.85;
-  color: var(--ink-soft); margin-bottom: 1.5rem;
-  max-width: 38rem;
+  color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 38rem;
 }
 .prologue-body p:first-of-type::first-letter {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 4rem; line-height: 0.9; float: left;
-  padding: 0.3rem 0.8rem 0 0;
+  font-family: "Cormorant Garamond", serif; font-size: 4rem;
+  line-height: 0.9; float: left; padding: 0.3rem 0.8rem 0 0;
   color: var(--rust); font-weight: 300;
 }
 
 /* GALLERY */
 .gallery-section {
-  background: var(--paper-deep);
-  padding: 8rem 4rem;
+  background: var(--paper-deep); padding: 8rem 4rem;
   position: relative; overflow: hidden;
 }
 .gallery-section::before {
-  content: "Œuvre";
-  position: absolute; top: 2rem; right: 3rem;
+  content: "Œuvre"; position: absolute; top: 2rem; right: 3rem;
   font-family: "Cormorant Garamond", serif; font-style: italic;
   font-size: clamp(8rem, 18vw, 22rem);
-  color: rgba(22,17,12,0.04);
-  line-height: 1; pointer-events: none; font-weight: 300;
+  color: rgba(22,17,12,0.04); line-height: 1;
+  pointer-events: none; font-weight: 300;
 }
 .gallery-head {
   max-width: 1400px; margin: 0 auto 4rem;
   display: flex; justify-content: space-between; align-items: flex-end;
-  position: relative;
 }
 .gallery-head h2 {
   font-family: "Cormorant Garamond", serif;
   font-size: clamp(2.5rem, 5vw, 4.2rem);
-  font-weight: 300; line-height: 1.05;
-  color: var(--ink); letter-spacing: -0.015em;
+  font-weight: 300; line-height: 1.05; color: var(--ink); letter-spacing: -0.015em;
 }
 .gallery-head h2 em { font-style: italic; color: var(--rust); }
-.gallery-head .gallery-count {
+.gallery-head .gallery-sub {
   font-family: "Cormorant Garamond", serif;
-  font-size: 0.85rem; color: var(--slate); font-style: italic;
+  font-size: 0.9rem; color: var(--slate); font-style: italic;
 }
 
 .gallery-filters {
   display: flex; max-width: 1400px; margin: 0 auto 4rem;
   border-top: 1px solid rgba(22,17,12,0.15);
   border-bottom: 1px solid rgba(22,17,12,0.15);
-  position: relative;
 }
 .filter-btn {
   flex: 1; background: none; border: none;
   border-right: 1px solid rgba(22,17,12,0.1);
-  padding: 1.2rem 1rem;
-  font-family: inherit;
+  padding: 1.2rem 1rem; font-family: inherit;
   font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--slate); cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+  color: var(--slate); cursor: pointer; transition: background 0.3s, color 0.3s;
 }
 .filter-btn:last-child { border-right: none; }
 .filter-btn:hover { color: var(--ink); background: rgba(255,255,255,0.3); }
@@ -270,74 +212,67 @@ nav.scrolled { padding: 1rem 3rem; }
   text-transform: none; letter-spacing: 0;
 }
 
+/* Asymmetric gallery grid */
 .gallery-grid {
   max-width: 1400px; margin: 0 auto;
   display: grid; grid-template-columns: repeat(12, 1fr);
   gap: 1.5rem; position: relative;
 }
-
-.artwork {
-  position: relative; cursor: pointer;
-  transition: opacity 0.4s;
-}
+.artwork { position: relative; cursor: pointer; transition: opacity 0.4s; }
 .artwork.hidden { display: none; }
-
 .artwork-image {
   position: relative; overflow: hidden;
-  background-color: #2a221a;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100%;
-  aspect-ratio: 3/4;
+  background-color: var(--ink-soft);
+  background-size: cover; background-position: center;
+  background-repeat: no-repeat; width: 100%;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .artwork:hover .artwork-image { transform: scale(1.02); }
 
-.artwork:nth-child(1) .artwork-image { aspect-ratio: 3/2; }
-.artwork:nth-child(2) .artwork-image { aspect-ratio: 3/4; }
-.artwork:nth-child(3) .artwork-image { aspect-ratio: 4/3; }
-.artwork:nth-child(4) .artwork-image { aspect-ratio: 5/4; }
-.artwork:nth-child(5) .artwork-image { aspect-ratio: 4/3; }
-.artwork:nth-child(6) .artwork-image { aspect-ratio: 3/2; }
-.artwork:nth-child(7) .artwork-image { aspect-ratio: 4/3; }
-.artwork:nth-child(8) .artwork-image { aspect-ratio: 16/5; }
-.artwork:nth-child(9) .artwork-image { aspect-ratio: 3/4; }
-
-/* Asymmetric placement */
-.artwork:nth-child(1) { grid-column: 1 / span 7; margin-top: 0; }
-.artwork:nth-child(2) { grid-column: 9 / span 4; margin-top: 4rem; }
-.artwork:nth-child(3) { grid-column: 2 / span 5; margin-top: 3rem; }
-.artwork:nth-child(4) { grid-column: 8 / span 5; margin-top: -2rem; }
-.artwork:nth-child(5) { grid-column: 1 / span 5; margin-top: 4rem; }
-.artwork:nth-child(6) { grid-column: 7 / span 6; margin-top: 2rem; }
-.artwork:nth-child(7) { grid-column: 2 / span 5; margin-top: 3rem; }
-.artwork:nth-child(8) { grid-column: 1 / span 12; margin-top: 4rem; }
-.artwork:nth-child(9) { grid-column: 5 / span 4; margin-top: 4rem; }
+/* Asymmetric placement — 12 pieces */
+.artwork:nth-child(1)  { grid-column: 1 / span 7; }
+.artwork:nth-child(1)  .artwork-image { aspect-ratio: 4/3; }
+.artwork:nth-child(2)  { grid-column: 9 / span 4; margin-top: 5rem; }
+.artwork:nth-child(2)  .artwork-image { aspect-ratio: 1/1; }
+.artwork:nth-child(3)  { grid-column: 2 / span 5; margin-top: 3rem; }
+.artwork:nth-child(3)  .artwork-image { aspect-ratio: 4/3; }
+.artwork:nth-child(4)  { grid-column: 8 / span 5; margin-top: -2rem; }
+.artwork:nth-child(4)  .artwork-image { aspect-ratio: 3/4; }
+.artwork:nth-child(5)  { grid-column: 1 / span 4; margin-top: 4rem; }
+.artwork:nth-child(5)  .artwork-image { aspect-ratio: 1/1; }
+.artwork:nth-child(6)  { grid-column: 6 / span 4; margin-top: 2rem; }
+.artwork:nth-child(6)  .artwork-image { aspect-ratio: 1/1; }
+.artwork:nth-child(7)  { grid-column: 11 / span 2; margin-top: 6rem; }
+.artwork:nth-child(7)  .artwork-image { aspect-ratio: 3/4; }
+.artwork:nth-child(8)  { grid-column: 1 / span 12; margin-top: 4rem; }
+.artwork:nth-child(8)  .artwork-image { aspect-ratio: 16/5; }
+.artwork:nth-child(9)  { grid-column: 2 / span 4; margin-top: 4rem; }
+.artwork:nth-child(9)  .artwork-image { aspect-ratio: 3/4; }
+.artwork:nth-child(10) { grid-column: 7 / span 5; margin-top: 2rem; }
+.artwork:nth-child(10) .artwork-image { aspect-ratio: 4/3; }
+.artwork:nth-child(11) { grid-column: 1 / span 5; margin-top: 3rem; }
+.artwork:nth-child(11) .artwork-image { aspect-ratio: 3/4; }
+.artwork:nth-child(12) { grid-column: 7 / span 6; margin-top: 1rem; }
+.artwork:nth-child(12) .artwork-image { aspect-ratio: 4/3; }
 
 .artwork-meta {
-  padding: 1.2rem 0 0;
+  padding: 1rem 0 0;
   display: grid; grid-template-columns: 1fr auto;
-  gap: 0.5rem 1rem; align-items: baseline;
+  gap: 0.4rem 1rem; align-items: baseline;
 }
 .artwork-title {
   font-family: "Cormorant Garamond", serif;
-  font-size: 1.15rem; font-style: italic; font-weight: 400;
-  color: var(--ink);
+  font-size: 1.1rem; font-style: italic; font-weight: 400; color: var(--ink);
 }
-.artwork-year {
-  font-size: 0.7rem; letter-spacing: 0.15em; color: var(--rust);
-}
+.artwork-year { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--rust); }
 .artwork-medium {
-  grid-column: 1 / -1;
-  font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--slate); opacity: 0.8;
+  grid-column: 1 / -1; font-size: 0.68rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--slate); opacity: 0.8;
 }
 
 /* LIGHTBOX */
 .lightbox {
-  position: fixed; inset: 0;
-  background: rgba(22,17,12,0.96);
+  position: fixed; inset: 0; background: rgba(22,17,12,0.96);
   z-index: 1000; display: none;
   align-items: center; justify-content: center;
   padding: 4rem; backdrop-filter: blur(4px);
@@ -349,11 +284,9 @@ nav.scrolled { padding: 1rem 3rem; }
   gap: 4rem; align-items: center;
 }
 .lightbox-image {
-  aspect-ratio: 4/5;
-  background-color: #0e0a07;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #0e0a07; background-size: contain;
+  background-position: center; background-repeat: no-repeat;
+  aspect-ratio: 4/3; max-height: 70vh;
 }
 .lightbox-text h3 {
   font-family: "Cormorant Garamond", serif;
@@ -361,12 +294,10 @@ nav.scrolled { padding: 1rem 3rem; }
   color: var(--paper); margin-bottom: 0.5rem; line-height: 1.1;
 }
 .lightbox-text .lb-year {
-  font-size: 0.75rem; letter-spacing: 0.3em;
-  color: var(--ochre); margin-bottom: 2rem;
+  font-size: 0.75rem; letter-spacing: 0.3em; color: var(--ochre); margin-bottom: 2rem;
 }
 .lightbox-text dl {
-  border-top: 1px solid rgba(241,235,221,0.15);
-  margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: 1px solid rgba(241,235,221,0.15); margin-top: 1.5rem; padding-top: 1.5rem;
 }
 .lightbox-text dt {
   font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
@@ -374,25 +305,22 @@ nav.scrolled { padding: 1rem 3rem; }
 }
 .lightbox-text dt:first-child { margin-top: 0; }
 .lightbox-text dd {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1rem; color: var(--paper);
-  margin-top: 0.3rem; font-style: italic;
+  font-family: "Cormorant Garamond", serif; font-size: 1rem;
+  color: var(--paper); margin-top: 0.3rem; font-style: italic;
 }
 .lightbox-close {
   position: absolute; top: 2rem; right: 2rem;
   background: none; border: 1px solid rgba(241,235,221,0.3);
-  color: var(--paper);
-  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-  padding: 0.6rem 1.2rem; cursor: pointer;
-  font-family: inherit;
-  transition: background 0.3s;
+  color: var(--paper); font-size: 0.7rem; letter-spacing: 0.3em;
+  text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: pointer;
+  font-family: inherit; transition: background 0.3s;
 }
-.lightbox-close:hover { background: var(--rust); }
+.lightbox-close:hover { background: var(--rust); border-color: var(--rust); }
 
 /* PRACTICE */
 .practice {
-  background: var(--ink); color: var(--paper);
-  padding: 8rem 4rem; position: relative; overflow: hidden;
+  background: var(--ink); color: var(--paper); padding: 8rem 4rem;
+  position: relative; overflow: hidden;
 }
 .practice-inner { max-width: 1400px; margin: 0 auto; position: relative; }
 .practice-head { margin-bottom: 4rem; max-width: 50rem; }
@@ -402,11 +330,9 @@ nav.scrolled { padding: 1rem 3rem; }
 }
 .practice-head h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 300; line-height: 1.05;
+  font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 300; line-height: 1.05;
 }
 .practice-head h2 em { font-style: italic; color: var(--ochre); }
-
 .practice-grid {
   display: grid; grid-template-columns: 1fr 1fr 1fr;
   border-top: 1px solid rgba(241,235,221,0.12);
@@ -418,52 +344,38 @@ nav.scrolled { padding: 1rem 3rem; }
 }
 .practice-card:last-child { border-right: none; }
 .practice-num {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 0.85rem; font-style: italic; color: var(--ochre);
-  margin-bottom: 1.5rem;
+  font-family: "Cormorant Garamond", serif; font-size: 0.85rem;
+  font-style: italic; color: var(--ochre); margin-bottom: 1.5rem;
 }
 .practice-card h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 400; font-size: 1.7rem;
-  color: var(--paper); margin-bottom: 1rem; line-height: 1.2;
+  font-family: "Cormorant Garamond", serif; font-weight: 400;
+  font-size: 1.7rem; color: var(--paper); margin-bottom: 1rem; line-height: 1.2;
 }
 .practice-card h3 em { font-style: italic; color: var(--ochre); }
-.practice-card p {
-  font-size: 0.92rem; line-height: 1.8;
-  color: var(--warm-mid);
-}
+.practice-card p { font-size: 0.92rem; line-height: 1.8; color: var(--warm-mid); }
 
 /* PULL QUOTE */
-.pullquote {
-  padding: 8rem 4rem; background: var(--paper);
-  text-align: center;
-}
+.pullquote { padding: 8rem 4rem; background: var(--paper); text-align: center; }
 .pullquote-mark {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 10rem; font-style: italic;
-  color: var(--rust); line-height: 0.5;
+  font-family: "Cormorant Garamond", serif; font-size: 10rem;
+  font-style: italic; color: var(--rust); line-height: 0.5;
   margin-bottom: 1rem; height: 4rem; opacity: 0.85;
 }
 .pullquote blockquote {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-  font-weight: 300; line-height: 1.3;
-  color: var(--ink); max-width: 50rem;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem); font-weight: 300;
+  line-height: 1.3; color: var(--ink); max-width: 50rem;
   margin: 0 auto; font-style: italic;
 }
-.pullquote blockquote em {
-  font-style: normal; color: var(--rust);
-}
+.pullquote blockquote em { font-style: normal; color: var(--rust); }
 .pullquote cite {
-  display: block; margin-top: 2.5rem;
-  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+  display: block; margin-top: 2.5rem; font-size: 0.7rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--slate); font-style: normal;
 }
 
 /* EXHIBITIONS */
-.exhibitions {
-  padding: 7rem 4rem; max-width: 1400px; margin: 0 auto;
-}
+.exhibitions { padding: 7rem 4rem; max-width: 1400px; margin: 0 auto; }
 .ex-head {
   display: grid; grid-template-columns: 1fr auto;
   align-items: end; margin-bottom: 3rem; gap: 2rem;
@@ -476,32 +388,23 @@ nav.scrolled { padding: 1rem 3rem; }
 }
 .ex-head h2 em { font-style: italic; color: var(--rust); }
 .ex-head .ex-meta {
-  text-align: right; font-size: 0.7rem;
-  letter-spacing: 0.25em; text-transform: uppercase;
-  color: var(--slate); line-height: 1.8;
+  text-align: right; font-size: 0.7rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--slate); line-height: 1.8;
 }
 .ex-head .ex-meta strong { font-weight: 400; color: var(--rust); }
-
 .exhibition-item {
   display: grid; grid-template-columns: 5rem 1fr 1.5fr auto;
-  align-items: center; gap: 2rem;
-  padding: 1.4rem 0.5rem;
+  align-items: center; gap: 2rem; padding: 1.4rem 0.5rem;
   border-bottom: 1px solid rgba(22,17,12,0.1);
   transition: background 0.3s, padding 0.3s;
 }
-.exhibition-item:hover {
-  background: rgba(139,58,31,0.04); padding-left: 1.5rem;
-}
+.exhibition-item:hover { background: rgba(139,58,31,0.04); padding-left: 1.5rem; }
 .ex-year {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.3rem; font-style: italic;
-  color: var(--rust); font-weight: 400;
+  font-family: "Cormorant Garamond", serif; font-size: 1.3rem;
+  font-style: italic; color: var(--rust); font-weight: 400;
 }
 .ex-name { font-size: 0.95rem; color: var(--ink); }
-.ex-name em {
-  font-family: "Cormorant Garamond", serif; font-style: italic;
-  font-size: 1.1rem;
-}
+.ex-name em { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 1.1rem; }
 .ex-venue {
   font-size: 0.82rem; color: var(--slate);
   font-style: italic; font-family: "Cormorant Garamond", serif;
@@ -509,19 +412,15 @@ nav.scrolled { padding: 1rem 3rem; }
 .ex-tag {
   font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--rust); border: 1px solid var(--rust);
-  padding: 0.3rem 0.7rem; border-radius: 100px;
-  white-space: nowrap;
+  padding: 0.3rem 0.7rem; border-radius: 100px; white-space: nowrap;
 }
 .ex-tag.solo { background: var(--rust); color: var(--paper); }
-
 .ex-cta {
   display: block; text-align: center; margin-top: 2.5rem;
   font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--ink); text-decoration: none;
 }
-.ex-cta span {
-  border-bottom: 1px solid var(--ink); padding-bottom: 0.3rem;
-}
+.ex-cta span { border-bottom: 1px solid var(--ink); padding-bottom: 0.3rem; }
 .ex-cta:hover span { color: var(--rust); border-color: var(--rust); }
 
 /* CONTACT */
@@ -530,53 +429,42 @@ nav.scrolled { padding: 1rem 3rem; }
   position: relative; overflow: hidden;
 }
 .contact::before {
-  content: "OD";
-  position: absolute; top: 50%; left: 50%;
+  content: "OD"; position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(20rem, 40vw, 32rem);
-  font-weight: 300; color: rgba(241,235,221,0.025);
-  pointer-events: none; letter-spacing: -0.05em; line-height: 0.8;
+  font-size: clamp(20rem, 40vw, 32rem); font-weight: 300;
+  color: rgba(241,235,221,0.025); pointer-events: none;
+  letter-spacing: -0.05em; line-height: 0.8;
 }
-.contact-inner {
-  max-width: 1000px; margin: 0 auto;
-  position: relative; text-align: center;
-}
+.contact-inner { max-width: 1000px; margin: 0 auto; position: relative; text-align: center; }
 .contact-eyebrow {
   font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
   color: var(--ochre); margin-bottom: 1.5rem;
 }
 .contact h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 300; font-style: italic;
-  color: var(--paper); line-height: 1;
-  margin-bottom: 1.5rem; letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; font-style: italic;
+  color: var(--paper); line-height: 1; margin-bottom: 1.5rem; letter-spacing: -0.02em;
 }
 .contact-sub {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.05rem; color: var(--warm-mid);
-  margin-bottom: 3.5rem; font-style: italic;
+  font-family: "Cormorant Garamond", serif; font-size: 1.05rem;
+  color: var(--warm-mid); margin-bottom: 3.5rem; font-style: italic;
 }
 .contact-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2rem; margin-bottom: 3rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-bottom: 3rem;
   border-top: 1px solid rgba(241,235,221,0.12);
   border-bottom: 1px solid rgba(241,235,221,0.12);
 }
-.contact-cell {
-  padding: 2.5rem 1rem;
-  border-right: 1px solid rgba(241,235,221,0.12);
-}
+.contact-cell { padding: 2.5rem 1rem; border-right: 1px solid rgba(241,235,221,0.12); }
 .contact-cell:last-child { border-right: none; }
 .contact-cell .label {
   font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--ochre); margin-bottom: 0.8rem;
 }
 .contact-cell a, .contact-cell .value {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.05rem; color: var(--paper);
-  text-decoration: none; line-height: 1.6;
+  font-family: "Cormorant Garamond", serif; font-size: 1.05rem;
+  color: var(--paper); text-decoration: none; line-height: 1.6;
   font-style: italic; display: block;
 }
 .contact-cell a:hover { color: var(--ochre); }
@@ -587,14 +475,10 @@ footer {
   display: grid; grid-template-columns: 1fr auto 1fr;
   align-items: center; gap: 2rem;
 }
-footer p {
-  font-size: 0.65rem; letter-spacing: 0.15em;
-  color: rgba(184,169,141,0.45);
-}
+footer p { font-size: 0.65rem; letter-spacing: 0.15em; color: rgba(184,169,141,0.45); }
 footer .footer-mark {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic; font-size: 0.85rem;
-  color: var(--rust); text-align: center;
+  font-family: "Cormorant Garamond", serif; font-style: italic;
+  font-size: 0.85rem; color: var(--rust); text-align: center;
 }
 footer .footer-end { text-align: right; }
 
@@ -604,40 +488,31 @@ footer .footer-end { text-align: right; }
   .nav-tagline { display: none; }
   .nav-links { gap: 1rem; }
   .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
-
   .hero { padding: 7rem 2rem 3rem; min-height: auto; }
-  .hero-bg { width: 100%; opacity: 0.1; }
-
+  .hero-bg { width: 100%; opacity: 0.12; }
   .prologue { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 2rem; }
   .prologue-side { position: static; }
-
   .gallery-section { padding: 4rem 2rem; }
   .gallery-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
   .artwork:nth-child(n) { grid-column: auto; margin-top: 0; }
   .artwork:nth-child(8) { grid-column: 1 / -1; }
-
   .practice { padding: 4rem 2rem; }
   .practice-grid { grid-template-columns: 1fr; }
   .practice-card { border-right: none; }
-
   .pullquote { padding: 4rem 2rem; }
   .pullquote-mark { font-size: 6rem; height: 3rem; }
-
   .exhibitions { padding: 4rem 2rem; }
   .exhibition-item { grid-template-columns: 4rem 1fr; gap: 1rem; }
   .ex-venue, .ex-tag { display: none; }
-
   .contact { padding: 4rem 2rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .contact-cell { border-right: none; border-bottom: 1px solid rgba(241,235,221,0.12); }
   .contact-cell:last-child { border-bottom: none; }
-
   footer { grid-template-columns: 1fr; text-align: center; gap: 1rem; padding: 1.5rem 2rem; }
   footer .footer-end { text-align: center; }
-
   .lightbox { padding: 1.5rem; }
   .lightbox-content { grid-template-columns: 1fr; gap: 1.5rem; max-height: 90vh; overflow-y: auto; }
-  .lightbox-image { aspect-ratio: 1/1; }
+  .lightbox-image { aspect-ratio: 4/3; max-height: 50vh; }
 }
 @media (max-width: 600px) {
   .gallery-grid { grid-template-columns: 1fr; }
@@ -662,7 +537,7 @@ footer .footer-end { text-align: right; }
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
-    <p class="hero-meta">Now Showing · D'Amour Museum, Springfield</p>
+    <p class="hero-meta">Now Showing · D'Amour Museum of Fine Arts, Springfield</p>
     <h1 class="hero-name">Olwen O'Herlihy<span class="surname">Dowling</span></h1>
     <p class="hero-statement">A painter and printmaker whose work moves between the West of Ireland and the Berkshire Hills — drypoint, monotype, intaglio; oil and watercolor; landscape rendered as memory and as warning.</p>
     <a href="#work" class="hero-cta">View the work →</a>
@@ -676,17 +551,17 @@ footer .footer-end { text-align: right; }
     <span class="marquee-item">Virginia Center for the Creative Arts</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Smith College</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Boston Printmakers</span><span class="marquee-item marquee-sep">◇</span>
+    <span class="marquee-item">D'Amour Museum of Fine Arts</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">California Society of Printmakers</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Monotype Guild of New England</span><span class="marquee-item marquee-sep">◇</span>
-    <span class="marquee-item">D'Amour Museum of Fine Arts</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Zea Mays Printmaking</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Tyrone Guthrie Centre</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Virginia Center for the Creative Arts</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Smith College</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Boston Printmakers</span><span class="marquee-item marquee-sep">◇</span>
+    <span class="marquee-item">D'Amour Museum of Fine Arts</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">California Society of Printmakers</span><span class="marquee-item marquee-sep">◇</span>
     <span class="marquee-item">Monotype Guild of New England</span><span class="marquee-item marquee-sep">◇</span>
-    <span class="marquee-item">D'Amour Museum of Fine Arts</span><span class="marquee-item marquee-sep">◇</span>
   </div>
 </div>
 
@@ -706,96 +581,125 @@ footer .footer-end { text-align: right; }
 <section class="gallery-section" id="work">
   <div class="gallery-head">
     <h2>Selected <em>Works</em></h2>
-    <span class="gallery-count">From the studio · 2020 — present</span>
+    <span class="gallery-sub">Intaglio · Drypoint · Monotype · Oil · Watercolor</span>
   </div>
 
   <div class="gallery-filters">
-    <button class="filter-btn active" data-filter="all">All <span class="count">9</span></button>
-    <button class="filter-btn" data-filter="drypoint">Drypoint <span class="count">5</span></button>
+    <button class="filter-btn active" data-filter="all">All <span class="count">12</span></button>
+    <button class="filter-btn" data-filter="intaglio">Intaglio <span class="count">3</span></button>
+    <button class="filter-btn" data-filter="drypoint">Drypoint <span class="count">4</span></button>
     <button class="filter-btn" data-filter="monotype">Monotype <span class="count">3</span></button>
+    <button class="filter-btn" data-filter="oil">Oil <span class="count">1</span></button>
     <button class="filter-btn" data-filter="watercolor">Watercolor <span class="count">1</span></button>
   </div>
 
   <div class="gallery-grid">
 
-    <div class="artwork" data-medium="drypoint" data-img="work-01.webp" data-title="Trees, in mist" data-year="2024" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="From the One Foot in Two Places series. Trees and the threshold between mist and ground.">
-      <div class="artwork-image" style="background-image: url('work-01.webp');"></div>
+    <div class="artwork" data-medium="monotype" data-img="images/g01-atlantic-seascape.jpg" data-title="Atlantic" data-year="—" data-medium-full="Monotype with Line Work" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Sea, mountain, the breaking weather of the West of Ireland. Monotype wash with drypoint line.">
+      <div class="artwork-image" style="background-image: url('images/g01-atlantic-seascape.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Trees, in Mist</span>
-        <span class="artwork-year">2024</span>
+        <span class="artwork-title">Atlantic</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Monotype with Line Work</span>
+      </div>
+    </div>
+
+    <div class="artwork" data-medium="drypoint" data-img="images/g02-allium.jpg" data-title="Allium" data-year="—" data-medium-full="Drypoint with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Seed heads in deep magenta against a pale ground. Drypoint line with hand-applied colour.">
+      <div class="artwork-image" style="background-image: url('images/g02-allium.jpg');"></div>
+      <div class="artwork-meta">
+        <span class="artwork-title">Allium</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Drypoint with Hand-colouring</span>
+      </div>
+    </div>
+
+    <div class="artwork" data-medium="drypoint" data-img="images/g03-trees.jpg" data-title="Trees" data-year="—" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="The signature subject — Berkshire trees in winter, the atmospheric density of the monotype ground behind drypoint line.">
+      <div class="artwork-image" style="background-image: url('images/g03-trees.jpg');"></div>
+      <div class="artwork-meta">
+        <span class="artwork-title">Trees</span>
+        <span class="artwork-year">—</span>
         <span class="artwork-medium">Drypoint &amp; Monotype</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="work-02.webp" data-title="Tall Trees, Field" data-year="2024" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Bare trees against an autumn field, the ground rising amber. From the series.">
-      <div class="artwork-image" style="background-image: url('work-02.webp');"></div>
+    <div class="artwork" data-medium="intaglio" data-img="images/g04-red-rose.jpg" data-title="Rose" data-year="—" data-medium-full="Intaglio with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="A single rose in deep crimson against a graphite ground. Intaglio plate with hand-applied colour.">
+      <div class="artwork-image" style="background-image: url('images/g04-red-rose.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Tall Trees, Field</span>
-        <span class="artwork-year">2024</span>
+        <span class="artwork-title">Rose</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Intaglio with Hand-colouring</span>
+      </div>
+    </div>
+
+    <div class="artwork" data-medium="intaglio" data-img="images/g05-blue-flowers.jpg" data-title="Blue Flowers" data-year="—" data-medium-full="Intaglio with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Botanical study. The blue fill pressed into intaglio line — a technique that shows the hand at work.">
+      <div class="artwork-image" style="background-image: url('images/g05-blue-flowers.jpg');"></div>
+      <div class="artwork-meta">
+        <span class="artwork-title">Blue Flowers</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Intaglio with Hand-colouring</span>
+      </div>
+    </div>
+
+    <div class="artwork" data-medium="drypoint" data-img="images/g06-sea-fan.jpg" data-title="Sea Fan" data-year="—" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="The biology training fully visible — cellular structure rendered in patient drypoint mark-making.">
+      <div class="artwork-image" style="background-image: url('images/g06-sea-fan.jpg');"></div>
+      <div class="artwork-meta">
+        <span class="artwork-title">Sea Fan</span>
+        <span class="artwork-year">—</span>
         <span class="artwork-medium">Drypoint &amp; Monotype</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="work-03.webp" data-title="Treeline" data-year="2024" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="A dense treeline rising from the ground.">
-      <div class="artwork-image" style="background-image: url('work-03.webp');"></div>
+    <div class="artwork" data-medium="drypoint" data-img="images/g07-yellow-roses.jpg" data-title="Yellow Roses" data-year="—" data-medium-full="Drypoint with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Yellow and gold against a cool grey-blue ground. Confident colour in a drypoint still life.">
+      <div class="artwork-image" style="background-image: url('images/g07-yellow-roses.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Treeline</span>
-        <span class="artwork-year">2024</span>
-        <span class="artwork-medium">Drypoint &amp; Monotype</span>
+        <span class="artwork-title">Yellow Roses</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Drypoint with Hand-colouring</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="work-04.webp" data-title="Late Light" data-year="2024" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Late autumn, the orange of the canopy holding the last of the day's light.">
-      <div class="artwork-image" style="background-image: url('work-04.webp');"></div>
+    <div class="artwork" data-medium="monotype" data-img="images/g08-coneflowers.jpg" data-title="Coneflowers" data-year="—" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-edition="—" data-notes="Echinacea in precise intaglio. Each petal and stem observed and recorded with the patience the medium demands.">
+      <div class="artwork-image" style="background-image: url('images/g08-coneflowers.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Late Light</span>
-        <span class="artwork-year">2024</span>
-        <span class="artwork-medium">Drypoint &amp; Monotype</span>
+        <span class="artwork-title">Coneflowers</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Intaglio Etching</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="work-05.webp" data-title="Sepia Trees" data-year="2024" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="A study in sepia and ground.">
-      <div class="artwork-image" style="background-image: url('work-05.webp');"></div>
+    <div class="artwork" data-medium="intaglio" data-img="images/g09-loosestrife.jpg" data-title="Loosestrife" data-year="—" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-edition="—" data-notes="Purple loosestrife — a plant both beautiful and ecologically fraught. The biology and the botanical eye together.">
+      <div class="artwork-image" style="background-image: url('images/g09-loosestrife.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Sepia Trees</span>
-        <span class="artwork-year">2024</span>
-        <span class="artwork-medium">Drypoint &amp; Monotype</span>
+        <span class="artwork-title">Loosestrife</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Intaglio Etching</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="monotype" data-img="work-06.webp" data-title="Connemara" data-year="2024" data-medium-full="Monotype with Line Work" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="The west of Ireland — bog, hill, the specific quality of Atlantic light over wet ground.">
-      <div class="artwork-image" style="background-image: url('work-06.webp');"></div>
+    <div class="artwork" data-medium="monotype" data-img="images/g10-maple-leaf.jpg" data-title="Maple Leaf" data-year="—" data-medium-full="Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="A single leaf — all the information of autumn in one impression.">
+      <div class="artwork-image" style="background-image: url('images/g10-maple-leaf.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Connemara</span>
-        <span class="artwork-year">2024</span>
+        <span class="artwork-title">Maple Leaf</span>
+        <span class="artwork-year">—</span>
         <span class="artwork-medium">Monotype</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="monotype" data-img="work-07.webp" data-title="Atlantic Sky" data-year="2024" data-medium-full="Monotype with Line Work" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Sea, mountain, the breaking weather. Watercolor instinct working through the print medium.">
-      <div class="artwork-image" style="background-image: url('work-07.webp');"></div>
+    <div class="artwork" data-medium="drypoint" data-img="images/g11-botanical-berries.jpg" data-title="Autumn Botanical" data-year="—" data-medium-full="Drypoint &amp; Watercolour" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Berries, leaves, the crinkled tissue-paper ground. Meticulous observation in drypoint with watercolour.">
+      <div class="artwork-image" style="background-image: url('images/g11-botanical-berries.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Atlantic Sky</span>
-        <span class="artwork-year">2024</span>
-        <span class="artwork-medium">Monotype</span>
+        <span class="artwork-title">Autumn Botanical</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Drypoint &amp; Watercolour</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="monotype" data-img="work-08.webp" data-title="Grasses" data-year="2024" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Panoramic format · dimensions on request" data-edition="Unique" data-notes="A panoramic study. Grasses bent by wind — the looking is the subject.">
-      <div class="artwork-image" style="background-image: url('work-08.webp');"></div>
+    <div class="artwork" data-medium="watercolor" data-img="images/g12-washing-line.jpg" data-title="Washing Line" data-year="—" data-medium-full="Watercolour on Paper" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="White linen against a summer garden. A different register — domestic, light-filled, completely observed.">
+      <div class="artwork-image" style="background-image: url('images/g12-washing-line.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Grasses</span>
-        <span class="artwork-year">2024</span>
-        <span class="artwork-medium">Drypoint &amp; Monotype</span>
-      </div>
-    </div>
-
-    <div class="artwork" data-medium="watercolor" data-img="work-09.webp" data-title="Red Leaves" data-year="2024" data-medium-full="Watercolor on Paper" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Plant study. Red leaves against a rose ground. The biology training surfacing in the work.">
-      <div class="artwork-image" style="background-image: url('work-09.webp');"></div>
-      <div class="artwork-meta">
-        <span class="artwork-title">Red Leaves</span>
-        <span class="artwork-year">2024</span>
-        <span class="artwork-medium">Watercolor</span>
+        <span class="artwork-title">Washing Line</span>
+        <span class="artwork-year">—</span>
+        <span class="artwork-medium">Watercolour</span>
       </div>
     </div>
 
@@ -838,7 +742,7 @@ footer .footer-end { text-align: right; }
       </div>
       <div class="practice-card">
         <div class="practice-num">iii</div>
-        <h3><em>Oil</em><br>&amp; Watercolor</h3>
+        <h3><em>Oil</em><br>&amp; Watercolour</h3>
         <p>Painted from the West of Ireland and the Berkshire mountains. The grey-green of Connemara, the ochre of October hills, the specific wet light of an Atlantic morning.</p>
       </div>
     </div>
@@ -854,11 +758,7 @@ footer .footer-end { text-align: right; }
 <section class="exhibitions" id="exhibitions">
   <div class="ex-head">
     <h2>Selected <em>Exhibitions</em><br>&amp; Residencies</h2>
-    <div class="ex-meta">
-      <strong>27 Years Active</strong><br>
-      Ireland · Massachusetts<br>
-      Virginia
-    </div>
+    <div class="ex-meta"><strong>27 Years Active</strong><br>Ireland · Massachusetts · Virginia</div>
   </div>
   <div>
     <div class="exhibition-item">
@@ -970,12 +870,8 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 lbClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) closeLightbox();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeLightbox();
-});
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 </script>
 
 </body>
