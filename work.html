@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works — Olwen O'Herlihy Dowling</title>
+<meta name="description" content="Complete catalog of works by Olwen O'Herlihy Dowling. Drypoint monotypes, intaglio etchings, Irish oil paintings, watercolors.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+.catalog { max-width: 1400px; margin: 0 auto; padding: 2rem 4rem 6rem; }
+.medium-section { margin-bottom: 7rem; }
+.medium-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 1.5rem; margin-bottom: 3rem; }
+.medium-header h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--ink); letter-spacing: -0.01em; }
+.medium-header h2 em { font-style: italic; color: var(--rust); }
+.medium-count { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--slate); }
+.work-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem 2rem; }
+.work-item { cursor: pointer; position: relative; }
+.work-item.sold { opacity: 0.6; cursor: default; }
+.work-thumb { width: 100%; aspect-ratio: 4/5; background-color: var(--paper-deep); background-size: cover; background-position: center; overflow: hidden; position: relative; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.work-item.landscape .work-thumb { aspect-ratio: 4/3; }
+.work-item.wide .work-thumb { aspect-ratio: 3/2; }
+.work-item.square .work-thumb { aspect-ratio: 1/1; }
+.work-item:not(.sold):hover .work-thumb { transform: scale(1.02); }
+.sold-badge { position: absolute; top: 1rem; right: 1rem; background: var(--ink); color: var(--paper); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.35rem 0.7rem; }
+.work-info { padding: 0.9rem 0 0; }
+.work-title { font-family: "Cormorant Garamond", serif; font-size: 1.05rem; font-style: italic; color: var(--ink); display: block; margin-bottom: 0.25rem; }
+.work-dims { font-size: 0.65rem; letter-spacing: 0.08em; color: var(--slate); display: block; margin-bottom: 0.4rem; line-height: 1.5; }
+.work-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; border-top: 1px solid rgba(22,17,12,0.1); padding-top: 0.6rem; }
+.work-price { font-size: 0.95rem; color: var(--rust); font-family: "Cormorant Garamond", serif; font-style: italic; }
+.work-enquire { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(22,17,12,0.3); padding-bottom: 0.1rem; transition: color 0.3s, border-color 0.3s; cursor: pointer; background: none; border-left: none; border-right: none; border-top: none; font-family: inherit; }
+.work-enquire:hover { color: var(--rust); border-bottom-color: var(--rust); }
+.work-item.sold .work-enquire { color: var(--slate); pointer-events: none; border-bottom-color: transparent; }
+.lightbox { position: fixed; inset: 0; background: rgba(22,17,12,0.96); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 4rem; backdrop-filter: blur(4px); }
+.lightbox.active { display: flex; }
+.lightbox-content { max-width: 1000px; width: 100%; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; }
+.lightbox-image { background-color: #0e0a07; background-size: contain; background-position: center; background-repeat: no-repeat; aspect-ratio: 4/5; max-height: 70vh; }
+.lightbox-text h3 { font-family: "Cormorant Garamond", serif; font-size: 2rem; font-weight: 300; font-style: italic; color: var(--paper); margin-bottom: 0.5rem; line-height: 1.1; }
+.lb-price-big { font-family: "Cormorant Garamond", serif; font-size: 2rem; font-weight: 300; color: var(--ochre); margin-bottom: 1.5rem; }
+.lightbox-text dl { border-top: 1px solid rgba(241,235,221,0.15); padding-top: 1.5rem; }
+.lightbox-text dt { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm-mid); margin-top: 1rem; }
+.lightbox-text dt:first-child { margin-top: 0; }
+.lightbox-text dd { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: var(--paper); margin-top: 0.3rem; font-style: italic; }
+.lb-enquire-btn { display: inline-block; margin-top: 2rem; padding: 0.9rem 2rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; font-family: inherit; transition: background 0.3s; }
+.lb-enquire-btn:hover { background: #6b2c17; }
+.lightbox-close { position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(241,235,221,0.3); color: var(--paper); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: pointer; font-family: inherit; transition: background 0.3s; }
+.lightbox-close:hover { background: var(--rust); border-color: var(--rust); }
+@media (max-width: 1200px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) { .catalog { padding: 2rem 2rem 4rem; } .work-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; } .lightbox { padding: 1.5rem; } .lightbox-content { grid-template-columns: 1fr; gap: 1.5rem; max-height: 90vh; overflow-y: auto; } .lightbox-image { max-height: 50vh; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-mark">Olwen <span>Dowling</span></a>
+  <div class="nav-tagline">Painter &middot; Printmaker &middot; Est. 1995</div>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Selected</a></li>
+    <li><a href="work.html" class="active">All Works</a></li>
+    <li><a href="biography.html">Biography</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-header">
+  <p class="eyebrow">Complete Catalog</p>
+  <h1>All <em>Works</em></h1>
+  <p class="sub">Click any work to enquire. Works marked Sold are no longer available &mdash; please contact for similar pieces. All prices in USD.</p>
+</header>
+
+<div class="catalog">
+
+  <section class="medium-section" id="drypoint-monotypes">
+    <div class="medium-header">
+      <h2>Drypoint <em>Monotypes</em></h2>
+      <span class="medium-count">Drypoint &amp; Monotype &middot; Selected works</span>
+    </div>
+    <div class="work-grid">
+      <div class="work-item landscape" data-title="Muted Colors: Connemara" data-medium="Drypoint &amp; Monotype" data-dims="46" x 36" framed" data-price="$2,200" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/9d640d24-748d-4ecc-9c26-68c6e975fecb/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/9d640d24-748d-4ecc-9c26-68c6e975fecb/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Muted Colors: Connemara</span>
+          <span class="work-dims">46" x 36" framed &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$2,200</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Cashel: from my bedroom window" data-medium="Drypoint &amp; Monotype" data-dims="46" x 36" framed" data-price="$2,200" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/892a9e7a-0388-4e1e-8bbb-1e583db3c3c1/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/892a9e7a-0388-4e1e-8bbb-1e583db3c3c1/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Cashel: from my bedroom window</span>
+          <span class="work-dims">46" x 36" framed &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$2,200</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Winter Forest" data-medium="Drypoint &amp; Monotype" data-dims="26" x 36"" data-price="$2,300" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1695845011631-E87CSKZLAH93H73DHRNX/Winter+Forest.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1695845011631-E87CSKZLAH93H73DHRNX/Winter+Forest.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Winter Forest</span>
+          <span class="work-dims">26" x 36" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$2,300</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Bare Branches" data-medium="Drypoint &amp; Monotype" data-dims="26" x 36"" data-price="$2,300" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1695846823554-W5VDCMAFMUB50AL7T1U9/Bare+Branches.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1695846823554-W5VDCMAFMUB50AL7T1U9/Bare+Branches.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Bare Branches</span>
+          <span class="work-dims">26" x 36" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$2,300</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="The West" data-medium="Drypoint &amp; Monotype" data-dims="26" x 24"" data-price="$850" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1701964693968-VRIZU88053BHCQLPZLNC/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1701964693968-VRIZU88053BHCQLPZLNC/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">The West</span>
+          <span class="work-dims">26" x 24" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$850</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Ocean" data-medium="Drypoint, Monotype &amp; Watercolor" data-dims="24" x 28"" data-price="$950" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1695845292832-WE04Z4KLBCKQIC7UM4U9/IMG_5250.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1695845292832-WE04Z4KLBCKQIC7UM4U9/IMG_5250.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Ocean</span>
+          <span class="work-dims">24" x 28" &middot; Drypoint, Monotype &amp; Watercolor</span>
+          <div class="work-footer">
+            <span class="work-price">$950</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Stone Reflections" data-medium="Drypoint &amp; Monotype" data-dims="10" x 28"" data-price="$450" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1639675547177-GH8DIJWEV6E3I16UHW7J/IMG_2723.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1639675547177-GH8DIJWEV6E3I16UHW7J/IMG_2723.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Stone Reflections</span>
+          <span class="work-dims">10" x 28" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$450</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Yellow Roses" data-medium="Drypoint &amp; Monotype" data-dims="18" x 20"" data-price="$650" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1578164418931-MO5C83ZQB7UT7CK5RLS9/Yellow+Roses.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1578164418931-MO5C83ZQB7UT7CK5RLS9/Yellow+Roses.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Yellow Roses</span>
+          <span class="work-dims">18" x 20" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$650</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Sea Fan" data-medium="Drypoint &amp; Monotype" data-dims="12" x 14"" data-price="$325" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1568064490836-EMM287XJEPVOIVAWVVQQ/SEA+FAN2.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1568064490836-EMM287XJEPVOIVAWVVQQ/SEA+FAN2.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Sea Fan</span>
+          <span class="work-dims">12" x 14" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$325</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Marsh with Lilies" data-medium="Drypoint &amp; Monotype" data-dims="18" x 20"" data-price="$650" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1578164324944-JZCC6BH0YDG84HY9QFQZ/Marsh+with+Lilies.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1578164324944-JZCC6BH0YDG84HY9QFQZ/Marsh+with+Lilies.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Marsh with Lilies</span>
+          <span class="work-dims">18" x 20" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$650</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Fading Leaves" data-medium="Monotype, Drypoint &amp; Watercolor on Japanese Paper" data-dims="20" x 30"" data-price="$1,100" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1612446805816-S96TPUVU7YMG42HNS1B0/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1612446805816-S96TPUVU7YMG42HNS1B0/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Fading Leaves</span>
+          <span class="work-dims">20" x 30" &middot; Monotype, Drypoint &amp; Watercolor on Japanese Paper</span>
+          <div class="work-footer">
+            <span class="work-price">$1,100</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Summer Weeds" data-medium="Drypoint &amp; Monotype" data-dims="20" x 26"" data-price="$475" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1603902084493-XGA4XD78IYJ65A4E7V5S/IMG_0749.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1603902084493-XGA4XD78IYJ65A4E7V5S/IMG_0749.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Summer Weeds</span>
+          <span class="work-dims">20" x 26" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$475</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Gentle Beauty" data-medium="Drypoint &amp; Monotype" data-dims="26" x 20"" data-price="$475" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1610743904143-GIAQJ7TVUF1RL9LLPU4A/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1610743904143-GIAQJ7TVUF1RL9LLPU4A/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Gentle Beauty</span>
+          <span class="work-dims">26" x 20" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$475</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item square" data-title="Morning Light" data-medium="Drypoint &amp; Monotype" data-dims="8" x 8"" data-price="$275" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1561826414784-L342JN8G9M7XDMTH1JOS/Morning+Light.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1561826414784-L342JN8G9M7XDMTH1JOS/Morning+Light.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Morning Light</span>
+          <span class="work-dims">8" x 8" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$275</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Blue Flowers" data-medium="Drypoint &amp; Monotype" data-dims="20" x 18"" data-price="$650" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1583341037753-41UARVIYZAGXHYL1L5XN/IMG_1249.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1583341037753-41UARVIYZAGXHYL1L5XN/IMG_1249.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Blue Flowers</span>
+          <span class="work-dims">20" x 18" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$650</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Fragments" data-medium="Monotype, Drypoint &amp; Watercolor" data-dims="4" x 8"" data-price="$225" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1615217927033-EUKB2ZLFRZ55PJFOSEF7/IMG_0472+%281%29.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1615217927033-EUKB2ZLFRZ55PJFOSEF7/IMG_0472+%281%29.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Fragments</span>
+          <span class="work-dims">4" x 8" &middot; Monotype, Drypoint &amp; Watercolor</span>
+          <div class="work-footer">
+            <span class="work-price">$225</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item wide" data-title="Pond Life" data-medium="Drypoint &amp; Monotype" data-dims="24" x 8"" data-price="$350" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1684950778977-4IV3L3YVBAJ71PVGJCK0/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1684950778977-4IV3L3YVBAJ71PVGJCK0/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Pond Life</span>
+          <span class="work-dims">24" x 8" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">$350</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item sold" data-title="Lily Pond" data-medium="Drypoint &amp; Monotype" data-dims="18" x 20"" data-price="Sold" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1568064556377-FMRSH8275DITKVHDLZKK/IMG_0451.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1568064556377-FMRSH8275DITKVHDLZKK/IMG_0451.jpeg');"><span class="sold-badge">Sold</span></div>
+        <div class="work-info">
+          <span class="work-title">Lily Pond</span>
+          <span class="work-dims">18" x 20" &middot; Drypoint &amp; Monotype</span>
+          <div class="work-footer">
+            <span class="work-price">Sold</span>
+            <span class="work-enquire">Sold</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="medium-section" id="intaglio-etchings">
+    <div class="medium-header">
+      <h2>Intaglio <em>Etchings</em></h2>
+      <span class="medium-count">Copper plate etching &middot; Selected works</span>
+    </div>
+    <div class="work-grid">
+      <div class="work-item" data-title="Red Rose" data-medium="Intaglio Etching with Hand-colouring" data-dims="Dimensions on request" data-price="$425" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1661615516786-LIC3ATJK21SBMJDN3P8C/IMG_5392.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1661615516786-LIC3ATJK21SBMJDN3P8C/IMG_5392.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Red Rose</span>
+          <span class="work-dims">Dimensions on request &middot; Intaglio Etching with Hand-colouring</span>
+          <div class="work-footer">
+            <span class="work-price">$425</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Spotted Leopard and Cub" data-medium="Copper Intaglio Etching" data-dims="10" x 14"" data-price="$350" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1681577795642-A6JGSAZXG97HKXRVJ0SF/IMG_6511.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1681577795642-A6JGSAZXG97HKXRVJ0SF/IMG_6511.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Spotted Leopard and Cub</span>
+          <span class="work-dims">10" x 14" &middot; Copper Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$350</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Dragonfly" data-medium="Intaglio Etching" data-dims="Dimensions on request" data-price="$500" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1661615334859-P2MNFNB386E8C32SJTCY/IMG_5386.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1661615334859-P2MNFNB386E8C32SJTCY/IMG_5386.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Dragonfly</span>
+          <span class="work-dims">Dimensions on request &middot; Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$500</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item square" data-title="Maple Leaf" data-medium="Copper Intaglio Etching" data-dims="4" x 4"" data-price="$210" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1544988528105-X8IXE132ZWNVK9C8POBZ/IMG_1730.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1544988528105-X8IXE132ZWNVK9C8POBZ/IMG_1730.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Maple Leaf</span>
+          <span class="work-dims">4" x 4" &middot; Copper Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$210</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Cocoon and Butterfly" data-medium="Copper Intaglio Etching" data-dims="12" x 24"" data-price="$225" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1539467375884-NGR7DRO4ALUIENI4BD4M/Cocoon+and+Butterfly.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1539467375884-NGR7DRO4ALUIENI4BD4M/Cocoon+and+Butterfly.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Cocoon and Butterfly</span>
+          <span class="work-dims">12" x 24" &middot; Copper Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$225</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Monarchs" data-medium="Copper Intaglio Etching" data-dims="12" x 24"" data-price="$225" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1539467436377-GKX2LU4LGVNLQ878VQK8/Monarchs.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1539467436377-GKX2LU4LGVNLQ878VQK8/Monarchs.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Monarchs</span>
+          <span class="work-dims">12" x 24" &middot; Copper Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$225</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Milkweed Seedlings" data-medium="Copper Intaglio Etching" data-dims="12" x 24"" data-price="$225" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1539467150904-0DHP09PRS2I2WPP56GOJ/Milkweed+Seedlings.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1539467150904-0DHP09PRS2I2WPP56GOJ/Milkweed+Seedlings.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Milkweed Seedlings</span>
+          <span class="work-dims">12" x 24" &middot; Copper Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$225</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Three Ferns" data-medium="Copper Intaglio on Mulberry Rice Paper" data-dims="28" x 12"" data-price="$950" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1550354764073-BAOGX49E39WZEQGYU8OZ/Ferns_on+gray.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1550354764073-BAOGX49E39WZEQGYU8OZ/Ferns_on+gray.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Three Ferns</span>
+          <span class="work-dims">28" x 12" &middot; Copper Intaglio on Mulberry Rice Paper</span>
+          <div class="work-footer">
+            <span class="work-price">$950</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item square" data-title="Least Tern" data-medium="Intaglio Etching" data-dims="4" x 4"" data-price="$75" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1640184769636-XYKEHAE7KIOP0VKUZGYJ/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1640184769636-XYKEHAE7KIOP0VKUZGYJ/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Least Tern</span>
+          <span class="work-dims">4" x 4" &middot; Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$75</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item square" data-title="Stream Bed" data-medium="Intaglio Soft Ground Etching" data-dims="8" x 8"" data-price="$275" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1684336807179-XIUUXQOCA49MJX4IRFR1/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1684336807179-XIUUXQOCA49MJX4IRFR1/image-asset.jpeg');"></div>
+        <div class="work-info">
+          <span class="work-title">Stream Bed</span>
+          <span class="work-dims">8" x 8" &middot; Intaglio Soft Ground Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$275</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Museum Gossip" data-medium="Intaglio Etching" data-dims="12" x 10"" data-price="$150" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506964264809-GYBC23617NJOOMUPEUZF/MUSEUM+GOSSIP.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506964264809-GYBC23617NJOOMUPEUZF/MUSEUM+GOSSIP.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Museum Gossip</span>
+          <span class="work-dims">12" x 10" &middot; Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$150</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Hayroll" data-medium="Intaglio Etching" data-dims="14" x 11"" data-price="$175" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506963366925-2SSY9SSJWBOKQ7565O60/61.+Hayroll.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506963366925-2SSY9SSJWBOKQ7565O60/61.+Hayroll.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Hayroll</span>
+          <span class="work-dims">14" x 11" &middot; Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$175</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Annamakerrig, New Bliss" data-medium="Intaglio Etching" data-dims="14" x 12"" data-price="$410" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506963451181-CW3UUIMIDAWJLH24MOPK/69.+ANNAMAKERIG+IRELAND+.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506963451181-CW3UUIMIDAWJLH24MOPK/69.+ANNAMAKERIG+IRELAND+.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Annamakerrig, New Bliss</span>
+          <span class="work-dims">14" x 12" &middot; Intaglio Etching</span>
+          <div class="work-footer">
+            <span class="work-price">$410</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Fern I" data-medium="Copper Intaglio" data-dims="6" x 8"" data-price="$110" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1523830742300-WO8IHYM7CC381SFNIWEQ/Fern+1_Fotor_Fotor.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1523830742300-WO8IHYM7CC381SFNIWEQ/Fern+1_Fotor_Fotor.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Fern I</span>
+          <span class="work-dims">6" x 8" &middot; Copper Intaglio</span>
+          <div class="work-footer">
+            <span class="work-price">$110</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Fern 2" data-medium="Copper Intaglio" data-dims="6" x 8"" data-price="$110" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1523830896712-0DKMQOQYVL9OQJTWFS61/Fern+2_Fotor_Fotor.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1523830896712-0DKMQOQYVL9OQJTWFS61/Fern+2_Fotor_Fotor.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Fern 2</span>
+          <span class="work-dims">6" x 8" &middot; Copper Intaglio</span>
+          <div class="work-footer">
+            <span class="work-price">$110</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item sold" data-title="Connemara Moon" data-medium="Coffee lift monotype, two-color intaglio" data-dims="Dimensions on request" data-price="Sold" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1667223262942-IUIVNKNCRDA5RSBC3Q77/image-asset.jpeg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1667223262942-IUIVNKNCRDA5RSBC3Q77/image-asset.jpeg');"><span class="sold-badge">Sold</span></div>
+        <div class="work-info">
+          <span class="work-title">Connemara Moon</span>
+          <span class="work-dims">Dimensions on request &middot; Coffee lift monotype, two-color intaglio</span>
+          <div class="work-footer">
+            <span class="work-price">Sold</span>
+            <span class="work-enquire">Sold</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="medium-section" id="irish-oils">
+    <div class="medium-header">
+      <h2>Irish <em>Oil Paintings</em></h2>
+      <span class="medium-count">Oil on canvas &middot; West of Ireland</span>
+    </div>
+    <div class="work-grid">
+      <div class="work-item landscape" data-title="Light Showers" data-medium="Oil on canvas" data-dims="26" x 24"" data-price="$1,100" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961900759-4TS8TU3VX8U1VG8XEP2D/12.+Light+Showers.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961900759-4TS8TU3VX8U1VG8XEP2D/12.+Light+Showers.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Light Showers</span>
+          <span class="work-dims">26" x 24" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">$1,100</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Connemara: Cutting Turf" data-medium="Oil on canvas" data-dims="18" x 14"" data-price="$850" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506358961102-NXMVLV75TU7D9OKF237V/9.+Cutting+Turf.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506358961102-NXMVLV75TU7D9OKF237V/9.+Cutting+Turf.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Connemara: Cutting Turf</span>
+          <span class="work-dims">18" x 14" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">$850</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Misty Mountain" data-medium="Oil on canvas" data-dims="20" x 16"" data-price="$500" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1533743842953-T9ALCX6D9RMQOYX4F7PE/Berkshire+Hilltowns+copy.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1533743842953-T9ALCX6D9RMQOYX4F7PE/Berkshire+Hilltowns+copy.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Misty Mountain</span>
+          <span class="work-dims">20" x 16" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">$500</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Studio at Annaghmakerrig" data-medium="Oil on canvas" data-dims="Dimensions on request" data-price="$1,200" data-img="images/studio-annaghmakerrig.jpg">
+        <div class="work-thumb" style="background-image: url('images/studio-annaghmakerrig.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Studio at Annaghmakerrig</span>
+          <span class="work-dims">Dimensions on request &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">$1,200</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Blaskets from Slea Head" data-medium="Oil on canvas" data-dims="36" x 34"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961706837-EG80DRY5JMHZFR3JSZJX/2.Blaskets+FROM+SLEA+HEAD.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961706837-EG80DRY5JMHZFR3JSZJX/2.Blaskets+FROM+SLEA+HEAD.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Blaskets from Slea Head</span>
+          <span class="work-dims">36" x 34" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Brandon Bay" data-medium="Oil on canvas" data-dims="14" x 11"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506358955013-79SXDEVO42M5RVLGOMAT/4.+Brandon+Bay.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506358955013-79SXDEVO42M5RVLGOMAT/4.+Brandon+Bay.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Brandon Bay</span>
+          <span class="work-dims">14" x 11" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Kerry Headland" data-medium="Oil on canvas" data-dims="14" x 11"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961847484-DS14L85D5GA9WW4D8OTX/11.+Kerry+Headland.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961847484-DS14L85D5GA9WW4D8OTX/11.+Kerry+Headland.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Kerry Headland</span>
+          <span class="work-dims">14" x 11" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item square" data-title="Inagh Valley" data-medium="Oil on canvas" data-dims="24" x 24"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961746960-7Y3RYD6FPOGL2EF28XEY/10.+Inagh+Valley.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506961746960-7Y3RYD6FPOGL2EF28XEY/10.+Inagh+Valley.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Inagh Valley</span>
+          <span class="work-dims">24" x 24" &middot; Oil on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="medium-section" id="watercolors">
+    <div class="medium-header">
+      <h2><em>Watercolors</em></h2>
+      <span class="medium-count">Watercolor on paper and rice paper</span>
+    </div>
+    <div class="work-grid">
+      <div class="work-item landscape" data-title="Laundry Line" data-medium="Watercolor on paper" data-dims="16" x 14"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962532385-P6VALZ8HWJ75AFCYHTCW/30.+Laundry+Line.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962532385-P6VALZ8HWJ75AFCYHTCW/30.+Laundry+Line.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Laundry Line</span>
+          <span class="work-dims">16" x 14" &middot; Watercolor on paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Mid Day Pond" data-medium="Watercolor on rice paper" data-dims="22" x 30"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1550354647020-WAG9TMO7379FPEOVCM4Z/Mid+Day+Pond.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1550354647020-WAG9TMO7379FPEOVCM4Z/Mid+Day+Pond.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Mid Day Pond</span>
+          <span class="work-dims">22" x 30" &middot; Watercolor on rice paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item square" data-title="Primroses" data-medium="Watercolor on paper" data-dims="24" x 24"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962829365-P7PTQDOFLJB8Z78X4P8M/35.+Yellow+Flowers.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962829365-P7PTQDOFLJB8Z78X4P8M/35.+Yellow+Flowers.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Primroses</span>
+          <span class="work-dims">24" x 24" &middot; Watercolor on paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Golden Iris" data-medium="Watercolor on rice paper" data-dims="12" x 20"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506359749442-4J10ASB8UE7OI57MVL92/37.+Golden+Iris.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506359749442-4J10ASB8UE7OI57MVL92/37.+Golden+Iris.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Golden Iris</span>
+          <span class="work-dims">12" x 20" &middot; Watercolor on rice paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Maam Valley" data-medium="Watercolor on paper" data-dims="16" x 14"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962665603-0GTZF0I7UOJPH7C9APAK/43A.Maam+Valley.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962665603-0GTZF0I7UOJPH7C9APAK/43A.Maam+Valley.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">Maam Valley</span>
+          <span class="work-dims">16" x 14" &middot; Watercolor on paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="North Chester Bridge" data-medium="Watercolor on paper" data-dims="18" x 20"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962497149-QCTLDYBPZ8S6XACRTQW4/31.+North+Chester+Bridge+.JPG">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962497149-QCTLDYBPZ8S6XACRTQW4/31.+North+Chester+Bridge+.JPG');"></div>
+        <div class="work-info">
+          <span class="work-title">North Chester Bridge</span>
+          <span class="work-dims">18" x 20" &middot; Watercolor on paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item landscape" data-title="Vacant Shoes" data-medium="Watercolor on paper" data-dims="24" x 20"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962588218-FE1V7FQKSWJELNMWVRKC/36.+Shoes.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506962588218-FE1V7FQKSWJELNMWVRKC/36.+Shoes.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Vacant Shoes</span>
+          <span class="work-dims">24" x 20" &middot; Watercolor on paper</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+      <div class="work-item" data-title="Blueberrying" data-medium="Watercolor on canvas" data-dims="14" x 16"" data-price="Enquire" data-img="https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506359871900-BRBMLM7EUT6OZGJDB5M5/27A.+Blueberrying.jpg">
+        <div class="work-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/598eb635914e6bba68a52d5a/1506359871900-BRBMLM7EUT6OZGJDB5M5/27A.+Blueberrying.jpg');"></div>
+        <div class="work-info">
+          <span class="work-title">Blueberrying</span>
+          <span class="work-dims">14" x 16" &middot; Watercolor on canvas</span>
+          <div class="work-footer">
+            <span class="work-price">Enquire</span>
+            <a class="work-enquire" href="#">Enquire</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">Close x</button>
+  <div class="lightbox-content">
+    <div class="lightbox-image" id="lightboxImage"></div>
+    <div class="lightbox-text">
+      <h3 id="lbTitle"></h3>
+      <div class="lb-price-big" id="lbPrice"></div>
+      <dl>
+        <dt>Medium</dt><dd id="lbMedium"></dd>
+        <dt>Dimensions</dt><dd id="lbDims"></dd>
+      </dl>
+      <a class="lb-enquire-btn" id="lbEnquire" href="#">Enquire about this work</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>2026 Olwen O'Herlihy Dowling</p>
+  <p class="footer-mark">OD</p>
+  <p class="footer-end">Boston Printmakers &middot; CSP &middot; MGNE &middot; Zea Mays</p>
+</footer>
+
+<script>
+const nav = document.querySelector("nav");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 80) nav.classList.add("scrolled");
+  else nav.classList.remove("scrolled");
+});
+
+const lightbox = document.getElementById("lightbox");
+const lbImage = document.getElementById("lightboxImage");
+const lbTitle = document.getElementById("lbTitle");
+const lbPrice = document.getElementById("lbPrice");
+const lbMedium = document.getElementById("lbMedium");
+const lbDims = document.getElementById("lbDims");
+const lbEnquire = document.getElementById("lbEnquire");
+const lbClose = document.getElementById("lightboxClose");
+
+function openLightbox(item) {
+  const title = item.dataset.title;
+  const price = item.dataset.price;
+  const medium = item.dataset.medium;
+  const dims = item.dataset.dims;
+  const img = item.dataset.img;
+  lbImage.style.backgroundImage = "url('" + img + "')";
+  lbTitle.textContent = title;
+  lbPrice.textContent = price;
+  lbMedium.innerHTML = medium;
+  lbDims.textContent = dims || "Dimensions on request";
+  const subject = encodeURIComponent("Enquiry: " + title);
+  const body = encodeURIComponent("Dear Olwen,\n\nI am interested in \"" + title + "\" (" + medium + ", " + (dims || "dimensions on request") + ", " + price + ").\n\nPlease let me know if this work is available.\n\nKind regards,");
+  lbEnquire.href = "mailto:olwen@olwendowling.com?subject=" + subject + "&body=" + body;
+  lightbox.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+document.querySelectorAll(".work-item:not(.sold)").forEach(item => {
+  item.addEventListener("click", () => openLightbox(item));
+});
+
+function closeLightbox() {
+  lightbox.classList.remove("active");
+  document.body.style.overflow = "";
+}
+lbClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+</script>
+</body>
+</html>
