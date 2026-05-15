@@ -264,10 +264,35 @@ nav.scrolled { padding: 1rem 3rem; }
   font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem; font-style: italic; font-weight: 400; color: var(--ink);
 }
-.artwork-year { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--rust); }
+.artwork-price {
+  font-size: 0.82rem; font-weight: 400; color: var(--rust);
+  letter-spacing: 0.05em; text-align: right;
+}
 .artwork-medium {
   grid-column: 1 / -1; font-size: 0.68rem; letter-spacing: 0.15em;
   text-transform: uppercase; color: var(--slate); opacity: 0.8;
+}
+
+/* Enquiry button in lightbox */
+.lb-enquire {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  background: var(--rust);
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-family: inherit;
+  transition: background 0.3s;
+  border: none; cursor: pointer;
+}
+.lb-enquire:hover { background: #6b2c17; }
+.lb-price-display {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem; font-weight: 300;
+  color: var(--ochre); margin-bottom: 0.5rem;
 }
 
 /* LIGHTBOX */
@@ -595,110 +620,110 @@ footer .footer-end { text-align: right; }
 
   <div class="gallery-grid">
 
-    <div class="artwork" data-medium="monotype" data-img="images/g01-atlantic-seascape.jpg" data-title="Atlantic" data-year="—" data-medium-full="Monotype with Line Work" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Sea, mountain, the breaking weather of the West of Ireland. Monotype wash with drypoint line.">
+    <div class="artwork" data-medium="monotype" data-img="images/g01-atlantic-seascape.jpg" data-title="Muted Colors: Connemara" data-price="$2,200" data-available="available" data-medium-full="Drypoint &amp; Monotype" data-dimensions="46&quot; × 36&quot;" data-notes="The specific quality of Atlantic light over bog and mountain. From the West of Ireland series.">
       <div class="artwork-image" style="background-image: url('images/g01-atlantic-seascape.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Atlantic</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Monotype with Line Work</span>
+        <span class="artwork-title">Muted Colors: Connemara</span>
+        <span class="artwork-price">$2,200</span>
+        <span class="artwork-medium">Drypoint &amp; Monotype · 46″ × 36″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="images/g02-allium.jpg" data-title="Allium" data-year="—" data-medium-full="Drypoint with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Seed heads in deep magenta against a pale ground. Drypoint line with hand-applied colour.">
+    <div class="artwork" data-medium="drypoint" data-img="images/g02-allium.jpg" data-title="Winter 1" data-price="$300" data-available="available" data-medium-full="Drypoint &amp; Monotype" data-dimensions="20&quot; × 18&quot;" data-notes="Seed heads in deep magenta against a pale ground. Drypoint line with hand-applied colour.">
       <div class="artwork-image" style="background-image: url('images/g02-allium.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Allium</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Drypoint with Hand-colouring</span>
+        <span class="artwork-title">Winter 1</span>
+        <span class="artwork-price">$300</span>
+        <span class="artwork-medium">Drypoint &amp; Monotype · 20″ × 18″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="images/g03-trees.jpg" data-title="Trees" data-year="—" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="The signature subject — Berkshire trees in winter, the atmospheric density of the monotype ground behind drypoint line.">
+    <div class="artwork" data-medium="drypoint" data-img="images/g03-trees.jpg" data-title="Winter Forest" data-price="$2,300" data-available="available" data-medium-full="Drypoint &amp; Monotype" data-dimensions="26&quot; × 36&quot;" data-notes="The signature subject — Berkshire trees in winter, the atmospheric density of the monotype ground behind drypoint line.">
       <div class="artwork-image" style="background-image: url('images/g03-trees.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Trees</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Drypoint &amp; Monotype</span>
+        <span class="artwork-title">Winter Forest</span>
+        <span class="artwork-price">$2,300</span>
+        <span class="artwork-medium">Drypoint &amp; Monotype · 26″ × 36″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="intaglio" data-img="images/g04-red-rose.jpg" data-title="Rose" data-year="—" data-medium-full="Intaglio with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="A single rose in deep crimson against a graphite ground. Intaglio plate with hand-applied colour.">
+    <div class="artwork" data-medium="intaglio" data-img="images/g04-red-rose.jpg" data-title="Red Rose" data-price="$425" data-available="available" data-medium-full="Intaglio with Hand-colouring" data-dimensions="Dimensions on request" data-notes="A single rose in deep crimson against a graphite ground. Intaglio plate with hand-applied colour.">
       <div class="artwork-image" style="background-image: url('images/g04-red-rose.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Rose</span>
-        <span class="artwork-year">—</span>
+        <span class="artwork-title">Red Rose</span>
+        <span class="artwork-price">$425</span>
         <span class="artwork-medium">Intaglio with Hand-colouring</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="intaglio" data-img="images/g05-blue-flowers.jpg" data-title="Blue Flowers" data-year="—" data-medium-full="Intaglio with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Botanical study. The blue fill pressed into intaglio line — a technique that shows the hand at work.">
+    <div class="artwork" data-medium="intaglio" data-img="images/g05-blue-flowers.jpg" data-title="Blue Flowers" data-price="$650" data-available="available" data-medium-full="Intaglio with Hand-colouring" data-dimensions="20&quot; × 18&quot;" data-notes="Botanical study. The blue fill pressed into intaglio line — a technique that shows the hand at work.">
       <div class="artwork-image" style="background-image: url('images/g05-blue-flowers.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Blue Flowers</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Intaglio with Hand-colouring</span>
+        <span class="artwork-price">$650</span>
+        <span class="artwork-medium">Intaglio · 20″ × 18″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="images/g06-sea-fan.jpg" data-title="Sea Fan" data-year="—" data-medium-full="Drypoint &amp; Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="The biology training fully visible — cellular structure rendered in patient drypoint mark-making.">
+    <div class="artwork" data-medium="drypoint" data-img="images/g06-sea-fan.jpg" data-title="Sea Fan" data-price="$325" data-available="available" data-medium-full="Drypoint &amp; Monotype" data-dimensions="12&quot; × 14&quot;" data-notes="The biology training fully visible — cellular structure rendered in patient drypoint mark-making.">
       <div class="artwork-image" style="background-image: url('images/g06-sea-fan.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Sea Fan</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Drypoint &amp; Monotype</span>
+        <span class="artwork-price">$325</span>
+        <span class="artwork-medium">Drypoint &amp; Monotype · 12″ × 14″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="images/g07-yellow-roses.jpg" data-title="Yellow Roses" data-year="—" data-medium-full="Drypoint with Hand-colouring" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Yellow and gold against a cool grey-blue ground. Confident colour in a drypoint still life.">
+    <div class="artwork" data-medium="drypoint" data-img="images/g07-yellow-roses.jpg" data-title="Yellow Roses" data-price="$650" data-available="available" data-medium-full="Drypoint &amp; Monotype" data-dimensions="18&quot; × 20&quot;" data-notes="Yellow and gold against a cool grey-blue ground. Confident colour in a drypoint still life.">
       <div class="artwork-image" style="background-image: url('images/g07-yellow-roses.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Yellow Roses</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Drypoint with Hand-colouring</span>
+        <span class="artwork-price">$650</span>
+        <span class="artwork-medium">Drypoint &amp; Monotype · 18″ × 20″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="monotype" data-img="images/g08-coneflowers.jpg" data-title="Coneflowers" data-year="—" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-edition="—" data-notes="Echinacea in precise intaglio. Each petal and stem observed and recorded with the patience the medium demands.">
+    <div class="artwork" data-medium="intaglio" data-img="images/g08-coneflowers.jpg" data-title="Cocoon and Butterfly" data-price="$225" data-available="available" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-notes="Echinacea in precise intaglio. Each petal and stem observed and recorded with the patience the medium demands.">
       <div class="artwork-image" style="background-image: url('images/g08-coneflowers.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Coneflowers</span>
-        <span class="artwork-year">—</span>
+        <span class="artwork-price">$225</span>
         <span class="artwork-medium">Intaglio Etching</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="intaglio" data-img="images/g09-loosestrife.jpg" data-title="Loosestrife" data-year="—" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-edition="—" data-notes="Purple loosestrife — a plant both beautiful and ecologically fraught. The biology and the botanical eye together.">
+    <div class="artwork" data-medium="intaglio" data-img="images/g09-loosestrife.jpg" data-title="Loosestrife" data-price="On request" data-available="available" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-notes="Purple loosestrife — a plant both beautiful and ecologically fraught. The biology and the botanical eye together.">
       <div class="artwork-image" style="background-image: url('images/g09-loosestrife.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Loosestrife</span>
-        <span class="artwork-year">—</span>
+        <span class="artwork-price">Enquire</span>
         <span class="artwork-medium">Intaglio Etching</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="monotype" data-img="images/g10-maple-leaf.jpg" data-title="Maple Leaf" data-year="—" data-medium-full="Monotype" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="A single leaf — all the information of autumn in one impression.">
+    <div class="artwork" data-medium="monotype" data-img="images/g10-maple-leaf.jpg" data-title="Maple Leaf" data-price="$210" data-available="available" data-medium-full="Monotype" data-dimensions="Dimensions on request" data-notes="A single leaf — all the information of autumn in one impression.">
       <div class="artwork-image" style="background-image: url('images/g10-maple-leaf.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Maple Leaf</span>
-        <span class="artwork-year">—</span>
+        <span class="artwork-price">$210</span>
         <span class="artwork-medium">Monotype</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="drypoint" data-img="images/g11-botanical-berries.jpg" data-title="Autumn Botanical" data-year="—" data-medium-full="Drypoint &amp; Watercolour" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="Berries, leaves, the crinkled tissue-paper ground. Meticulous observation in drypoint with watercolour.">
+    <div class="artwork" data-medium="drypoint" data-img="images/g11-botanical-berries.jpg" data-title="Fading Leaves" data-price="$1,100" data-available="available" data-medium-full="Monotype, Drypoint &amp; Watercolour on Japanese Paper" data-dimensions="20&quot; × 30&quot;" data-notes="Handmade Japanese paper with embedded leaves, monotype, drypoint, watercolor. One of the most technically ambitious pieces in the catalog.">
       <div class="artwork-image" style="background-image: url('images/g11-botanical-berries.jpg');"></div>
       <div class="artwork-meta">
-        <span class="artwork-title">Autumn Botanical</span>
-        <span class="artwork-year">—</span>
-        <span class="artwork-medium">Drypoint &amp; Watercolour</span>
+        <span class="artwork-title">Fading Leaves</span>
+        <span class="artwork-price">$1,100</span>
+        <span class="artwork-medium">Monotype, Drypoint &amp; Watercolour · 20″ × 30″</span>
       </div>
     </div>
 
-    <div class="artwork" data-medium="watercolor" data-img="images/g12-washing-line.jpg" data-title="Washing Line" data-year="—" data-medium-full="Watercolour on Paper" data-dimensions="Dimensions on request" data-edition="Unique" data-notes="White linen against a summer garden. A different register — domestic, light-filled, completely observed.">
+    <div class="artwork" data-medium="watercolor" data-img="images/g12-washing-line.jpg" data-title="Washing Line" data-price="Enquire" data-available="available" data-medium-full="Watercolour on Paper" data-dimensions="Dimensions on request" data-notes="White linen against a summer garden. A different register — domestic, light-filled, completely observed.">
       <div class="artwork-image" style="background-image: url('images/g12-washing-line.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Washing Line</span>
-        <span class="artwork-year">—</span>
+        <span class="artwork-price">Enquire</span>
         <span class="artwork-medium">Watercolour</span>
       </div>
     </div>
@@ -712,13 +737,13 @@ footer .footer-end { text-align: right; }
     <div class="lightbox-image" id="lightboxImage"></div>
     <div class="lightbox-text">
       <h3 id="lbTitle"></h3>
-      <p class="lb-year" id="lbYear"></p>
+      <div class="lb-price-display" id="lbPrice"></div>
       <dl>
         <dt>Medium</dt><dd id="lbMedium"></dd>
         <dt>Dimensions</dt><dd id="lbDimensions"></dd>
-        <dt>Edition</dt><dd id="lbEdition"></dd>
         <dt>Notes</dt><dd id="lbNotes"></dd>
       </dl>
+      <a class="lb-enquire" id="lbEnquire" href="#">Enquire about this work →</a>
     </div>
   </div>
 </div>
@@ -844,22 +869,24 @@ filterBtns.forEach(btn => {
 const lightbox = document.getElementById('lightbox');
 const lbImage = document.getElementById('lightboxImage');
 const lbTitle = document.getElementById('lbTitle');
-const lbYear = document.getElementById('lbYear');
+const lbPrice = document.getElementById('lbPrice');
 const lbMedium = document.getElementById('lbMedium');
 const lbDimensions = document.getElementById('lbDimensions');
-const lbEdition = document.getElementById('lbEdition');
 const lbNotes = document.getElementById('lbNotes');
+const lbEnquire = document.getElementById('lbEnquire');
 const lbClose = document.getElementById('lightboxClose');
 
 artworks.forEach(art => {
   art.addEventListener('click', () => {
     lbImage.style.backgroundImage = "url('" + art.dataset.img + "')";
     lbTitle.textContent = art.dataset.title;
-    lbYear.textContent = art.dataset.year;
+    lbPrice.textContent = art.dataset.price;
     lbMedium.innerHTML = art.dataset.mediumFull;
     lbDimensions.textContent = art.dataset.dimensions;
-    lbEdition.textContent = art.dataset.edition;
     lbNotes.textContent = art.dataset.notes;
+    const subject = encodeURIComponent("Enquiry: " + art.dataset.title);
+    const body = encodeURIComponent("Dear Olwen,\n\nI am interested in \"" + art.dataset.title + "\" (" + art.dataset.mediumFull + ", " + art.dataset.dimensions + ", " + art.dataset.price + ").\n\nPlease let me know if this work is available.\n\nKind regards,");
+    lbEnquire.href = "mailto:olwen@olwendowling.com?subject=" + subject + "&body=" + body;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   });
