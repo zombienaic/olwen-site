@@ -571,19 +571,26 @@ footer .footer-end { text-align: right; }
   /* 3. Show the Hamburger Button */
   .nav-hamburger { display: flex; }
 
-  /* 4. The Mobile Menu Overlay (The Black Screen) */
+    /* 4. The Mobile Menu Overlay */
   .nav-links {
     display: none; 
     position: fixed; 
     top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--ink); 
+      background: var(--ink);
+  height: 100vh; /* Add this! It forces the black to cover the full screen height */
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
     gap: 2.5rem;
-    z-index: 200;
+    z-index: 400; /* This high number forces it to the VERY front */
+    padding-top: 50px; /* This pushes the links down away from the top */
   }
 
+  /* 5. The Hamburger Button */
+  .nav-hamburger { 
+    display: flex; 
+    z-index: 401; /* This MUST be higher than the overlay to stay visible */
+  }
   /* 5. Show it when 'open' class is added via JS */
   .nav-links.open { 
     display: flex; 
