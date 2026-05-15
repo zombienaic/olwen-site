@@ -555,24 +555,51 @@ footer .footer-end { text-align: right; }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-@media (max-width: 600px) {
-  .gallery-grid { grid-template-columns: 1fr; }
-  nav { grid-template-columns: 1fr auto; }
+@media (max-width: 700px) {
+  /* 1. Stack the gallery into one column */
+  .gallery-grid { 
+    grid-template-columns: 1fr; 
+  }
+
+  /* 2. Fix the Nav Bar Layout */
+  nav { 
+    grid-template-columns: 1fr auto; 
+    padding: 1rem 1.5rem; 
+  }
   .nav-tagline { display: none; }
+  
+  /* 3. Show the Hamburger Button */
   .nav-hamburger { display: flex; }
+
+  /* 4. The Mobile Menu Overlay (The Black Screen) */
   .nav-links {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--ink); flex-direction: column;
-    align-items: center; justify-content: center; gap: 2.5rem;
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--ink); 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    gap: 2.5rem;
     z-index: 200;
   }
-  .nav-links.open { display: flex; }
+
+  /* 5. Show it when 'open' class is added via JS */
+  .nav-links.open { 
+    display: flex; 
+  }
+
+  /* 6. Style the links for mobile */
   .nav-links a {
-    font-size: 1.1rem; letter-spacing: 0.25em; color: var(--paper) !important;
+    font-size: 1.2rem;
+    color: var(--paper) !important;
     opacity: 0.85;
   }
-  .nav-links a:hover { opacity: 1; color: var(--ochre) !important; }
-  .nav-hamburger.open span { background: var(--paper); }
+  
+  /* 7. Turn the Hamburger White when menu is open */
+  .nav-hamburger.open span { 
+    background: var(--paper); 
+  }
 }
 </style>
 </head>
