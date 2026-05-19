@@ -44,8 +44,11 @@
 .lightbox-text dt { font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm-mid); margin-top: 1rem; }
 .lightbox-text dt:first-child { margin-top: 0; }
 .lightbox-text dd { font-family: "Cormorant Garamond", serif; font-size: 1rem; color: var(--paper); margin-top: 0.3rem; font-style: italic; }
-.lb-enquire-btn { display: inline-block; margin-top: 2rem; padding: 0.9rem 2rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; }
+.lb-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.lb-enquire-btn { display: inline-block; padding: 0.9rem 2rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; }
 .lb-enquire-btn:hover { background: #6b2c17; }
+.lb-buy-btn { display: inline-block; padding: 0.9rem 2rem; background: var(--ink); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; }
+.lb-buy-btn:hover { background: #2a2218; }
 .lightbox-close { position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(241,235,221,0.3); color: var(--paper); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: pointer; }
 @media (max-width: 1200px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px) { .catalog { padding: 2rem 2rem 4rem; } .work-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; } .lightbox { padding: 1.5rem; } .lightbox-content { grid-template-columns: 1fr; gap: 1.5rem; max-height: 90vh; overflow-y: auto; } .lightbox-image { max-height: 50vh; } }
@@ -56,7 +59,7 @@
 <nav id="mainNav">
   <a href="index.html" class="nav-mark">Olwen <span>Dowling</span></a>
   <div class="nav-tagline">Painter &middot; Printmaker</div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html#work">Selected</a></li>
     <li><a href="work.html" class="active">All Works</a></li>
     <li><a href="biography.html">Biography</a></li>
@@ -70,7 +73,7 @@
 <header class="page-header">
   <p class="eyebrow">Complete Catalog</p>
   <h1>All <em>Works</em></h1>
-  <p class="sub">Click any work to enquire. All prices in USD.</p>
+  <p class="sub">Click any work to enquire or purchase. All prices in USD.</p>
 </header>
 
 <div class="catalog" id="catalog">
@@ -88,7 +91,10 @@
         <dt>Medium</dt><dd id="lbMedium"></dd>
         <dt>Dimensions</dt><dd id="lbDims"></dd>
       </dl>
-      <a class="lb-enquire-btn" id="lbEnquire" href="#">Enquire about this work</a>
+      <div class="lb-actions">
+        <a class="lb-enquire-btn" id="lbEnquire" href="#">Enquire about this work</a>
+        <a class="lb-buy-btn" id="lbBuy" href="#" target="_blank" style="display:none;">Buy Now</a>
+      </div>
     </div>
   </div>
 </div>
@@ -100,14 +106,8 @@
 </footer>
 
 <script>
-// ============================================================
-// CATALOG DATA SOURCE
-// Replace the URL below with the "Publish to web" CSV URL
-// from your Google Sheet.
-// ============================================================
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3XScG4d1eqLJKxItKYFw5eTRvBIUY2Br0eaVElW7EawvWQPyiuk2M0FTzX1EtokLRFE6TJss7HTjI/pub?output=csv";
 
-// Section ordering for display
 const SECTION_ORDER = [
   { id: "drypoint", label: "Drypoint <em>Monotypes</em>", subtitle: "Drypoint &amp; Monotype" },
   { id: "intaglio", label: "Intaglio <em>Etchings</em>", subtitle: "Copper plate etching" },
@@ -115,7 +115,6 @@ const SECTION_ORDER = [
   { id: "watercolor", label: "<em>Watercolors</em>", subtitle: "Watercolor on paper" }
 ];
 
-// CSV parser that handles quoted fields with commas inside
 function parseCSV(text) {
   const rows = [];
   let row = [];
@@ -161,8 +160,6 @@ function normalizeSection(s) {
 function renderCatalog(works) {
   const catalog = document.getElementById("catalog");
   catalog.innerHTML = "";
-  
-  // Group by normalized section
   const grouped = {};
   works.forEach(w => {
     const sec = normalizeSection(w.section);
@@ -170,15 +167,12 @@ function renderCatalog(works) {
     if (!grouped[sec]) grouped[sec] = [];
     grouped[sec].push(w);
   });
-  
   SECTION_ORDER.forEach(section => {
     const items = grouped[section.id];
     if (!items || !items.length) return;
-    
     const sec = document.createElement("section");
     sec.className = "medium-section";
     sec.id = section.id;
-    
     sec.innerHTML = `
       <div class="medium-header">
         <h2>${section.label}</h2>
@@ -186,7 +180,6 @@ function renderCatalog(works) {
       </div>
       <div class="work-grid"></div>
     `;
-    
     const grid = sec.querySelector(".work-grid");
     items.forEach(w => {
       const sold = (w.status || "").toLowerCase() === "sold";
@@ -197,12 +190,11 @@ function renderCatalog(works) {
       item.dataset.dims = w.dimensions || "";
       item.dataset.price = sold ? "Sold" : (w.price || "Enquire");
       item.dataset.img = w["image url"] || w.image || "";
-      
+      item.dataset.paypal = w["paypal_link"] || "";
       const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
-      const enquireBtn = sold 
-        ? '<span class="work-enquire">Sold</span>' 
+      const enquireBtn = sold
+        ? '<span class="work-enquire">Sold</span>'
         : '<a class="work-enquire" href="#" onclick="event.preventDefault(); event.stopPropagation();">Enquire</a>';
-      
       item.innerHTML = `
         <div class="work-thumb" style="background-image: url('${item.dataset.img}');">${soldBadge}</div>
         <div class="work-info">
@@ -214,22 +206,18 @@ function renderCatalog(works) {
           </div>
         </div>
       `;
-      
       if (!sold) {
         item.addEventListener("click", () => openLightbox(item));
       }
       grid.appendChild(item);
     });
-    
     catalog.appendChild(sec);
   });
-  
   if (!catalog.children.length) {
     catalog.innerHTML = '<div class="catalog-status">No works available at this time.</div>';
   }
 }
 
-// Lightbox
 const lightbox = document.getElementById("lightbox");
 const lbImage = document.getElementById("lightboxImage");
 const lbTitle = document.getElementById("lbTitle");
@@ -237,6 +225,7 @@ const lbPrice = document.getElementById("lbPrice");
 const lbMedium = document.getElementById("lbMedium");
 const lbDims = document.getElementById("lbDims");
 const lbEnquire = document.getElementById("lbEnquire");
+const lbBuy = document.getElementById("lbBuy");
 const lbClose = document.getElementById("lightboxClose");
 
 function openLightbox(item) {
@@ -253,6 +242,13 @@ function openLightbox(item) {
   const subject = encodeURIComponent("Enquiry: " + title);
   const body = encodeURIComponent("Dear Olwen,\n\nI am interested in \"" + title + "\" (" + medium + ", " + (dims || "dimensions on request") + ", " + price + ").\n\nPlease let me know if this work is available.\n\nKind regards,");
   lbEnquire.href = "mailto:olwen@olwendowling.com?subject=" + subject + "&body=" + body;
+  if (item.dataset.paypal) {
+    lbBuy.href = item.dataset.paypal;
+    lbBuy.style.display = "inline-block";
+  } else {
+    lbBuy.href = "#";
+    lbBuy.style.display = "none";
+  }
   lightbox.classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -265,23 +261,14 @@ lbClose.addEventListener("click", closeLightbox);
 lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
 
-// Nav scroll
 const nav = document.getElementById("mainNav");
 window.addEventListener("scroll", () => {
   if (window.scrollY > 80) nav.classList.add("scrolled");
   else nav.classList.remove("scrolled");
 });
 
-// Fetch and render
 async function loadCatalog() {
   const status = document.getElementById("loadingStatus");
-  
-  if (SHEET_CSV_URL === "REPLACE_WITH_PUBLISHED_CSV_URL") {
-    status.className = "catalog-status error";
-    status.innerHTML = "Catalog not yet configured.<br><small>Edit work.html and replace SHEET_CSV_URL with your published Google Sheet URL.</small>";
-    return;
-  }
-  
   try {
     const response = await fetch(SHEET_CSV_URL + "&t=" + Date.now());
     if (!response.ok) throw new Error("Sheet not accessible (HTTP " + response.status + ")");
