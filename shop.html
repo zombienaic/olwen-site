@@ -8,236 +8,85 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
 :root {
-  --ink: #16110c;
-  --ink-soft: #2a221a;
-  --paper: #e2d6bb;
-  --paper-warm: #ebe2cf;
-  --paper-deep: #d4c5a5;
-  --warm-mid: #b8a98d;
-  --rust: #8b3a1f;
-  --ochre: #c4873a;
-  --slate: #3d4754;
+  --ink: #16110c; --ink-soft: #2a221a; --paper: #e2d6bb;
+  --paper-warm: #ebe2cf; --paper-deep: #d4c5a5; --warm-mid: #b8a98d;
+  --rust: #8b3a1f; --ochre: #c4873a; --slate: #3d4754;
 }
-
 html { scroll-behavior: smooth; }
-
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Inter Tight", sans-serif;
-  font-weight: 300;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
+body { background: var(--paper); color: var(--ink); font-family: "Inter Tight", sans-serif; font-weight: 300; overflow-x: hidden; line-height: 1.6; }
 ::selection { background: var(--rust); color: var(--paper); }
-
 body::before {
-  content: "";
-  position: fixed; inset: 0;
+  content: ""; position: fixed; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 9999;
-  mix-blend-mode: multiply; opacity: 0.5;
+  pointer-events: none; z-index: 9999; mix-blend-mode: multiply; opacity: 0.5;
 }
-
-/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: grid; grid-template-columns: auto 1fr auto;
   align-items: center; padding: 1.6rem 3rem; gap: 3rem;
-  background: rgba(226, 214, 187, 0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(22,17,12,0.08);
-  transition: padding 0.3s;
+  background: rgba(226,214,187,0.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(22,17,12,0.08); transition: padding 0.3s;
 }
 nav.scrolled { padding: 1rem 3rem; }
-.nav-mark {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.4rem; font-weight: 400;
-  color: var(--ink); text-decoration: none;
-}
+.nav-mark { font-family: "Cormorant Garamond", serif; font-size: 1.4rem; font-weight: 400; color: var(--ink); text-decoration: none; }
 .nav-mark span { font-style: italic; color: var(--rust); }
-.nav-tagline {
-  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--slate); opacity: 0.7; justify-self: center;
-}
+.nav-tagline { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--slate); opacity: 0.7; justify-self: center; }
 .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-.nav-links a {
-  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--ink); text-decoration: none; opacity: 0.65;
-  transition: opacity 0.3s, color 0.3s;
-}
+.nav-links a { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink); text-decoration: none; opacity: 0.65; transition: opacity 0.3s, color 0.3s; }
 .nav-links a:hover { opacity: 1; color: var(--rust); }
 .nav-links a.active { opacity: 1; color: var(--rust); }
-
-/* HAMBURGER */
-.nav-hamburger {
-  display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 4px;
-  position: relative; z-index: 201;
-}
-.nav-hamburger span {
-  display: block; width: 22px; height: 1.5px; background: var(--ink);
-  transition: transform 0.3s, opacity 0.3s;
-}
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; position: relative; z-index: 201; }
+.nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-/* SHOP HEADER */
 .shop-header {
-  padding: 10rem 4rem 5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 6rem;
-  align-items: end;
-  border-bottom: 1px solid rgba(22,17,12,0.12);
+  padding: 10rem 4rem 5rem; max-width: 1400px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem;
+  align-items: end; border-bottom: 1px solid rgba(22,17,12,0.12);
 }
-.shop-header-side .s-label {
-  font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--rust); margin-bottom: 1.5rem;
-}
-.shop-header-side h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 300; line-height: 1; letter-spacing: -0.02em;
-}
+.shop-header-side .s-label { font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--rust); margin-bottom: 1.5rem; }
+.shop-header-side h1 { font-family: "Cormorant Garamond", serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1; letter-spacing: -0.02em; }
 .shop-header-side h1 em { font-style: italic; color: var(--rust); }
-.shop-header-body {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 1.05rem; line-height: 1.8;
-  color: var(--ink-soft);
-}
+.shop-header-body { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 1.05rem; line-height: 1.8; color: var(--ink-soft); }
 .shop-header-body p + p { margin-top: 1rem; }
 .shop-header-body a { color: var(--rust); text-decoration: none; }
 .shop-header-body a:hover { text-decoration: underline; }
-
-/* SHOP MAIN */
-.shop-main {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 5rem 4rem 8rem;
-}
-
-.shop-section-label {
-  font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--rust); margin-bottom: 2.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(22,17,12,0.1);
-}
-
-.shop-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem 2.5rem;
-  margin-bottom: 6rem;
-}
-
+.shop-main { max-width: 1400px; margin: 0 auto; padding: 5rem 4rem 8rem; }
+.shop-status { text-align: center; padding: 4rem 2rem; font-family: "Cormorant Garamond", serif; font-style: italic; color: var(--slate); }
+.shop-status.error { color: var(--rust); }
+.shop-section-label { font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--rust); margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(22,17,12,0.1); }
+.shop-section { margin-bottom: 6rem; }
+.shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2.5rem; }
 .shop-card { display: flex; flex-direction: column; }
-
-.shop-card-image {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  background-color: var(--paper-deep);
-  margin-bottom: 1.2rem;
-}
-.shop-card-image img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.shop-card:hover .shop-card-image img { transform: scale(1.03); }
-
+.shop-card.sold { opacity: 0.5; }
+.shop-card-image { aspect-ratio: 4/3; overflow: hidden; background-color: var(--paper-deep); margin-bottom: 1.2rem; position: relative; }
+.shop-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1); }
+.shop-card:not(.sold):hover .shop-card-image img { transform: scale(1.03); }
+.sold-badge { position: absolute; top: 1rem; right: 1rem; background: var(--ink); color: var(--paper); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.35rem 0.7rem; }
 .shop-card-meta { flex: 1; display: flex; flex-direction: column; }
-
-.shop-card-title {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.3rem; font-style: italic; font-weight: 400;
-  color: var(--ink); margin-bottom: 0.3rem;
-}
-.shop-card-medium {
-  font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--slate); opacity: 0.8; margin-bottom: 0.2rem;
-}
-.shop-card-dims {
-  font-size: 0.78rem; color: var(--slate); opacity: 0.7;
-  margin-bottom: 1rem;
-}
-.shop-card-price {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.5rem; font-weight: 300;
-  color: var(--ink); margin-top: auto; margin-bottom: 1.2rem;
-}
+.shop-card-title { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; font-style: italic; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; }
+.shop-card-medium { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate); opacity: 0.8; margin-bottom: 0.2rem; }
+.shop-card-dims { font-size: 0.78rem; color: var(--slate); opacity: 0.7; margin-bottom: 1rem; }
+.shop-card-price { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-weight: 300; color: var(--ink); margin-top: auto; margin-bottom: 1.2rem; }
 .shop-card-price.enquire { font-size: 1rem; font-style: italic; color: var(--slate); }
-
-.btn-purchase {
-  display: inline-block;
-  padding: 0.85rem 1.8rem;
-  background: var(--rust);
-  color: var(--paper);
-  text-decoration: none;
-  font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
-  font-family: "Inter Tight", sans-serif; font-weight: 300;
-  transition: background 0.3s;
-  text-align: center; align-self: flex-start;
-}
+.btn-purchase { display: inline-block; padding: 0.85rem 1.8rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; font-family: "Inter Tight", sans-serif; font-weight: 300; transition: background 0.3s; text-align: center; align-self: flex-start; }
 .btn-purchase:hover { background: #6b2c17; }
-
-.btn-enquire {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--ink); text-decoration: none;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--ink);
-  width: fit-content;
-  transition: color 0.3s, border-color 0.3s;
-}
+.btn-enquire { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--ink); width: fit-content; transition: color 0.3s, border-color 0.3s; }
 .btn-enquire:hover { color: var(--rust); border-color: var(--rust); }
-
-/* SHIPPING NOTE */
-.shop-note {
-  border-top: 1px solid rgba(22,17,12,0.12);
-  padding-top: 3rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
-}
-.shop-note-cell .note-label {
-  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--rust); margin-bottom: 0.8rem;
-}
-.shop-note-cell p {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 0.95rem; font-style: italic;
-  color: var(--ink-soft); line-height: 1.7;
-}
+.shop-note { border-top: 1px solid rgba(22,17,12,0.12); padding-top: 3rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; }
+.shop-note-cell .note-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.8rem; }
+.shop-note-cell p { font-family: "Cormorant Garamond", serif; font-size: 0.95rem; font-style: italic; color: var(--ink-soft); line-height: 1.7; }
 .shop-note-cell a { color: var(--rust); text-decoration: none; }
 .shop-note-cell a:hover { text-decoration: underline; }
-
-/* FOOTER */
-footer {
-  background: #0e0a07; padding: 2rem 4rem;
-  display: grid; grid-template-columns: 1fr auto 1fr;
-  align-items: center; gap: 2rem;
-}
+footer { background: #0e0a07; padding: 2rem 4rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
 footer p { font-size: 0.65rem; letter-spacing: 0.15em; color: rgba(184,169,141,0.45); }
-footer .footer-mark {
-  font-family: "Cormorant Garamond", serif; font-style: italic;
-  font-size: 0.85rem; color: var(--rust); text-align: center;
-}
+footer .footer-mark { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 0.85rem; color: var(--rust); text-align: center; }
 footer .footer-end { text-align: right; }
-
-/* RESPONSIVE */
 @media (max-width: 1024px) {
-  nav { padding: 1.2rem 2.5rem; gap: 1.5rem; }
-  .nav-tagline { display: none; }
-  .nav-links { gap: 1rem; }
-  .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
+  nav { padding: 1.2rem 2.5rem; gap: 1.5rem; } .nav-tagline { display: none; }
+  .nav-links { gap: 1rem; } .nav-links a { font-size: 0.62rem; letter-spacing: 0.18em; }
   .shop-header { grid-template-columns: 1fr; gap: 2rem; padding: 7rem 2rem 3rem; }
   .shop-main { padding: 3rem 2rem 5rem; }
   .shop-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
@@ -245,18 +94,10 @@ footer .footer-end { text-align: right; }
   footer { grid-template-columns: 1fr; text-align: center; gap: 1rem; padding: 1.5rem 2rem; }
   footer .footer-end { text-align: center; }
 }
-
 @media (max-width: 700px) {
-  nav { grid-template-columns: 1fr auto; padding: 1rem 1.5rem; }
-  .nav-tagline { display: none; }
+  nav { grid-template-columns: 1fr auto; padding: 1rem 1.5rem; } .nav-tagline { display: none; }
   .nav-hamburger { display: flex; z-index: 401; }
-  .nav-links {
-    display: none; position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--ink); height: 100vh;
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2.5rem; z-index: 400; padding-top: 50px;
-  }
+  .nav-links { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--ink); height: 100vh; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; z-index: 400; padding-top: 50px; }
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 1.2rem; color: var(--paper) !important; opacity: 0.85; }
   .nav-hamburger.open span { background: var(--paper); }
@@ -289,197 +130,13 @@ footer .footer-end { text-align: right; }
     <h1>Original <em>Works</em><br>for Sale</h1>
   </div>
   <div class="shop-header-body">
-    <p>Each work is an original — pulled, painted, or printed by hand in the studio at North Chester, Massachusetts. Prices are in USD and include a signed certificate of authenticity.</p>
+    <p>Each work is an original — pulled, painted, or printed by hand in the studio at Stepaside, Massachusetts. Prices are in USD and include a signed certificate of authenticity.</p>
     <p>For works priced on request, or to enquire about commissions and studio visits, please <a href="index.html#contact">get in touch</a>.</p>
   </div>
 </div>
 
-<main class="shop-main">
-
-  <!-- ORIGINALS -->
-  <p class="shop-section-label">§ Originals</p>
-  <div class="shop-grid">
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g01-atlantic-seascape.jpg" alt="Muted Colors: Connemara — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Muted Colors: Connemara</h2>
-        <p class="shop-card-medium">Drypoint &amp; Monotype</p>
-        <p class="shop-card-dims">46&#8243; &times; 36&#8243;</p>
-        <p class="shop-card-price">$2,200</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_CONNEMARA" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g02-allium.jpg" alt="Winter 1 — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Winter 1</h2>
-        <p class="shop-card-medium">Drypoint &amp; Monotype</p>
-        <p class="shop-card-dims">20&#8243; &times; 18&#8243;</p>
-        <p class="shop-card-price">$300</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_WINTER1" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g03-trees.jpg" alt="Winter Forest — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Winter Forest</h2>
-        <p class="shop-card-medium">Drypoint &amp; Monotype</p>
-        <p class="shop-card-dims">26&#8243; &times; 36&#8243;</p>
-        <p class="shop-card-price">$2,300</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_WINTERFOREST" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g11-botanical-berries.jpg" alt="Fading Leaves — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Fading Leaves</h2>
-        <p class="shop-card-medium">Monotype, Drypoint &amp; Watercolour on Japanese Paper</p>
-        <p class="shop-card-dims">20&#8243; &times; 30&#8243;</p>
-        <p class="shop-card-price">$1,100</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_FADINGLEAVES" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g12-washing-line.jpg" alt="Washing Line — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Washing Line</h2>
-        <p class="shop-card-medium">Watercolour on Paper</p>
-        <p class="shop-card-dims">Dimensions on request</p>
-        <p class="shop-card-price enquire">Price on request</p>
-        <a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=Enquiry%3A%20Washing%20Line">Enquire &#8594;</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g09-loosestrife.jpg" alt="Loosestrife — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Loosestrife</h2>
-        <p class="shop-card-medium">Intaglio Etching</p>
-        <p class="shop-card-dims">Dimensions on request</p>
-        <p class="shop-card-price enquire">Price on request</p>
-        <a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=Enquiry%3A%20Loosestrife">Enquire &#8594;</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- PRINTS & EDITIONS -->
-  <p class="shop-section-label">§ Prints &amp; Editions</p>
-  <div class="shop-grid">
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g04-red-rose.jpg" alt="Red Rose — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Red Rose</h2>
-        <p class="shop-card-medium">Intaglio with Hand-colouring</p>
-        <p class="shop-card-dims">Dimensions on request</p>
-        <p class="shop-card-price">$425</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_REDROSE" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g05-blue-flowers.jpg" alt="Blue Flowers — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Blue Flowers</h2>
-        <p class="shop-card-medium">Intaglio with Hand-colouring</p>
-        <p class="shop-card-dims">20&#8243; &times; 18&#8243;</p>
-        <p class="shop-card-price">$650</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_BLUEFLOWERS" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g06-sea-fan.jpg" alt="Sea Fan — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Sea Fan</h2>
-        <p class="shop-card-medium">Drypoint &amp; Monotype</p>
-        <p class="shop-card-dims">12&#8243; &times; 14&#8243;</p>
-        <p class="shop-card-price">$325</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_SEAFAN" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g07-yellow-roses.jpg" alt="Yellow Roses — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Yellow Roses</h2>
-        <p class="shop-card-medium">Drypoint &amp; Monotype</p>
-        <p class="shop-card-dims">18&#8243; &times; 20&#8243;</p>
-        <p class="shop-card-price">$650</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_YELLOWROSES" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g08-coneflowers.jpg" alt="Coneflowers — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Coneflowers</h2>
-        <p class="shop-card-medium">Intaglio Etching</p>
-        <p class="shop-card-dims">Dimensions on request</p>
-        <p class="shop-card-price">$225</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_CONEFLOWERS" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-    <div class="shop-card">
-      <div class="shop-card-image">
-        <img src="g10-maple-leaf.jpg" alt="Maple Leaf — Olwen Dowling">
-      </div>
-      <div class="shop-card-meta">
-        <h2 class="shop-card-title">Maple Leaf</h2>
-        <p class="shop-card-medium">Monotype</p>
-        <p class="shop-card-dims">Dimensions on request</p>
-        <p class="shop-card-price">$210</p>
-        <a class="btn-purchase" href="PAYPAL_LINK_MAPLELEAF" target="_blank" rel="noopener">Purchase via PayPal</a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- SHIPPING NOTE -->
-  <div class="shop-note">
-    <div class="shop-note-cell">
-      <p class="note-label">§ Authenticity</p>
-      <p>All works ship with a signed certificate of authenticity from the artist's studio at North Chester, Massachusetts.</p>
-    </div>
-    <div class="shop-note-cell">
-      <p class="note-label">§ Shipping</p>
-      <p>Works ship within 7&#8211;10 business days, carefully packed and insured. International shipping available &#8212; <a href="index.html#contact">contact for rates</a>.</p>
-    </div>
-    <div class="shop-note-cell">
-      <p class="note-label">§ Questions</p>
-      <p>For commissions, studio visits, or any enquiry, write to <a href="mailto:olwen@olwendowling.com">olwen@olwendowling.com</a>.</p>
-    </div>
-  </div>
-
+<main class="shop-main" id="shopMain">
+  <div class="shop-status" id="shopStatus">Loading works&hellip;</div>
 </main>
 
 <footer>
@@ -489,26 +146,174 @@ footer .footer-end { text-align: right; }
 </footer>
 
 <script>
-const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 80) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3XScG4d1eqLJKxItKYFw5eTRvBIUY2Br0eaVElW7EawvWQPyiuk2M0FTzX1EtokLRFE6TJss7HTjI/pub?output=csv";
+
+const SECTION_ORDER = [
+  { id: "drypoint",   label: "Drypoint &amp; <em>Monotypes</em>",   subtitle: "Drypoint &amp; Monotype" },
+  { id: "intaglio",   label: "Intaglio <em>Etchings</em>",           subtitle: "Copper plate etching" },
+  { id: "oil",        label: "Irish <em>Oil Paintings</em>",         subtitle: "Oil on canvas" },
+  { id: "watercolor", label: "<em>Watercolors</em>",                 subtitle: "Watercolor on paper" }
+];
+
+function parseCSV(text) {
+  const rows = []; let row = [], cell = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"' && text[i+1] === '"') { cell += '"'; i++; }
+      else if (c === '"') { inQuotes = false; }
+      else { cell += c; }
+    } else {
+      if (c === '"') { inQuotes = true; }
+      else if (c === ",") { row.push(cell); cell = ""; }
+      else if (c === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+      else if (c === "\r") {}
+      else { cell += c; }
+    }
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows;
+}
+
+function rowsToObjects(rows) {
+  if (!rows.length) return [];
+  const headers = rows[0].map(h => h.trim().toLowerCase());
+  return rows.slice(1).map(row => {
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (row[i] || "").trim(); });
+    return obj;
+  }).filter(o => o.title);
+}
+
+function normalizeSection(s) {
+  s = (s || "").toLowerCase();
+  if (s.includes("drypoint") || s.includes("monotype")) return "drypoint";
+  if (s.includes("intaglio") || s.includes("etching")) return "intaglio";
+  if (s.includes("oil")) return "oil";
+  if (s.includes("watercolor") || s.includes("watercolour")) return "watercolor";
+  return "drypoint";
+}
+
+function buildCard(w) {
+  const sold = (w.status || "").toLowerCase() === "sold";
+  const img = w["image url"] || w.image || "";
+  const price = w.price || "";
+  const paypal = w["paypal_link"] || "";
+  const dims = w.dimensions || "";
+  const medium = w.medium || "";
+
+  const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
+
+  let priceEl, actionEl;
+  if (sold) {
+    priceEl = `<p class="shop-card-price enquire">Sold</p>`;
+    actionEl = "";
+  } else if (paypal) {
+    priceEl = `<p class="shop-card-price">$${price}</p>`;
+    actionEl = `<a class="btn-purchase" href="${paypal}" target="_blank" rel="noopener">Purchase via PayPal</a>`;
+  } else if (price) {
+    priceEl = `<p class="shop-card-price">$${price}</p>`;
+    const subject = encodeURIComponent("Enquiry: " + w.title);
+    actionEl = `<a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=${subject}">Enquire &#8594;</a>`;
+  } else {
+    priceEl = `<p class="shop-card-price enquire">Price on request</p>`;
+    const subject = encodeURIComponent("Enquiry: " + w.title);
+    actionEl = `<a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=${subject}">Enquire &#8594;</a>`;
+  }
+
+  return `
+    <div class="shop-card${sold ? " sold" : ""}">
+      <div class="shop-card-image">
+        ${img ? `<img src="${img}" alt="${w.title} — Olwen Dowling" loading="lazy">` : ""}
+        ${soldBadge}
+      </div>
+      <div class="shop-card-meta">
+        <h2 class="shop-card-title">${w.title}</h2>
+        ${medium ? `<p class="shop-card-medium">${medium}</p>` : ""}
+        ${dims ? `<p class="shop-card-dims">${dims}</p>` : ""}
+        ${priceEl}
+        ${actionEl}
+      </div>
+    </div>`;
+}
+
+function renderShop(works) {
+  const main = document.getElementById("shopMain");
+  main.innerHTML = "";
+
+  const grouped = {};
+  works.forEach(w => {
+    if ((w.status || "").toLowerCase() === "hidden") return;
+    const sec = normalizeSection(w.section);
+    if (!grouped[sec]) grouped[sec] = [];
+    grouped[sec].push(w);
+  });
+
+  SECTION_ORDER.forEach(section => {
+    const items = grouped[section.id];
+    if (!items || !items.length) return;
+    const sec = document.createElement("section");
+    sec.className = "shop-section";
+    sec.innerHTML = `
+      <p class="shop-section-label">§ ${section.label}</p>
+      <div class="shop-grid">${items.map(buildCard).join("")}</div>`;
+    main.appendChild(sec);
+  });
+
+  // Shipping note
+  const note = document.createElement("div");
+  note.className = "shop-note";
+  note.innerHTML = `
+    <div class="shop-note-cell">
+      <p class="note-label">§ Authenticity</p>
+      <p>All works ship with a signed certificate of authenticity from the artist's studio.</p>
+    </div>
+    <div class="shop-note-cell">
+      <p class="note-label">§ Shipping</p>
+      <p>Works ship within 7&ndash;10 business days, carefully packed and insured. International shipping available &mdash; <a href="index.html#contact">contact for rates</a>.</p>
+    </div>
+    <div class="shop-note-cell">
+      <p class="note-label">§ Questions</p>
+      <p>For commissions, studio visits, or any enquiry, write to <a href="mailto:olwen@olwendowling.com">olwen@olwendowling.com</a>.</p>
+    </div>`;
+  main.appendChild(note);
+}
+
+async function loadShop() {
+  const status = document.getElementById("shopStatus");
+  try {
+    const res = await fetch(SHEET_CSV_URL + "&t=" + Date.now());
+    if (!res.ok) throw new Error("Sheet not accessible (HTTP " + res.status + ")");
+    const text = await res.text();
+    const works = rowsToObjects(parseCSV(text));
+    if (!works.length) throw new Error("No works found in sheet");
+    renderShop(works);
+  } catch(e) {
+    status.className = "shop-status error";
+    status.innerHTML = "Could not load works.<br><small>" + e.message + "</small>";
+  }
+}
+
+loadShop();
+
+const nav = document.getElementById("mainNav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 80);
 });
-const hamburger = document.getElementById('navHamburger');
-const navLinks = document.getElementById('navLinks');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  navLinks.classList.toggle('open');
-  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+const hamburger = document.getElementById("navHamburger");
+const navLinks = document.getElementById("navLinks");
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("open");
+  navLinks.classList.toggle("open");
+  document.body.style.overflow = navLinks.classList.contains("open") ? "hidden" : "";
 });
-navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
+navLinks.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    hamburger.classList.remove("open");
+    navLinks.classList.remove("open");
+    document.body.style.overflow = "";
   });
 });
 </script>
-
 </body>
 </html>
