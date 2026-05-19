@@ -577,19 +577,19 @@ footer .footer-end { text-align: right; }
     position: fixed; 
     top: 0; left: 0; right: 0; bottom: 0;
       background: var(--ink);
-  height: 100vh; /* Add this! It forces the black to cover the full screen height */
+  height: 100vh;
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
     gap: 2.5rem;
-    z-index: 400; /* This high number forces it to the VERY front */
-    padding-top: 50px; /* This pushes the links down away from the top */
+    z-index: 400;
+    padding-top: 50px;
   }
 
   /* 5. The Hamburger Button */
   .nav-hamburger { 
     display: flex; 
-    z-index: 401; /* This MUST be higher than the overlay to stay visible */
+    z-index: 401;
   }
   /* 5. Show it when 'open' class is added via JS */
   .nav-links.open { 
@@ -753,7 +753,7 @@ footer .footer-end { text-align: right; }
       </div>
     </div>
 
-    <div class="artwork" data-medium="intaglio" data-img="g08-coneflowers.jpg" data-title="Cocoon and Butterfly" data-price="$225" data-available="available" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-notes="Echinacea in precise intaglio. Each petal and stem observed and recorded with the patience the medium demands.">
+    <div class="artwork" data-medium="intaglio" data-img="g08-coneflowers.jpg" data-title="Coneflowers" data-price="$225" data-available="available" data-medium-full="Intaglio Etching" data-dimensions="Dimensions on request" data-notes="Echinacea in precise intaglio. Each petal and stem observed and recorded with the patience the medium demands.">
       <div class="artwork-image" style="background-image: url('g08-coneflowers.jpg');"></div>
       <div class="artwork-meta">
         <span class="artwork-title">Coneflowers</span>
