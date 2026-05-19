@@ -126,11 +126,11 @@ footer .footer-end { text-align: right; }
 
 <div class="shop-header">
   <div class="shop-header-side">
-    <p class="s-label">§ Available Works</p>
+    <p class="s-label">&sect; Available Works</p>
     <h1>Original <em>Works</em><br>for Sale</h1>
   </div>
   <div class="shop-header-body">
-    <p>Each work is an original — pulled, painted, or printed by hand in the studio at Stepaside, Massachusetts. Prices are in USD and include a signed certificate of authenticity.</p>
+    <p>Each work is an original &mdash; pulled, painted, or printed by hand in the studio at Stepaside, Massachusetts. Prices are in USD and include a signed certificate of authenticity.</p>
     <p>For works priced on request, or to enquire about commissions and studio visits, please <a href="index.html#contact">get in touch</a>.</p>
   </div>
 </div>
@@ -197,7 +197,7 @@ function normalizeSection(s) {
 function buildCard(w) {
   const sold = (w.status || "").toLowerCase() === "sold";
   const img = w["image url"] || w.image || "";
-  const price = w.price || "";
+  const price = (w.price || "").replace(/^\$/, "").trim();
   const paypal = w["paypal_link"] || "";
   const dims = w.dimensions || "";
   const medium = w.medium || "";
@@ -224,7 +224,7 @@ function buildCard(w) {
   return `
     <div class="shop-card${sold ? " sold" : ""}">
       <div class="shop-card-image">
-        ${img ? `<img src="${img}" alt="${w.title} — Olwen Dowling" loading="lazy">` : ""}
+        ${img ? `<img src="${img}" alt="${w.title} &mdash; Olwen Dowling" loading="lazy">` : ""}
         ${soldBadge}
       </div>
       <div class="shop-card-meta">
@@ -255,25 +255,24 @@ function renderShop(works) {
     const sec = document.createElement("section");
     sec.className = "shop-section";
     sec.innerHTML = `
-      <p class="shop-section-label">§ ${section.label}</p>
+      <p class="shop-section-label">&sect; ${section.label}</p>
       <div class="shop-grid">${items.map(buildCard).join("")}</div>`;
     main.appendChild(sec);
   });
 
-  // Shipping note
   const note = document.createElement("div");
   note.className = "shop-note";
   note.innerHTML = `
     <div class="shop-note-cell">
-      <p class="note-label">§ Authenticity</p>
+      <p class="note-label">&sect; Authenticity</p>
       <p>All works ship with a signed certificate of authenticity from the artist's studio.</p>
     </div>
     <div class="shop-note-cell">
-      <p class="note-label">§ Shipping</p>
+      <p class="note-label">&sect; Shipping</p>
       <p>Works ship within 7&ndash;10 business days, carefully packed and insured. International shipping available &mdash; <a href="index.html#contact">contact for rates</a>.</p>
     </div>
     <div class="shop-note-cell">
-      <p class="note-label">§ Questions</p>
+      <p class="note-label">&sect; Questions</p>
       <p>For commissions, studio visits, or any enquiry, write to <a href="mailto:olwen@olwendowling.com">olwen@olwendowling.com</a>.</p>
     </div>`;
   main.appendChild(note);
