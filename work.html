@@ -148,12 +148,12 @@ function rowsToObjects(rows) {
   }).filter(o => o.title);
 }
 
-function normalizeSection(s) {
-  s = (s || "").toLowerCase();
-  if (s.includes("drypoint") || s.includes("monotype")) return "drypoint";
-  if (s.includes("intaglio") || s.includes("etching")) return "intaglio";
-  if (s.includes("oil")) return "oil";
-  if (s.includes("watercolor") || s.includes("watercolour")) return "watercolor";
+function normalizeSection(s, m) {
+  const combined = ((s || "") + " " + (m || "")).toLowerCase();
+  if (combined.includes("intaglio") || combined.includes("etching")) return "intaglio";
+  if (combined.includes("drypoint") || combined.includes("monotype")) return "drypoint";
+  if (combined.includes("oil")) return "oil";
+  if (combined.includes("watercolor") || combined.includes("watercolour")) return "watercolor";
   return "drypoint";
 }
 
@@ -162,7 +162,7 @@ function renderCatalog(works) {
   catalog.innerHTML = "";
   const grouped = {};
   works.forEach(w => {
-    const sec = normalizeSection(w.section);
+    const sec = normalizeSection(w.section, w.medium);
     if (w.status && w.status.toLowerCase() === "hidden") return;
     if (!grouped[sec]) grouped[sec] = [];
     grouped[sec].push(w);
