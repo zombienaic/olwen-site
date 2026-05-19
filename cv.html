@@ -30,17 +30,17 @@ padding: 4rem 4rem 6rem;
 }
 
 .cv-section {
-border-top: 2px solid var(–ink);
+border-top: 2px solid var(--ink);
 padding-top: 2rem; margin-bottom: 4rem;
 }
 
 .cv-section h2 {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 2rem; font-weight: 300;
-color: var(–ink); margin-bottom: 2rem;
+color: var(--ink); margin-bottom: 2rem;
 letter-spacing: -0.01em;
 }
-.cv-section h2 em { font-style: italic; color: var(–rust); }
+.cv-section h2 em { font-style: italic; color: var(--rust); }
 
 .cv-row {
 display: grid; grid-template-columns: 5rem 1fr 1.5fr;
@@ -50,20 +50,20 @@ align-items: baseline;
 }
 .cv-row:last-child { border-bottom: none; }
 .cv-row .yr {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-style: italic; font-size: 1.1rem;
-color: var(–rust);
+color: var(--rust);
 }
 .cv-row .what {
-font-size: 0.95rem; color: var(–ink);
+font-size: 0.95rem; color: var(--ink);
 }
 .cv-row .what em {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-style: italic; font-size: 1.05rem;
 }
 .cv-row .where {
-font-size: 0.85rem; color: var(–slate);
-font-style: italic; font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.85rem; color: var(--slate);
+font-style: italic; font-family: 'Cormorant Garamond', serif;
 }
 
 .cv-list {
@@ -72,12 +72,12 @@ columns: 2; column-gap: 4rem; list-style: none;
 .cv-list li {
 padding: 0.5rem 0;
 font-size: 0.92rem;
-color: var(–ink-soft);
+color: var(--ink-soft);
 break-inside: avoid;
 border-bottom: 1px solid rgba(22,17,12,0.06);
 }
 .cv-list li::before {
-content: ’· ’; color: var(–rust); font-weight: 500;
+content: '· '; color: var(--rust); font-weight: 500;
 }
 
 @media (max-width: 1024px) {
@@ -91,12 +91,12 @@ content: ’· ’; color: var(–rust); font-weight: 500;
 @media print {
 body::before, nav, .cv-actions, footer { display: none !important; }
 body { background: white; }
-.page-header { padding: 1rem 0 1.5rem; border-bottom: 2px solid var(–ink); }
+.page-header { padding: 1rem 0 1.5rem; border-bottom: 2px solid var(--ink); }
 .page-header h1 { font-size: 2.5rem; }
 .page-header .sub { font-size: 0.95rem; }
 .cv-body { padding: 1rem 0; max-width: 100%; }
 .cv-section { page-break-inside: avoid; }
-a { color: var(–ink); text-decoration: none; }
+a { color: var(--ink); text-decoration: none; }
 }
 </style>
 
@@ -108,6 +108,7 @@ a { color: var(–ink); text-decoration: none; }
   <div class="nav-tagline">Painter · Printmaker · Est. 1995</div>
   <ul class="nav-links">
     <li><a href="index.html#work">Work</a></li>
+    <li><a href="work.html">All Works</a></li>
     <li><a href="biography.html">Biography</a></li>
     <li><a href="cv.html" class="active">CV</a></li>
     <li><a href="events.html">Events</a></li>

@@ -18,22 +18,22 @@
 display: grid; grid-template-columns: 12rem 1fr auto;
 gap: 3rem; align-items: center;
 padding: 2.5rem;
-background: var(–paper-warm);
+background: var(--paper-warm);
 border: 1px solid rgba(22,17,12,0.08);
 transition: background 0.3s, transform 0.3s;
 }
 .event:hover {
-background: var(–paper-deep);
+background: var(--paper-deep);
 }
 .event.featured {
-background: var(–ink); color: var(–paper);
-border-color: var(–rust);
+background: var(--ink); color: var(--paper);
+border-color: var(--rust);
 position: relative;
 }
 .event.featured::before {
-content: ‘Now Showing’;
+content: 'Now Showing';
 position: absolute; top: -1px; left: 2.5rem;
-background: var(–rust); color: var(–paper);
+background: var(--rust); color: var(--paper);
 font-size: 0.6rem; letter-spacing: 0.3em;
 text-transform: uppercase;
 padding: 0.4rem 1rem;
@@ -41,7 +41,7 @@ transform: translateY(-50%);
 }
 
 .event-date {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 text-align: center;
 border-right: 1px solid rgba(22,17,12,0.15);
 padding-right: 2rem;
@@ -49,41 +49,41 @@ padding-right: 2rem;
 .event.featured .event-date { border-right-color: rgba(241,235,221,0.2); }
 .event-date .month {
 font-size: 0.7rem; letter-spacing: 0.3em;
-text-transform: uppercase; color: var(–rust);
+text-transform: uppercase; color: var(--rust);
 margin-bottom: 0.5rem;
 }
-.event.featured .event-date .month { color: var(–ochre); }
+.event.featured .event-date .month { color: var(--ochre); }
 .event-date .day {
 font-size: 3.5rem; font-weight: 300;
 line-height: 1; font-style: italic;
 }
 .event-date .year {
 font-size: 0.85rem; font-style: italic;
-color: var(–slate); margin-top: 0.4rem;
+color: var(--slate); margin-top: 0.4rem;
 }
-.event.featured .event-date .year { color: var(–warm-mid); }
+.event.featured .event-date .year { color: var(--warm-mid); }
 
 .event-info h3 {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 1.7rem; font-weight: 400;
 line-height: 1.2; margin-bottom: 0.6rem;
 }
-.event-info h3 em { font-style: italic; color: var(–rust); }
-.event.featured .event-info h3 em { color: var(–ochre); }
+.event-info h3 em { font-style: italic; color: var(--rust); }
+.event.featured .event-info h3 em { color: var(--ochre); }
 
 .event-info .venue {
 font-size: 0.85rem; letter-spacing: 0.05em;
-color: var(–slate); margin-bottom: 1rem;
-font-family: ‘Cormorant Garamond’, serif;
+color: var(--slate); margin-bottom: 1rem;
+font-family: 'Cormorant Garamond', serif;
 font-style: italic; font-size: 1rem;
 }
-.event.featured .event-info .venue { color: var(–warm-mid); }
+.event.featured .event-info .venue { color: var(--warm-mid); }
 
 .event-info p {
 font-size: 0.9rem; line-height: 1.7;
-color: var(–ink-soft); max-width: 38rem;
+color: var(--ink-soft); max-width: 38rem;
 }
-.event.featured .event-info p { color: var(–warm-mid); }
+.event.featured .event-info p { color: var(--warm-mid); }
 
 .event-meta {
 text-align: right;
@@ -92,28 +92,28 @@ text-align: right;
 display: inline-block;
 font-size: 0.6rem; letter-spacing: 0.25em;
 text-transform: uppercase;
-border: 1px solid var(–rust); color: var(–rust);
+border: 1px solid var(--rust); color: var(--rust);
 padding: 0.4rem 0.9rem;
 border-radius: 100px;
 margin-bottom: 1rem;
 }
 .event.featured .event-tag {
-border-color: var(–ochre); color: var(–ochre);
+border-color: var(--ochre); color: var(--ochre);
 }
 .event-link {
 display: block;
 font-size: 0.7rem; letter-spacing: 0.25em;
 text-transform: uppercase;
-color: var(–ink); text-decoration: none;
-border-bottom: 1px solid var(–ink);
+color: var(--ink); text-decoration: none;
+border-bottom: 1px solid var(--ink);
 padding-bottom: 0.3rem;
 transition: color 0.3s, border-color 0.3s;
 }
 .event.featured .event-link {
-color: var(–paper); border-color: rgba(241,235,221,0.4);
+color: var(--paper); border-color: rgba(241,235,221,0.4);
 }
-.event-link:hover { color: var(–rust); border-color: var(–rust); }
-.event.featured .event-link:hover { color: var(–ochre); border-color: var(–ochre); }
+.event-link:hover { color: var(--rust); border-color: var(--rust); }
+.event.featured .event-link:hover { color: var(--ochre); border-color: var(--ochre); }
 
 .past-section {
 max-width: 1400px; margin: 0 auto;
@@ -121,11 +121,11 @@ padding: 4rem 4rem 6rem;
 border-top: 1px solid rgba(22,17,12,0.1);
 }
 .past-section h2 {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: 2rem; font-weight: 300;
 margin-bottom: 2.5rem;
 }
-.past-section h2 em { font-style: italic; color: var(–rust); }
+.past-section h2 em { font-style: italic; color: var(--rust); }
 .past-list {
 display: grid; gap: 1rem;
 }
@@ -136,52 +136,52 @@ border-bottom: 1px solid rgba(22,17,12,0.08);
 align-items: baseline;
 }
 .past-item .pyr {
-font-family: ‘Cormorant Garamond’, serif;
-font-style: italic; color: var(–rust);
+font-family: 'Cormorant Garamond', serif;
+font-style: italic; color: var(--rust);
 }
 .past-item .pname { font-size: 0.92rem; }
 .past-item .pname em {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-style: italic; font-size: 1rem;
 }
 .past-item .pvenue {
-font-size: 0.82rem; color: var(–slate);
-font-style: italic; font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.82rem; color: var(--slate);
+font-style: italic; font-family: 'Cormorant Garamond', serif;
 }
 
 .subscribe {
-background: var(–ink); color: var(–paper);
+background: var(--ink); color: var(--paper);
 padding: 6rem 4rem; text-align: center;
 }
 .subscribe h2 {
-font-family: ‘Cormorant Garamond’, serif;
+font-family: 'Cormorant Garamond', serif;
 font-size: clamp(2rem, 4vw, 3rem);
 font-weight: 300; font-style: italic;
 margin-bottom: 1rem;
 }
 .subscribe p {
-color: var(–warm-mid); margin-bottom: 2.5rem;
+color: var(--warm-mid); margin-bottom: 2.5rem;
 max-width: 30rem; margin-left: auto; margin-right: auto;
 }
 .subscribe-form {
 display: flex; max-width: 30rem; margin: 0 auto;
-border-bottom: 1px solid var(–warm-mid);
+border-bottom: 1px solid var(--warm-mid);
 }
 .subscribe-form input {
 flex: 1; background: none; border: none;
-color: var(–paper); padding: 1rem 0;
+color: var(--paper); padding: 1rem 0;
 font-family: inherit; font-size: 0.95rem;
 outline: none;
 }
-.subscribe-form input::placeholder { color: var(–warm-mid); opacity: 0.6; }
+.subscribe-form input::placeholder { color: var(--warm-mid); opacity: 0.6; }
 .subscribe-form button {
 background: none; border: none;
-color: var(–ochre); padding: 1rem 0 1rem 1.5rem;
+color: var(--ochre); padding: 1rem 0 1rem 1.5rem;
 font-family: inherit; font-size: 0.7rem;
 letter-spacing: 0.25em; text-transform: uppercase;
 cursor: pointer; transition: color 0.3s;
 }
-.subscribe-form button:hover { color: var(–paper); }
+.subscribe-form button:hover { color: var(--paper); }
 
 @media (max-width: 1024px) {
 .events-grid { padding: 2rem; }
@@ -207,6 +207,7 @@ cursor: pointer; transition: color 0.3s;
   <div class="nav-tagline">Painter · Printmaker · Est. 1995</div>
   <ul class="nav-links">
     <li><a href="index.html#work">Work</a></li>
+    <li><a href="work.html">All Works</a></li>
     <li><a href="biography.html">Biography</a></li>
     <li><a href="cv.html">CV</a></li>
     <li><a href="events.html" class="active">Events</a></li>
