@@ -110,14 +110,43 @@
     font-size: 0.92rem; color: var(--warm-mid);
     line-height: 1.7;
   }
+
   @media (max-width: 1024px) {
     .bio-portrait { padding: 3rem 2rem; }
     .bio-portrait-inner { grid-template-columns: 1fr; gap: 3rem; }
     .timeline { padding: 4rem 2rem; }
-    .timeline-list { margin-left: 0; padding-left: 2rem; }
-    .timeline-year { left: -2rem; top: 0; width: auto;
-      position: static; text-align: left; }
-    .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; padding-left: 1rem; }
+
+    /* Reset the desktop left-margin approach */
+    .timeline-list {
+      margin-left: 0;
+      padding-left: 0;
+      border-left: none;
+    }
+
+    /* Each item: year on top, content below */
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.5rem 0 1.5rem 0;
+      border-left: 2px solid rgba(241,235,221,0.15);
+      padding-left: 1.5rem;
+      margin-left: 0;
+    }
+
+    .timeline-item::before {
+      left: -5px;
+      top: 1.8rem;
+    }
+
+    /* Year sits inline at top, no absolute positioning */
+    .timeline-year {
+      position: static;
+      text-align: left;
+      width: auto;
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
   }
 </style>
 </head>
