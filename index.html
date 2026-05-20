@@ -984,6 +984,36 @@ function closeLightbox() {
 lbClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// Sync prices from Google Sheet
+(async function() {
+  const CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3XScG4d1eqLJKxItKYFw5eTRvBIUY2Br0eaVElW7EawvWQPyiuk2M0FTzX1EtokLRFE6TJss7HTjI/pub?output=csv";
+  try {
+    const res = await fetch(CSV + "&t=" + Date.now());
+    const text = await res.text();
+    const rows = text.trim().split(/\r?\n/).slice(1);
+    const prices = {};
+    rows.forEach(row => {
+      const cols = row.match(/(".*?"|[^,]+)(?=,|$)/g) || [];
+      const title = (cols[0] || "").replace(/^"|"$/g, "").trim();
+      const price = (cols[4] || "").replace(/^"|"$/g, "").trim();
+      if (title) prices[title] = price;
+    });
+    document.querySelectorAll(".artwork").forEach(art => {
+      const title = art.dataset.title;
+      if (title && prices[title] !== undefined) {
+        const display = prices[title] ? "$" + prices[title] : "Enquire";
+        art.dataset.price = display;
+        const span = art.querySelector(".artwork-price");
+        if (span) span.textContent = display;
+      }
+    });
+  } catch(e) {
+    console.warn("Price sync failed:", e);
+  }
+})();
+
+
 </script>
 
 </body>
