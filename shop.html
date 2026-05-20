@@ -61,9 +61,9 @@ nav.scrolled { padding: 1rem 3rem; }
 .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem 2.5rem; }
 .shop-card { display: flex; flex-direction: column; }
 .shop-card.sold { opacity: 0.5; }
-.shop-card-image { aspect-ratio: 4/3; overflow: hidden; background-color: var(--paper-deep); margin-bottom: 1.2rem; position: relative; }
+.shop-card-image { aspect-ratio: 4/3; overflow: hidden; background-color: var(--paper-deep); margin-bottom: 1.2rem; position: relative; cursor: pointer; }
 .shop-card-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1); }
-.shop-card:not(.sold):hover .shop-card-image img { transform: scale(1.03); }
+.shop-card:not(.sold) .shop-card-image:hover img { transform: scale(1.03); }
 .sold-badge { position: absolute; top: 1rem; right: 1rem; background: var(--ink); color: var(--paper); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.35rem 0.7rem; }
 .shop-card-meta { flex: 1; display: flex; flex-direction: column; }
 .shop-card-title { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; font-style: italic; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; }
@@ -80,6 +80,66 @@ nav.scrolled { padding: 1rem 3rem; }
 .shop-note-cell p { font-family: "Cormorant Garamond", serif; font-size: 0.95rem; font-style: italic; color: var(--ink-soft); line-height: 1.7; }
 .shop-note-cell a { color: var(--rust); text-decoration: none; }
 .shop-note-cell a:hover { text-decoration: underline; }
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed; inset: 0; background: rgba(22,17,12,0.96);
+  z-index: 1000; display: none;
+  align-items: center; justify-content: center;
+  padding: 4rem; backdrop-filter: blur(4px);
+}
+.lightbox.active { display: flex; }
+.lightbox-content {
+  max-width: 1100px; width: 100%;
+  display: grid; grid-template-columns: 1.5fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.lightbox-image {
+  background-color: #0e0a07; background-size: contain;
+  background-position: center; background-repeat: no-repeat;
+  aspect-ratio: 4/3; max-height: 70vh;
+}
+.lightbox-text h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.2rem; font-weight: 300; font-style: italic;
+  color: var(--paper); margin-bottom: 0.5rem; line-height: 1.1;
+}
+.lb-price-display {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem; font-weight: 300;
+  color: var(--ochre); margin-bottom: 0.5rem;
+}
+.lb-price-display.sold { color: var(--rust); font-style: italic; }
+.lightbox-text dl {
+  border-top: 1px solid rgba(241,235,221,0.15); margin-top: 1.5rem; padding-top: 1.5rem;
+}
+.lightbox-text dt {
+  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--warm-mid); margin-top: 1rem;
+}
+.lightbox-text dt:first-child { margin-top: 0; }
+.lightbox-text dd {
+  font-family: "Cormorant Garamond", serif; font-size: 1rem;
+  color: var(--paper); margin-top: 0.3rem; font-style: italic;
+}
+.lb-action {
+  display: inline-block; margin-top: 2rem;
+  padding: 0.9rem 2rem; background: var(--rust); color: var(--paper);
+  text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em;
+  text-transform: uppercase; font-family: inherit;
+  transition: background 0.3s; border: none; cursor: pointer;
+}
+.lb-action:hover { background: #6b2c17; }
+.lb-action.hidden { display: none; }
+.lightbox-close {
+  position: absolute; top: 2rem; right: 2rem;
+  background: none; border: 1px solid rgba(241,235,221,0.3);
+  color: var(--paper); font-size: 0.7rem; letter-spacing: 0.3em;
+  text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: pointer;
+  font-family: inherit; transition: background 0.3s;
+}
+.lightbox-close:hover { background: var(--rust); border-color: var(--rust); }
+
 footer { background: #0e0a07; padding: 2rem 4rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
 footer p { font-size: 0.65rem; letter-spacing: 0.15em; color: rgba(184,169,141,0.45); }
 footer .footer-mark { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 0.85rem; color: var(--rust); text-align: center; }
@@ -93,6 +153,9 @@ footer .footer-end { text-align: right; }
   .shop-note { grid-template-columns: 1fr; }
   footer { grid-template-columns: 1fr; text-align: center; gap: 1rem; padding: 1.5rem 2rem; }
   footer .footer-end { text-align: center; }
+  .lightbox { padding: 1.5rem; }
+  .lightbox-content { grid-template-columns: 1fr; gap: 1.5rem; max-height: 90vh; overflow-y: auto; }
+  .lightbox-image { aspect-ratio: 4/3; max-height: 50vh; }
 }
 @media (max-width: 700px) {
   nav { grid-template-columns: 1fr auto; padding: 1rem 1.5rem; } .nav-tagline { display: none; }
@@ -138,6 +201,22 @@ footer .footer-end { text-align: right; }
 <main class="shop-main" id="shopMain">
   <div class="shop-status" id="shopStatus">Loading works&hellip;</div>
 </main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">Close &times;</button>
+  <div class="lightbox-content">
+    <div class="lightbox-image" id="lightboxImage"></div>
+    <div class="lightbox-text">
+      <h3 id="lbTitle"></h3>
+      <div class="lb-price-display" id="lbPrice"></div>
+      <dl>
+        <dt>Medium</dt><dd id="lbMedium"></dd>
+        <dt>Dimensions</dt><dd id="lbDimensions"></dd>
+      </dl>
+      <a class="lb-action" id="lbAction" href="#">Enquire about this work &rarr;</a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <p>&copy; 2026 Olwen O'Herlihy Dowling</p>
@@ -194,6 +273,10 @@ function normalizeSection(s, m) {
   return "drypoint";
 }
 
+function escapeAttr(s) {
+  return (s || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 function buildCard(w) {
   const sold = (w.status || "").toLowerCase() === "sold";
   const img = w["image url"] || w.image || "";
@@ -221,10 +304,20 @@ function buildCard(w) {
     actionEl = `<a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=${subject}">Enquire &#8594;</a>`;
   }
 
+  // Data attributes for the lightbox
+  const dataAttrs = `
+    data-title="${escapeAttr(w.title)}"
+    data-img="${escapeAttr(img)}"
+    data-medium="${escapeAttr(medium)}"
+    data-dimensions="${escapeAttr(dims)}"
+    data-price="${escapeAttr(price)}"
+    data-sold="${sold ? 'true' : 'false'}"
+    data-paypal="${escapeAttr(paypal)}"`;
+
   return `
     <div class="shop-card${sold ? " sold" : ""}">
-      <div class="shop-card-image">
-        ${img ? `<img src="${img}" alt="${w.title} &mdash; Olwen Dowling" loading="lazy">` : ""}
+      <div class="shop-card-image" ${dataAttrs}>
+        ${img ? `<img src="${img}" alt="${escapeAttr(w.title)} &mdash; Olwen Dowling" loading="lazy">` : ""}
         ${soldBadge}
       </div>
       <div class="shop-card-meta">
@@ -276,7 +369,83 @@ function renderShop(works) {
       <p>For commissions, studio visits, or any enquiry, write to <a href="mailto:olwen@olwendowling.com">olwen@olwendowling.com</a>.</p>
     </div>`;
   main.appendChild(note);
+
+  attachLightboxHandlers();
 }
+
+// LIGHTBOX
+const lightbox = document.getElementById("lightbox");
+const lbImage = document.getElementById("lightboxImage");
+const lbTitle = document.getElementById("lbTitle");
+const lbPrice = document.getElementById("lbPrice");
+const lbMedium = document.getElementById("lbMedium");
+const lbDimensions = document.getElementById("lbDimensions");
+const lbAction = document.getElementById("lbAction");
+const lbClose = document.getElementById("lightboxClose");
+
+function openLightbox(card) {
+  const title = card.dataset.title || "";
+  const img = card.dataset.img || "";
+  const medium = card.dataset.medium || "";
+  const dims = card.dataset.dimensions || "";
+  const price = card.dataset.price || "";
+  const sold = card.dataset.sold === "true";
+  const paypal = card.dataset.paypal || "";
+
+  lbImage.style.backgroundImage = img ? `url('${img}')` : "";
+  lbTitle.textContent = title;
+  lbMedium.textContent = medium || "—";
+  lbDimensions.textContent = dims || "—";
+
+  if (sold) {
+    lbPrice.textContent = "Sold";
+    lbPrice.classList.add("sold");
+    lbAction.classList.add("hidden");
+  } else {
+    lbPrice.classList.remove("sold");
+    lbPrice.textContent = price ? `$${price}` : "Price on request";
+    lbAction.classList.remove("hidden");
+
+    if (paypal) {
+      lbAction.href = paypal;
+      lbAction.target = "_blank";
+      lbAction.rel = "noopener";
+      lbAction.textContent = "Purchase via PayPal →";
+    } else {
+      const subject = encodeURIComponent("Enquiry: " + title);
+      const body = encodeURIComponent(
+        `Dear Olwen,\n\nI am interested in "${title}"` +
+        (medium ? ` (${medium}` : "") +
+        (dims ? `, ${dims}` : "") +
+        (medium ? `)` : "") +
+        (price ? `, $${price}` : "") +
+        `.\n\nPlease let me know if this work is available.\n\nKind regards,`
+      );
+      lbAction.href = `mailto:olwen@olwendowling.com?subject=${subject}&body=${body}`;
+      lbAction.removeAttribute("target");
+      lbAction.removeAttribute("rel");
+      lbAction.textContent = "Enquire about this work →";
+    }
+  }
+
+  lightbox.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+function attachLightboxHandlers() {
+  document.querySelectorAll(".shop-card-image").forEach(el => {
+    el.addEventListener("click", () => openLightbox(el));
+  });
+}
+
+lbClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
 
 async function loadShop() {
   const status = document.getElementById("shopStatus");
