@@ -986,17 +986,35 @@ lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightb
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
 // Sync prices from Google Sheet
+// Sync prices from Google Sheet
 (async function() {
   const CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3XScG4d1eqLJKxItKYFw5eTRvBIUY2Br0eaVElW7EawvWQPyiuk2M0FTzX1EtokLRFE6TJss7HTjI/pub?output=csv";
+  function parseRow(row) {
+    const cols = []; let cell = "", inQ = false;
+    for (let i = 0; i < row.length; i++) {
+      const c = row[i];
+      if (inQ) {
+        if (c === '"' && row[i+1] === '"') { cell += '"'; i++; }
+        else if (c === '"') { inQ = false; }
+        else { cell += c; }
+      } else {
+        if (c === '"') { inQ = true; }
+        else if (c === ',') { cols.push(cell); cell = ""; }
+        else { cell += c; }
+      }
+    }
+    cols.push(cell);
+    return cols;
+  }
   try {
     const res = await fetch(CSV + "&t=" + Date.now());
     const text = await res.text();
     const rows = text.trim().split(/\r?\n/).slice(1);
     const prices = {};
     rows.forEach(row => {
-      const cols = row.match(/(".*?"|[^,]+)(?=,|$)/g) || [];
-      const title = (cols[0] || "").replace(/^"|"$/g, "").trim();
-      const price = (cols[4] || "").replace(/^"|"$/g, "").trim();
+      const cols = parseRow(row);
+      const title = (cols[0] || "").trim();
+      const price = (cols[4] || "").trim();
       if (title) prices[title] = price;
     });
     document.querySelectorAll(".artwork").forEach(art => {
@@ -1012,6 +1030,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
     console.warn("Price sync failed:", e);
   }
 })();
+
 
 
 </script>
