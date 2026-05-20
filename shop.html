@@ -87,6 +87,7 @@ nav.scrolled { padding: 1rem 3rem; }
   z-index: 1000; display: none;
   align-items: center; justify-content: center;
   padding: 4rem; backdrop-filter: blur(4px);
+  -webkit-overflow-scrolling: touch;
 }
 .lightbox.active { display: flex; }
 .lightbox-content {
@@ -128,15 +129,21 @@ nav.scrolled { padding: 1rem 3rem; }
   text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em;
   text-transform: uppercase; font-family: inherit;
   transition: background 0.3s; border: none; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .lb-action:hover { background: #6b2c17; }
 .lb-action.hidden { display: none; }
+/* Fixed positioning so it's always tappable on iOS regardless of scroll */
 .lightbox-close {
-  position: absolute; top: 2rem; right: 2rem;
+  position: fixed; top: 2rem; right: 2rem;
   background: none; border: 1px solid rgba(241,235,221,0.3);
   color: var(--paper); font-size: 0.7rem; letter-spacing: 0.3em;
   text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: pointer;
   font-family: inherit; transition: background 0.3s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  z-index: 1001;
 }
 .lightbox-close:hover { background: var(--rust); border-color: var(--rust); }
 
@@ -212,6 +219,7 @@ footer .footer-end { text-align: right; }
       <dl>
         <dt>Medium</dt><dd id="lbMedium"></dd>
         <dt>Dimensions</dt><dd id="lbDimensions"></dd>
+        <dt>Notes</dt><dd id="lbNotes"></dd>
       </dl>
       <a class="lb-action" id="lbAction" href="#">Enquire about this work &rarr;</a>
     </div>
@@ -284,6 +292,7 @@ function buildCard(w) {
   const paypal = w["paypal_link"] || "";
   const dims = w.dimensions || "";
   const medium = w.medium || "";
+  const notes = w.notes || "";
 
   const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
 
@@ -304,12 +313,12 @@ function buildCard(w) {
     actionEl = `<a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=${subject}">Enquire &#8594;</a>`;
   }
 
-  // Data attributes for the lightbox
   const dataAttrs = `
     data-title="${escapeAttr(w.title)}"
     data-img="${escapeAttr(img)}"
     data-medium="${escapeAttr(medium)}"
     data-dimensions="${escapeAttr(dims)}"
+    data-notes="${escapeAttr(notes)}"
     data-price="${escapeAttr(price)}"
     data-sold="${sold ? 'true' : 'false'}"
     data-paypal="${escapeAttr(paypal)}"`;
@@ -380,6 +389,7 @@ const lbTitle = document.getElementById("lbTitle");
 const lbPrice = document.getElementById("lbPrice");
 const lbMedium = document.getElementById("lbMedium");
 const lbDimensions = document.getElementById("lbDimensions");
+const lbNotes = document.getElementById("lbNotes");
 const lbAction = document.getElementById("lbAction");
 const lbClose = document.getElementById("lightboxClose");
 
@@ -388,6 +398,7 @@ function openLightbox(card) {
   const img = card.dataset.img || "";
   const medium = card.dataset.medium || "";
   const dims = card.dataset.dimensions || "";
+  const notes = card.dataset.notes || "";
   const price = card.dataset.price || "";
   const sold = card.dataset.sold === "true";
   const paypal = card.dataset.paypal || "";
@@ -396,6 +407,7 @@ function openLightbox(card) {
   lbTitle.textContent = title;
   lbMedium.textContent = medium || "—";
   lbDimensions.textContent = dims || "—";
+  lbNotes.textContent = notes || "—";
 
   if (sold) {
     lbPrice.textContent = "Sold";
@@ -429,22 +441,40 @@ function openLightbox(card) {
   }
 
   lightbox.classList.add("active");
+  // iOS Safari scroll lock
   document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
 }
 
 function closeLightbox() {
   lightbox.classList.remove("active");
+  // Release iOS Safari scroll lock
   document.body.style.overflow = "";
+  document.body.style.position = "";
+  document.body.style.width = "";
 }
 
 function attachLightboxHandlers() {
   document.querySelectorAll(".shop-card-image").forEach(el => {
     el.addEventListener("click", () => openLightbox(el));
+    // iOS Safari touch support
+    el.addEventListener("touchend", e => {
+      e.preventDefault();
+      openLightbox(el);
+    });
   });
 }
 
+// Close button — click + touchend for iOS
 lbClose.addEventListener("click", closeLightbox);
+lbClose.addEventListener("touchend", e => { e.preventDefault(); closeLightbox(); });
+
+// Tap backdrop to close
 lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+lightbox.addEventListener("touchend", e => { if (e.target === lightbox) { e.preventDefault(); closeLightbox(); } });
+
+// Escape key
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
 
 async function loadShop() {
