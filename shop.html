@@ -306,11 +306,11 @@ function buildCard(w) {
   } else if (price) {
     priceEl = `<p class="shop-card-price">$${price}</p>`;
     const subject = encodeURIComponent("Enquiry: " + w.title);
-    actionEl = `<a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=${subject}">Enquire &#8594;</a>`;
+    actionEl = `<a class="btn-enquire" href="mailto:olwenoherlihy@gmail.com?subject=${subject}">Enquire &#8594;</a>`;
   } else {
     priceEl = `<p class="shop-card-price enquire">Price on request</p>`;
     const subject = encodeURIComponent("Enquiry: " + w.title);
-    actionEl = `<a class="btn-enquire" href="mailto:olwen@olwendowling.com?subject=${subject}">Enquire &#8594;</a>`;
+    actionEl = `<a class="btn-enquire" href="mailto:olwenoherlihy@gmail.com?subject=${subject}">Enquire &#8594;</a>`;
   }
 
   const dataAttrs = `
@@ -375,7 +375,7 @@ function renderShop(works) {
     </div>
     <div class="shop-note-cell">
       <p class="note-label">&sect; Questions</p>
-      <p>For commissions, studio visits, or any enquiry, write to <a href="mailto:olwen@olwendowling.com">olwen@olwendowling.com</a>.</p>
+      <p>For commissions, studio visits, or any enquiry, write to <a href="mailto:olwenoherlihy@gmail.com">olwenoherlihy@gmail.com</a>.</p>
     </div>`;
   main.appendChild(note);
 
@@ -433,7 +433,7 @@ function openLightbox(card) {
         (price ? `, $${price}` : "") +
         `.\n\nPlease let me know if this work is available.\n\nKind regards,`
       );
-      lbAction.href = `mailto:olwen@olwendowling.com?subject=${subject}&body=${body}`;
+      lbAction.href = `mailto:olwenoherlihy@gmail.com?subject=${subject}&body=${body}`;
       lbAction.removeAttribute("target");
       lbAction.removeAttribute("rel");
       lbAction.textContent = "Enquire about this work →";
