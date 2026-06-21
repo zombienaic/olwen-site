@@ -255,41 +255,33 @@ cursor: pointer; transition: color 0.3s;
 <section class="subscribe">
   <h2>Stay informed.</h2>
   <p>Occasional notes from the studio — new work, exhibition openings, residency dispatches from Ireland. No more than four times a year.</p>
-  <form class="subscribe-form" id="mc-form" novalidate>
-    <input type="email" id="mc-email" placeholder="your.email@example.com" required>
+  <form class="subscribe-form" id="mc-form" action="https://olwendowling.us7.list-manage.com/subscribe/post?u=459767ef0836e3ca84fd2054b&amp;id=546120" method="post" target="mc-frame" novalidate>
+    <input type="email" name="EMAIL" id="mc-email" placeholder="your.email@example.com" required>
+    <input type="hidden" name="b_459767ef0836e3ca84fd2054b_546120" tabindex="-1" value="">
     <button type="submit" id="mc-submit">Subscribe →</button>
   </form>
   <p id="mc-response" style="margin-top:1.2rem; font-size:0.85rem; color:var(--ochre); min-height:1.2em;"></p>
+  <iframe name="mc-frame" style="display:none;" onload="window._mcFrameLoaded && window._mcFrameLoaded()"></iframe>
 </section>
 
 <script>
+var mcSubmitted = false;
 document.getElementById('mc-form').addEventListener('submit', function(e) {
-  e.preventDefault();
   var email = document.getElementById('mc-email').value;
-  if (!email) return;
+  if (!email) { e.preventDefault(); return; }
   var btn = document.getElementById('mc-submit');
   var msg = document.getElementById('mc-response');
   btn.textContent = 'Sending\u2026';
   btn.disabled = true;
-  var cb = 'mcCb' + Date.now();
-  var s = document.createElement('script');
-  window[cb] = function(data) {
-    document.body.removeChild(s);
-    delete window[cb];
-    if (data.result === 'success') {
+  mcSubmitted = true;
+  setTimeout(function() {
+    if (mcSubmitted) {
       msg.textContent = 'Thank you \u2014 you\u2019re on the list.';
-      document.getElementById('mc-email').value = '';
       btn.textContent = 'Subscribed \u2713';
-    } else {
-      msg.textContent = (data.msg || 'Something went wrong.').replace(/<[^>]+>/g,'').replace(/^\d+ - /,'');
-      msg.style.color = '#c0634a';
-      btn.textContent = 'Subscribe \u2192';
-      btn.disabled = false;
+      document.getElementById('mc-email').value = '';
+      mcSubmitted = false;
     }
-  };
-  s.src = 'https://us7.list-manage.com/subscribe/post-json?u=459767ef0836e3ca84fd2054b&id=546120&EMAIL='
-        + encodeURIComponent(email) + '&c=' + cb;
-  document.body.appendChild(s);
+  }, 2000);
 });
 </script>
 
