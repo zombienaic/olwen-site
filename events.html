@@ -199,6 +199,7 @@ cursor: pointer; transition: color 0.3s;
 }
 </style>
 
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/459767ef0836e3ca84fd2054b/f96f64c838b7272a837f1d26e.js");</script>
 </head>
 <body>
 
@@ -254,52 +255,42 @@ cursor: pointer; transition: color 0.3s;
 <section class="subscribe">
   <h2>Stay informed.</h2>
   <p>Occasional notes from the studio — new work, exhibition openings, residency dispatches from Ireland. No more than four times a year.</p>
-  <form class="subscribe-form" id="mc-form" action="https://us7.list-manage.com/subscribe/post-json?u=bc5f201c09&id=546120" method="get" target="_blank" novalidate>
-    <input type="email" name="EMAIL" id="mc-email" placeholder="your.email@example.com" required>
-    <input type="hidden" name="b_bc5f201c09_546120" tabindex="-1" value="">
+  <form class="subscribe-form" id="mc-form" novalidate>
+    <input type="email" id="mc-email" placeholder="your.email@example.com" required>
     <button type="submit" id="mc-submit">Subscribe →</button>
   </form>
   <p id="mc-response" style="margin-top:1.2rem; font-size:0.85rem; color:var(--ochre); min-height:1.2em;"></p>
 </section>
 
 <script>
-(function() {
-  var form = document.getElementById('mc-form');
-  var btn  = document.getElementById('mc-submit');
-  var msg  = document.getElementById('mc-response');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = document.getElementById('mc-email').value;
-    if (!email) return;
-
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    var url = form.action.replace('/post-json', '/post-json') +
-              '&EMAIL=' + encodeURIComponent(email) +
-              '&c=mcCallback';
-
-    var script = document.createElement('script');
-    window.mcCallback = function(data) {
-      if (data.result === 'success') {
-        msg.textContent = 'Thank you — you're on the list.';
-        msg.style.color = 'var(--ochre)';
-        form.reset();
-        btn.textContent = 'Subscribed ✓';
-      } else {
-        msg.textContent = data.msg.replace(/<[^>]+>/g, '').replace(/^\d+ - /, '');
-        msg.style.color = '#c0634a';
-        btn.textContent = 'Subscribe →';
-        btn.disabled = false;
-      }
-      document.body.removeChild(script);
-    };
-
-    script.src = url;
-    document.body.appendChild(script);
-  });
-})();
+document.getElementById('mc-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = document.getElementById('mc-email').value;
+  if (!email) return;
+  var btn = document.getElementById('mc-submit');
+  var msg = document.getElementById('mc-response');
+  btn.textContent = 'Sending\u2026';
+  btn.disabled = true;
+  var cb = 'mcCb' + Date.now();
+  var s = document.createElement('script');
+  window[cb] = function(data) {
+    document.body.removeChild(s);
+    delete window[cb];
+    if (data.result === 'success') {
+      msg.textContent = 'Thank you \u2014 you\u2019re on the list.';
+      document.getElementById('mc-email').value = '';
+      btn.textContent = 'Subscribed \u2713';
+    } else {
+      msg.textContent = (data.msg || 'Something went wrong.').replace(/<[^>]+>/g,'').replace(/^\d+ - /,'');
+      msg.style.color = '#c0634a';
+      btn.textContent = 'Subscribe \u2192';
+      btn.disabled = false;
+    }
+  };
+  s.src = 'https://us7.list-manage.com/subscribe/post-json?u=459767ef0836e3ca84fd2054b&id=546120&EMAIL='
+        + encodeURIComponent(email) + '&c=' + cb;
+  document.body.appendChild(s);
+});
 </script>
 
 <footer>
