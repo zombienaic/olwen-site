@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Olwen O'Herlihy Dowling — Painter and Printmaker</title>
 <meta name="description" content="Olwen O'Herlihy Dowling. Painter and printmaker. Drypoint, monotype, intaglio, oil, watercolor. Working between the West of Ireland and the Berkshire Hills of western Massachusetts.">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -220,11 +219,13 @@ font-family: "Cormorant Garamond", serif; font-style: italic; color: var(--slate
 .artwork-image {
 position: relative; overflow: hidden;
 background-color: var(--ink-soft);
-background-size: cover; background-position: center;
+background-size: contain; background-position: center;
 background-repeat: no-repeat; width: 100%;
 transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .artwork:hover .artwork-image { transform: scale(1.02); }
+/* Asymmetric placement — repeating 6-piece editorial rhythm,
+   so any number of featured works keeps the staggered look. */
 .artwork:nth-child(6n+1) { grid-column: span 7; }
 .artwork:nth-child(6n+1) .artwork-image { aspect-ratio: 4/3; }
 .artwork:nth-child(6n+2) { grid-column: span 5; margin-top: 4rem; }
@@ -254,6 +255,7 @@ letter-spacing: 0.05em; text-align: right;
 grid-column: 1 / -1; font-size: 0.68rem; letter-spacing: 0.15em;
 text-transform: uppercase; color: var(--slate); opacity: 0.8;
 }
+/* Enquiry button in lightbox */
 .lb-enquire {
 display: inline-block;
 margin-top: 2rem;
@@ -836,6 +838,7 @@ function isHidden(v) {
   return (v || "").trim().toLowerCase() === "hidden";
 }
 
+// Map a free-text medium to one of the homepage filter categories.
 function category(medium) {
   const m = (medium || "").toLowerCase();
   if (m.includes("intaglio") || m.includes("etching")) return "intaglio";
@@ -924,10 +927,14 @@ async function loadGallery() {
     if (!res.ok) throw new Error("Sheet not accessible (HTTP " + res.status + ")");
     const all = rowsToObjects(parseCSV(await res.text()));
 
+    // Featured = rows with a truthy "featured" value.
     let works = all.filter(w => isFeatured(w.featured) && !isHidden(w.status));
 
+    // Fallback: if nothing is marked featured yet, show up to 12 visible works
+    // so the homepage is never empty.
     if (!works.length) works = all.filter(w => !isHidden(w.status)).slice(0, 12);
 
+    // Optional ordering via an "order" column (numeric); otherwise sheet order.
     if (works.some(w => w.order)) {
       works.sort((a, b) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999));
     }
