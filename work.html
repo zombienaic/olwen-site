@@ -148,6 +148,12 @@ function rowsToObjects(rows) {
   }).filter(o => o.title);
 }
 
+function priceDisplay(raw) {
+  const p = (raw || "").replace(/^\$/, "").trim();
+  if (!p) return "Enquire";
+  return /^[0-9]/.test(p) ? "$" + p : p;
+}
+
 function normalizeSection(s, m) {
   const combined = ((s || "") + " " + (m || "")).toLowerCase();
   if (combined.includes("intaglio") || combined.includes("etching")) return "intaglio";
@@ -188,7 +194,7 @@ function renderCatalog(works) {
       item.dataset.title = w.title;
       item.dataset.medium = w.medium || "";
       item.dataset.dims = w.dimensions || "";
-      item.dataset.price = sold ? "Sold" : (w.price || "Enquire");
+      item.dataset.price = sold ? "Sold" : priceDisplay(w.price);
       item.dataset.img = w["image url"] || w.image || "";
       item.dataset.paypal = w["paypal_link"] || "";
       const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
