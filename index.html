@@ -752,21 +752,21 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 /* ---------- NAV ---------- */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
-nav.classList.toggle('scrolled', window.scrollY > 80);
+  nav.classList.toggle('scrolled', window.scrollY > 80);
 });
 const hamburger = document.getElementById('navHamburger');
 const navLinks = document.getElementById('navLinks');
 hamburger.addEventListener('click', () => {
-hamburger.classList.toggle('open');
-navLinks.classList.toggle('open');
-document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
 });
 navLinks.querySelectorAll('a').forEach(a => {
-a.addEventListener('click', () => {
-hamburger.classList.remove('open');
-navLinks.classList.remove('open');
-document.body.style.overflow = '';
-});
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    document.body.style.overflow = '';
+  });
 });
 
 /* ---------- LIGHTBOX ---------- */
@@ -782,26 +782,26 @@ const lbClose = document.getElementById('lightboxClose');
 const ENQUIRY_EMAIL = "olwenoherlihy@gmail.com";
 
 function openLightbox(art) {
-lbImage.style.backgroundImage = "url('" + art.dataset.img + "')";
-lbTitle.textContent = art.dataset.title;
+  lbImage.style.backgroundImage = "url('" + art.dataset.img + "')";
+  lbTitle.textContent = art.dataset.title;
   lbPrice.textContent = art.dataset.price;
   lbMedium.innerHTML = art.dataset.mediumFull;
   lbDimensions.textContent = art.dataset.dimensions;
   lbNotes.textContent = art.dataset.notes;
-  const subject = encodeURIComponent("Enquiry: " + art.dataset.title);
-  const body = encodeURIComponent(
-    "Dear Olwen,\n\nI am interested in \"" + art.dataset.title + "\" (" +
-    art.dataset.mediumFull + ", " + art.dataset.dimensions + ", " + art.dataset.price +
-    ").\n\nPlease let me know if this work is available.\n\nKind regards,"
-  );
-  lbEnquire.href = "mailto:" + ENQUIRY_EMAIL + "?subject=" + subject + "&body=" + body;
-  lbEnquire.style.display = art.dataset.sold === "true" ? "none" : "inline-block";
-  lightbox.classList.add('active');
-  document.body.style.overflow = 'hidden';
+const subject = encodeURIComponent("Enquiry: " + art.dataset.title);
+const body = encodeURIComponent(
+"Dear Olwen,\n\nI am interested in \"" + art.dataset.title + "\" (" +
+art.dataset.mediumFull + ", " + art.dataset.dimensions + ", " + art.dataset.price +
+").\n\nPlease let me know if this work is available.\n\nKind regards,"
+);
+lbEnquire.href = "mailto:" + ENQUIRY_EMAIL + "?subject=" + subject + "&body=" + body;
+lbEnquire.style.display = art.dataset.sold === "true" ? "none" : "inline-block";
+lightbox.classList.add('active');
+document.body.style.overflow = 'hidden';
 }
 function closeLightbox() {
-  lightbox.classList.remove('active');
-  document.body.style.overflow = '';
+lightbox.classList.remove('active');
+document.body.style.overflow = '';
 }
 lbClose.addEventListener('click', closeLightbox);
 lbClose.addEventListener('touchend', function(e) { e.preventDefault(); closeLightbox(); });
@@ -817,44 +817,44 @@ function parseCSV(text) {
     const c = text[i];
     if (inQuotes) {
       if (c === '"' && text[i+1] === '"') { cell += '"'; i++; }
-      else if (c === '"') { inQuotes = false; }
-      else { cell += c; }
-    } else {
-      if (c === '"') { inQuotes = true; }
-      else if (c === ",") { row.push(cell); cell = ""; }
-      else if (c === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
-      else if (c === "\r") { /* skip */ }
-      else { cell += c; }
-    }
-  }
-  if (cell || row.length) { row.push(cell); rows.push(row); }
-  return rows;
+else if (c === '"') { inQuotes = false; }
+else { cell += c; }
+} else {
+if (c === '"') { inQuotes = true; }
+else if (c === ",") { row.push(cell); cell = ""; }
+else if (c === "\n") { row.push(cell); rows.push(row); row = []; cell = ""; }
+else if (c === "\r") { /* skip */ }
+else { cell += c; }
+}
+}
+if (cell || row.length) { row.push(cell); rows.push(row); }
+return rows;
 }
 
 function rowsToObjects(rows) {
-  if (!rows.length) return [];
-  const headers = rows[0].map(h => h.trim().toLowerCase());
-  return rows.slice(1).map(row => {
-    const obj = {};
-    headers.forEach((h, i) => { obj[h] = (row[i] || "").trim(); });
-    return obj;
-  }).filter(o => o.title);
+if (!rows.length) return [];
+const headers = rows[0].map(h => h.trim().toLowerCase());
+return rows.slice(1).map(row => {
+const obj = {};
+headers.forEach((h, i) => { obj[h] = (row[i] || "").trim(); });
+return obj;
+}).filter(o => o.title);
 }
 
 function isFeatured(v) {
-  return ["yes","y","true","1","x","✓","featured"].includes((v || "").trim().toLowerCase());
+return ["yes","y","true","1","x","✓","featured"].includes((v || "").trim().toLowerCase());
 }
 function isHidden(v) {
-  return (v || "").trim().toLowerCase() === "hidden";
+return (v || "").trim().toLowerCase() === "hidden";
 }
 
 // Map a free-text medium to one of the homepage filter categories.
 function category(medium) {
-  const m = (medium || "").toLowerCase();
-  if (m.includes("intaglio") || m.includes("etching")) return "intaglio";
-  if (m.includes("drypoint")) return "drypoint";
-  if (m.includes("monotype")) return "monotype";
-  if (m.includes("oil")) return "oil";
+const m = (medium || "").toLowerCase();
+if (m.includes("intaglio") || m.includes("etching")) return "intaglio";
+if (m.includes("drypoint")) return "drypoint";
+if (m.includes("monotype")) return "monotype";
+if (m.includes("oil")) return "oil";
   if (m.includes("watercolor") || m.includes("watercolour")) return "watercolor";
   return "drypoint";
 }
@@ -880,9 +880,9 @@ function buildArtwork(w) {
   const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
   return (
     '<div class="artwork' + (sold ? " sold" : "") + '" data-medium="' + esc(cat) + '" data-img="' + esc(img) +
-'" data-title="' + esc(w.title) + '" data-price="' + esc(price) +
-'" data-medium-full="' + esc(full) + '" data-dimensions="' + esc(dims) +
-'" data-notes="' + esc(notes) + '" data-sold="' + (sold ? "true" : "false") + '">' +
+    '" data-title="' + esc(w.title) + '" data-price="' + esc(price) +
+    '" data-medium-full="' + esc(full) + '" data-dimensions="' + esc(dims) +
+    '" data-notes="' + esc(notes) + '" data-sold="' + (sold ? "true" : "false") + '">' +
 '<div class="artwork-image" style="background-image: url(\'' + esc(img) + '\');">' + soldBadge + '</div>' +
 '<div class="artwork-meta">' +
 '<span class="artwork-title">' + esc(w.title) + '</span>' +
@@ -890,11 +890,11 @@ function buildArtwork(w) {
 '<span class="artwork-medium">' + esc(full) + '</span>' +
 '</div>' +
 '</div>'
-);
+  );
 }
 
 function buildFilters(works) {
-const cats = [
+  const cats = [
 ["intaglio", "Intaglio"], ["drypoint", "Drypoint"],
 ["monotype", "Monotype"], ["oil", "Oil"], ["watercolor", "Watercolor"]
 ];
