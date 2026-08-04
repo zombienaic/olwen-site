@@ -924,7 +924,17 @@ const lbEnquire = document.getElementById('lbEnquire');
 const lbClose = document.getElementById('lightboxClose');
 
 artworks.forEach(art => {
+  let tStartX = 0, tStartY = 0, tMoved = false;
+  art.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    tStartX = t.clientX; tStartY = t.clientY; tMoved = false;
+  }, { passive: true });
+  art.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    if (Math.abs(t.clientX - tStartX) > 10 || Math.abs(t.clientY - tStartY) > 10) tMoved = true;
+  }, { passive: true });
   art.addEventListener('click', () => {
+    if (tMoved) return; // finger moved before release — this was a scroll, not a tap
     lbImage.style.backgroundImage = "url('" + art.dataset.img + "')";
     lbTitle.textContent = art.dataset.title;
     lbPrice.textContent = art.dataset.price;
