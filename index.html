@@ -35,6 +35,7 @@ position: fixed; inset: 0;
 background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 pointer-events: none; z-index: 9999;
 mix-blend-mode: multiply; opacity: 0.5;
+transform: translateZ(0); -webkit-transform: translateZ(0);
 }
 /* NAV */
 nav {
@@ -79,6 +80,7 @@ background-size: cover; background-position: center;
 opacity: 0.55; pointer-events: none;
 mask-image: linear-gradient(to left, black 50%, transparent 95%);
 -webkit-mask-image: linear-gradient(to left, black 50%, transparent 95%);
+transform: translateZ(0); -webkit-transform: translateZ(0);
 }
 .hero-inner { position: relative; z-index: 2; max-width: 1100px; }
 .hero-meta {
@@ -750,21 +752,21 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 /* ---------- NAV ---------- */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
+nav.classList.toggle('scrolled', window.scrollY > 80);
 });
 const hamburger = document.getElementById('navHamburger');
 const navLinks = document.getElementById('navLinks');
 hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  navLinks.classList.toggle('open');
-  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+hamburger.classList.toggle('open');
+navLinks.classList.toggle('open');
+document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
 });
 navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
-  });
+a.addEventListener('click', () => {
+hamburger.classList.remove('open');
+navLinks.classList.remove('open');
+document.body.style.overflow = '';
+});
 });
 
 /* ---------- LIGHTBOX ---------- */
@@ -780,8 +782,8 @@ const lbClose = document.getElementById('lightboxClose');
 const ENQUIRY_EMAIL = "olwenoherlihy@gmail.com";
 
 function openLightbox(art) {
-  lbImage.style.backgroundImage = "url('" + art.dataset.img + "')";
-  lbTitle.textContent = art.dataset.title;
+lbImage.style.backgroundImage = "url('" + art.dataset.img + "')";
+lbTitle.textContent = art.dataset.title;
   lbPrice.textContent = art.dataset.price;
   lbMedium.innerHTML = art.dataset.mediumFull;
   lbDimensions.textContent = art.dataset.dimensions;
@@ -878,84 +880,84 @@ function buildArtwork(w) {
   const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
   return (
     '<div class="artwork' + (sold ? " sold" : "") + '" data-medium="' + esc(cat) + '" data-img="' + esc(img) +
-    '" data-title="' + esc(w.title) + '" data-price="' + esc(price) +
-    '" data-medium-full="' + esc(full) + '" data-dimensions="' + esc(dims) +
-    '" data-notes="' + esc(notes) + '" data-sold="' + (sold ? "true" : "false") + '">' +
-      '<div class="artwork-image" style="background-image: url(\'' + esc(img) + '\');">' + soldBadge + '</div>' +
-      '<div class="artwork-meta">' +
-        '<span class="artwork-title">' + esc(w.title) + '</span>' +
-        '<span class="artwork-price">' + esc(price) + '</span>' +
-        '<span class="artwork-medium">' + esc(full) + '</span>' +
-      '</div>' +
-    '</div>'
-  );
+'" data-title="' + esc(w.title) + '" data-price="' + esc(price) +
+'" data-medium-full="' + esc(full) + '" data-dimensions="' + esc(dims) +
+'" data-notes="' + esc(notes) + '" data-sold="' + (sold ? "true" : "false") + '">' +
+'<div class="artwork-image" style="background-image: url(\'' + esc(img) + '\');">' + soldBadge + '</div>' +
+'<div class="artwork-meta">' +
+'<span class="artwork-title">' + esc(w.title) + '</span>' +
+'<span class="artwork-price">' + esc(price) + '</span>' +
+'<span class="artwork-medium">' + esc(full) + '</span>' +
+'</div>' +
+'</div>'
+);
 }
 
 function buildFilters(works) {
-  const cats = [
-    ["intaglio", "Intaglio"], ["drypoint", "Drypoint"],
-    ["monotype", "Monotype"], ["oil", "Oil"], ["watercolor", "Watercolor"]
-  ];
-  let html = '<button class="filter-btn active" data-filter="all">All <span class="count">' + works.length + '</span></button>';
-  cats.forEach(([id, label]) => {
-    const n = works.filter(w => category(w.medium) === id).length;
-    if (n) html += '<button class="filter-btn" data-filter="' + id + '">' + label + ' <span class="count">' + n + '</span></button>';
-  });
-  return html;
+const cats = [
+["intaglio", "Intaglio"], ["drypoint", "Drypoint"],
+["monotype", "Monotype"], ["oil", "Oil"], ["watercolor", "Watercolor"]
+];
+let html = '<button class="filter-btn active" data-filter="all">All <span class="count">' + works.length + '</span></button>';
+cats.forEach(([id, label]) => {
+const n = works.filter(w => category(w.medium) === id).length;
+if (n) html += '<button class="filter-btn" data-filter="' + id + '">' + label + ' <span class="count">' + n + '</span></button>';
+});
+return html;
 }
 
 function attachGalleryHandlers() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const artworks = document.querySelectorAll('.artwork');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      artworks.forEach(art => {
-        if (filter === 'all' || art.dataset.medium === filter) art.classList.remove('hidden');
-        else art.classList.add('hidden');
-      });
-    });
-  });
-  artworks.forEach(art => {
-    art.addEventListener('click', () => openLightbox(art));
-    art.addEventListener('touchend', e => { e.preventDefault(); openLightbox(art); });
-  });
+const filterBtns = document.querySelectorAll('.filter-btn');
+const artworks = document.querySelectorAll('.artwork');
+filterBtns.forEach(btn => {
+btn.addEventListener('click', () => {
+filterBtns.forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+const filter = btn.dataset.filter;
+artworks.forEach(art => {
+if (filter === 'all' || art.dataset.medium === filter) art.classList.remove('hidden');
+else art.classList.add('hidden');
+});
+});
+});
+artworks.forEach(art => {
+art.addEventListener('click', () => openLightbox(art));
+art.addEventListener('touchend', e => { e.preventDefault(); openLightbox(art); });
+});
 }
 
 function renderGallery(works) {
-  document.getElementById('galleryFilters').innerHTML = buildFilters(works);
-  document.getElementById('galleryGrid').innerHTML = works.map(buildArtwork).join('');
-  attachGalleryHandlers();
+document.getElementById('galleryFilters').innerHTML = buildFilters(works);
+document.getElementById('galleryGrid').innerHTML = works.map(buildArtwork).join('');
+attachGalleryHandlers();
 }
 
 async function loadGallery() {
-  const status = document.getElementById('galleryStatus');
-  try {
-    const res = await fetch(SHEET_CSV_URL + "&t=" + Date.now());
-    if (!res.ok) throw new Error("Sheet not accessible (HTTP " + res.status + ")");
-    const all = rowsToObjects(parseCSV(await res.text()));
+const status = document.getElementById('galleryStatus');
+try {
+const res = await fetch(SHEET_CSV_URL + "&t=" + Date.now());
+if (!res.ok) throw new Error("Sheet not accessible (HTTP " + res.status + ")");
+const all = rowsToObjects(parseCSV(await res.text()));
 
-    // Featured = rows with a truthy "featured" value.
-    let works = all.filter(w => isFeatured(w.featured) && !isHidden(w.status));
+// Featured = rows with a truthy "featured" value.
+let works = all.filter(w => isFeatured(w.featured) && !isHidden(w.status));
 
-    // Fallback: if nothing is marked featured yet, show up to 12 visible works
-    // so the homepage is never empty.
-    if (!works.length) works = all.filter(w => !isHidden(w.status)).slice(0, 12);
+// Fallback: if nothing is marked featured yet, show up to 12 visible works
+// so the homepage is never empty.
+if (!works.length) works = all.filter(w => !isHidden(w.status)).slice(0, 12);
 
-    // Optional ordering via an "order" column (numeric); otherwise sheet order.
-    if (works.some(w => w.order)) {
-      works.sort((a, b) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999));
-    }
+// Optional ordering via an "order" column (numeric); otherwise sheet order.
+if (works.some(w => w.order)) {
+works.sort((a, b) => (parseFloat(a.order) || 999) - (parseFloat(b.order) || 999));
+}
 
-    if (!works.length) throw new Error("No works found");
-    renderGallery(works);
-  } catch (e) {
-    status.className = "gallery-status error";
-    status.innerHTML = "Could not load works.<br><small>" + e.message + "</small>";
-    console.warn("Gallery load failed:", e);
-  }
+if (!works.length) throw new Error("No works found");
+renderGallery(works);
+} catch (e) {
+status.className = "gallery-status error";
+status.innerHTML = "Could not load works.<br><small>" + e.message + "</small>";
+console.warn("Gallery load failed:", e);
+}
 }
 loadGallery();
 </script>
