@@ -212,9 +212,24 @@ function renderCatalog(works) {
           </div>
         </div>
       `;
-      if (!sold) {
+            if (!sold) {
+        let tStartX = 0, tStartY = 0, tMoved = false;
+        item.addEventListener("touchstart", e => {
+          const t = e.touches[0];
+          tStartX = t.clientX; tStartY = t.clientY; tMoved = false;
+        }, { passive: true });
+        item.addEventListener("touchmove", e => {
+          const t = e.touches[0];
+          if (Math.abs(t.clientX - tStartX) > 10 || Math.abs(t.clientY - tStartY) > 10) tMoved = true;
+        }, { passive: true });
+        item.addEventListener("touchend", e => {
+          if (tMoved) return;
+          e.preventDefault();
+          openLightbox(item);
+        });
         item.addEventListener("click", () => openLightbox(item));
       }
+
       grid.appendChild(item);
     });
     catalog.appendChild(sec);
