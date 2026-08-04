@@ -457,9 +457,19 @@ function closeLightbox() {
 
 function attachLightboxHandlers() {
   document.querySelectorAll(".shop-card-image").forEach(el => {
+    let tStartX = 0, tStartY = 0, tMoved = false;
+    el.addEventListener("touchstart", e => {
+      const t = e.touches[0];
+      tStartX = t.clientX; tStartY = t.clientY; tMoved = false;
+    }, { passive: true });
+    el.addEventListener("touchmove", e => {
+      const t = e.touches[0];
+      if (Math.abs(t.clientX - tStartX) > 10 || Math.abs(t.clientY - tStartY) > 10) tMoved = true;
+    }, { passive: true });
     el.addEventListener("click", () => openLightbox(el));
-    // iOS Safari touch support
+    // iOS Safari touch support — but only for an actual tap, not a scroll
     el.addEventListener("touchend", e => {
+      if (tMoved) return; // finger moved — this was a scroll, not a tap
       e.preventDefault();
       openLightbox(el);
     });
