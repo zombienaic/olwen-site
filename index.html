@@ -280,6 +280,12 @@ transition: background 0.3s;
 border: none; cursor: pointer;
 }
 .lb-enquire:hover { background: #6b2c17; }
+.lb-enquire.secondary { background: transparent; border: 1px solid rgba(241,235,221,0.4); padding: calc(0.9rem - 1px) calc(2rem - 1px); }
+.lb-enquire.secondary:hover { background: rgba(241,235,221,0.08); border-color: rgba(241,235,221,0.7); }
+.lb-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.lb-actions .lb-enquire { margin-top: 0; }
+.lb-buy { display: inline-block; padding: 0.9rem 2rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; font-family: inherit; transition: background 0.3s; }
+.lb-buy:hover { background: #6b2c17; }
 .lb-price-display {
 font-family: "Cormorant Garamond", serif;
 font-size: 1.8rem; font-weight: 300;
@@ -645,7 +651,10 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 <dt>Dimensions</dt><dd id="lbDimensions"></dd>
 <dt>Notes</dt><dd id="lbNotes"></dd>
 </dl>
+<div class="lb-actions">
+<a class="lb-buy" id="lbBuy" href="#" target="_blank" rel="noopener" style="display:none;">Buy Now</a>
 <a class="lb-enquire" id="lbEnquire" href="#">Enquire about this work →</a>
+</div>
 </div>
 </div>
 </div>
@@ -778,6 +787,7 @@ const lbMedium = document.getElementById('lbMedium');
 const lbDimensions = document.getElementById('lbDimensions');
 const lbNotes = document.getElementById('lbNotes');
 const lbEnquire = document.getElementById('lbEnquire');
+const lbBuy = document.getElementById('lbBuy');
 const lbClose = document.getElementById('lightboxClose');
 const ENQUIRY_EMAIL = "olwenoherlihy@gmail.com";
 
@@ -795,7 +805,17 @@ art.dataset.mediumFull + ", " + art.dataset.dimensions + ", " + art.dataset.pric
 ").\n\nPlease let me know if this work is available.\n\nKind regards,"
 );
 lbEnquire.href = "mailto:" + ENQUIRY_EMAIL + "?subject=" + subject + "&body=" + body;
-lbEnquire.style.display = art.dataset.sold === "true" ? "none" : "inline-block";
+const isSold = art.dataset.sold === "true";
+lbEnquire.style.display = isSold ? "none" : "inline-block";
+if (art.dataset.paypal && !isSold) {
+lbBuy.href = art.dataset.paypal;
+lbBuy.style.display = "inline-block";
+lbEnquire.classList.add("secondary");
+} else {
+lbBuy.href = "#";
+lbBuy.style.display = "none";
+lbEnquire.classList.remove("secondary");
+}
 lightbox.classList.add('active');
 document.body.style.overflow = 'hidden';
 }
@@ -862,6 +882,9 @@ if (m.includes("oil")) return "oil";
 function priceDisplay(raw) {
   const p = (raw || "").replace(/^\$/, "").trim();
   if (!p) return "Enquire";
+  if (/^[0-9][0-9,]*(\.[0-9]+)?$/.test(p)) {
+    return "$" + parseFloat(p.replace(/,/g, "")).toLocaleString("en-US", { maximumFractionDigits: 2 });
+  }
   return /^[0-9]/.test(p) ? "$" + p : p;
 }
 
@@ -882,7 +905,7 @@ function buildArtwork(w) {
     '<div class="artwork' + (sold ? " sold" : "") + '" data-medium="' + esc(cat) + '" data-img="' + esc(img) +
     '" data-title="' + esc(w.title) + '" data-price="' + esc(price) +
     '" data-medium-full="' + esc(full) + '" data-dimensions="' + esc(dims) +
-    '" data-notes="' + esc(notes) + '" data-sold="' + (sold ? "true" : "false") + '">' +
+    '" data-notes="' + esc(notes) + '" data-paypal="' + esc(w["paypal_link"] || "") + '" data-sold="' + (sold ? "true" : "false") + '">' +
 '<div class="artwork-image" style="background-image: url(\'' + esc(img) + '\');">' + soldBadge + '</div>' +
 '<div class="artwork-meta">' +
 '<span class="artwork-title">' + esc(w.title) + '</span>' +

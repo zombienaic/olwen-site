@@ -47,8 +47,10 @@
 .lb-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
 .lb-enquire-btn { display: inline-block; padding: 0.9rem 2rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; }
 .lb-enquire-btn:hover { background: #6b2c17; }
-.lb-buy-btn { display: inline-block; padding: 0.9rem 2rem; background: var(--ink); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; }
-.lb-buy-btn:hover { background: #2a2218; }
+.lb-enquire-btn.secondary { background: transparent; border: 1px solid rgba(241,235,221,0.4); padding: calc(0.9rem - 1px) calc(2rem - 1px); }
+.lb-enquire-btn.secondary:hover { background: rgba(241,235,221,0.08); border-color: rgba(241,235,221,0.7); }
+.lb-buy-btn { display: inline-block; padding: 0.9rem 2rem; background: var(--rust); color: var(--paper); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; }
+.lb-buy-btn:hover { background: #6b2c17; }
 .lightbox-close { position: absolute; top: 2rem; right: 2rem; background: none; border: 1px solid rgba(241,235,221,0.3); color: var(--paper); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; padding: 0.6rem 1.2rem; cursor: pointer; }
 @media (max-width: 1200px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px) { .catalog { padding: 2rem 2rem 4rem; } .work-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; } .lightbox { padding: 1.5rem; } .lightbox-content { grid-template-columns: 1fr; gap: 1.5rem; max-height: 90vh; overflow-y: auto; } .lightbox-image { max-height: 50vh; } }
@@ -92,8 +94,8 @@
         <dt>Dimensions</dt><dd id="lbDims"></dd>
       </dl>
       <div class="lb-actions">
+        <a class="lb-buy-btn" id="lbBuy" href="#" target="_blank" rel="noopener" style="display:none;">Buy Now</a>
         <a class="lb-enquire-btn" id="lbEnquire" href="#">Enquire about this work</a>
-        <a class="lb-buy-btn" id="lbBuy" href="#" target="_blank" style="display:none;">Buy Now</a>
       </div>
     </div>
   </div>
@@ -151,6 +153,9 @@ function rowsToObjects(rows) {
 function priceDisplay(raw) {
   const p = (raw || "").replace(/^\$/, "").trim();
   if (!p) return "Enquire";
+  if (/^[0-9][0-9,]*(\.[0-9]+)?$/.test(p)) {
+    return "$" + parseFloat(p.replace(/,/g, "")).toLocaleString("en-US", { maximumFractionDigits: 2 });
+  }
   return /^[0-9]/.test(p) ? "$" + p : p;
 }
 
@@ -200,7 +205,7 @@ function renderCatalog(works) {
       const soldBadge = sold ? '<span class="sold-badge">Sold</span>' : "";
       const enquireBtn = sold
         ? '<span class="work-enquire">Sold</span>'
-        : '<a class="work-enquire" href="#" onclick="event.preventDefault(); event.stopPropagation();">Enquire</a>';
+        : '<a class="work-enquire" href="#" onclick="event.preventDefault(); event.stopPropagation();">' + (item.dataset.paypal ? "Buy" : "Enquire") + '</a>';
       item.innerHTML = `
         <div class="work-thumb" style="background-image: url('${item.dataset.img}');">${soldBadge}</div>
         <div class="work-info">
@@ -266,9 +271,11 @@ function openLightbox(item) {
   if (item.dataset.paypal) {
     lbBuy.href = item.dataset.paypal;
     lbBuy.style.display = "inline-block";
+    lbEnquire.classList.add("secondary");
   } else {
     lbBuy.href = "#";
     lbBuy.style.display = "none";
+    lbEnquire.classList.remove("secondary");
   }
   lightbox.classList.add("active");
   document.body.style.overflow = "hidden";
