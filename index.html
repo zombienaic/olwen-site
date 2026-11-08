@@ -120,6 +120,22 @@ margin-top: 3rem; width: fit-content;
 transition: color 0.3s, border-color 0.3s;
 }
 .hero-cta:hover { color: var(--rust); border-color: var(--rust); }
+/* SHOW ANNOUNCEMENT */
+.show-announce { background: var(--paper-warm); padding: 4rem 4rem 4.5rem; text-align: center; }
+.show-announce-label {
+font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase;
+color: var(--rust); margin-bottom: 1.8rem;
+}
+.show-announce a { display: block; max-width: 900px; margin: 0 auto; }
+.show-announce img {
+display: block; width: 100%; height: auto;
+box-shadow: 0 10px 30px rgba(22,17,12,0.18);
+}
+.show-announce-caption {
+font-family: "Cormorant Garamond", serif; font-style: italic;
+font-size: 1.05rem; color: var(--ink-soft); margin-top: 1.6rem;
+}
+@media (max-width: 1024px) { .show-announce { padding: 3rem 1.5rem 3.5rem; } }
 /* MARQUEE */
 .marquee-wrap { overflow: hidden; background: var(--ink); padding: 1rem 0; }
 .marquee-track { display: flex; white-space: nowrap; animation: marquee 40s linear infinite; }
@@ -587,11 +603,18 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 <section class="hero">
 <div class="hero-bg"></div>
 <div class="hero-inner">
-<a href="images/IMG_8103.jpeg" target="_blank" class="hero-meta">Now Showing · D&apos;Amour Museum of Fine Arts, Springfield</a>
 <h1 class="hero-name">Olwen O'Herlihy<span class="surname">Dowling</span></h1>
 <p class="hero-statement">A painter and printmaker whose work moves between the West of Ireland and the Berkshire Hills — drypoint, monotype, intaglio; oil and watercolor; landscape rendered as memory and as warning.</p>
 <a href="#work" class="hero-cta">View the work →</a>
 </div>
+</section>
+
+<section class="show-announce" id="pause">
+<p class="show-announce-label">Group Exhibition · The Oxbow Gallery, Easthampton</p>
+<a href="Pause%20e-card-v2.jpeg" target="_blank" rel="noopener">
+<img src="Pause%20e-card-v2.jpeg" alt="The Oxbow Gallery presents Pause, back gallery: small works by member artists. December 3, 2026 through January 3, 2027. Opening reception Saturday, December 5, 4 to 7 pm. 40 Cottage Street, Easthampton, MA. Gallery hours Thursday through Sunday, 12 to 5 pm.">
+</a>
+<p class="show-announce-caption">Opening reception Saturday, December 5, 4&ndash;7 pm &middot; 40 Cottage Street, Easthampton</p>
 </section>
 
 <div class="marquee-wrap">
@@ -601,7 +624,6 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 <span class="marquee-item">Virginia Center for the Creative Arts</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Smith College</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Boston Printmakers</span><span class="marquee-item marquee-sep">◇</span>
-<span class="marquee-item">D'Amour Museum of Fine Arts</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">California Society of Printmakers</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Monotype Guild of New England</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Zea Mays Printmaking</span><span class="marquee-item marquee-sep">◇</span>
@@ -609,7 +631,6 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 <span class="marquee-item">Virginia Center for the Creative Arts</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Smith College</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Boston Printmakers</span><span class="marquee-item marquee-sep">◇</span>
-<span class="marquee-item">D'Amour Museum of Fine Arts</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">California Society of Printmakers</span><span class="marquee-item marquee-sep">◇</span>
 <span class="marquee-item">Monotype Guild of New England</span><span class="marquee-item marquee-sep">◇</span>
 </div>
@@ -697,12 +718,6 @@ gap: 2.5rem; z-index: 400; padding-top: 50px;
 <div class="ex-meta"><strong>27 Years Active</strong><br>Ireland · Massachusetts · Virginia</div>
 </div>
 <div>
-<div class="exhibition-item">
-<span class="ex-year">2026</span>
-<span class="ex-name"><em>One Foot in Two Places</em> — Solo</span>
-<span class="ex-venue">D'Amour Museum of Fine Arts, Springfield MA</span>
-<span class="ex-tag solo">Solo · Museum</span>
-</div>
 <div class="exhibition-item">
 <span class="ex-year">Ongoing</span>
 <span class="ex-name">Member Print Archive</span>
